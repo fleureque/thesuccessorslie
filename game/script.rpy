@@ -19,8 +19,10 @@ init python:
 
 default glossary_dict = {
 "The Plague": "An ailment, glaring and recognisable no matter which canvas it appears  on. You'll all return to the same artist in the end, won't you?",
-"Emperor Marchetti": "The Emperor who has long since forsaken people like you.",
+"Emperor Marchetti": "The Emperor who has long since forsaken people like you. To you, he'll always be 'the scumlord', ruler of nothing but inhumanity.",
 "Myllith of Moon": "The religious figure of the empire, consecrated in legend and eternity.",
+"Death": "The stench of bodies missing the warmth you've learned to love.",
+"The Revver Gang": "The pseudo-authority in your district. You have their protection. Still, you must be careful."
 }
 
 default messages = {
@@ -32,9 +34,9 @@ image ctc:
     "gui/ctc_icon.png" with Dissolve(0.4), #This is your image
     subpixel True #This line makes sure that ATL is smooth 
 
-    yalign 0.76 xalign 0.85 #Adjust these numbers to fit your own textbox
-    linear 0.5 yalign 0.77
-    linear 0.5 yalign 0.76
+    yalign 0.84 xalign 0.85 #Adjust these numbers to fit your own textbox
+    linear 0.5 yalign 0.85
+    linear 0.5 yalign 0.84
     
     repeat
 
@@ -126,11 +128,40 @@ label shed_scene:
     "Her lips curl upwards."
     "And then you freeze. The light hitting the corner of the room shifts slightly - not in intensity, but in shape."
     "The shadow's changed, and that means he's here. Time's up."
-    "Lin's jaw tightens. Her eyes glaze over."
+    "Lin's jaw tightens. Her eyes glaze over." with vpunch
     "As you shake her, she stirs slightly, expression oddly serene."
     "You pray internally. '{a=glossary:Myllith of Moon}🔻 Myllith of Moon{/a}... please not again...'"
     menu:
         "Why's the plague flaring up again??":
             pass
-        
+    "And then a sudden rush of stillness."
+    "Looking up aimlessly, you sense it."
+    hide lin with dissolve
+    "She's gone, isn't she?"
+    "It's not your first time around {a=glossary:Death}🔻 death{/a}. But you bite your lip until it splits."
+    "Ever since you'd come to know each other, you were always speaking in curses. Silent ones."
+    "Curses towards the passing ladies that believed themselves to be charitable. Yes, charitable; even when imparting the opposite of aid."
+    "Curses towards the emperor. Him, sleeping while you were beaten sore; eating while you starved; living in his lavish palace while you lived half-freezing in this shed."
+    "Why'd you left it at curses? Lord!"
+    "You could have done more. Should have done more. Why was your struggle so meaningless? You brush grime from Lin's still face."
+    "Through your tears, you notice the light cast through the window slowly morphing."
+    "The shadow's gone now."
+    "A scream rings outside." with vpunch
+    "The {a=glossary:Revvers}🔻 Revvers{/a} must be patrolling already. You press yourself against the wall, as time seems to stretch on and on..."
+    "...They have been patrolling much more frequently lately. Political unrest and such."
+
+
+label first_meeting:
+    "The shed's now cleaner than it has ever been before, thanks to your handiwork. It had protected you and Lin to the very end - both from the cold and strange hagglers."
+    "And all that remains now is the blanket. It'd done little to keep you warm, but you were lucky to have even that."
+    "You hesitate but draw it close and fold it into a neat square, being careful not to give away the shape of the folder within."
+    "The shadow had come at some point again this morning, and now you see it slipping away."
+    "In the direction of the entrance, no less."
+    menu:
+        "*Conclude by giving Lin's memory Myllith's curved salute.*":
+            pass
+        "...May you be safe, Lin.":
+            "Your words still don't feel final enough."
+            "You rack your mind over what else to say, but you've already said all that needed to be said. All you can mutter is “please…” as you shut my eyes." 
     
+    "You take in every last sensation: rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime. "
