@@ -270,15 +270,71 @@ label carriage_ride:
     "...And besides, it's not the right time of day."
     menu:
         "*Look at the landscape outside*":
+            $ witness_shove = False
             "Somewhere along the journey, the filth outside had become polished stone and shrubbery. You've never left Scab City before, but you can tell: you're beyond the forest already."
         "*Look at what Gideon's doing*":
             "You bring your face closer against the window. There isn't any physical altercation, despite the people below being armed. The opposition is clad in the same deep blue as Gideon - but their crests are slightly different."
             "No matter how much you strain your ears, the carriage muffles the sound, rendering it incomprehensible."
             "With nothing left to do, you drum your fingers on the window impatiently, reading their expressions. After all, you doubt that Gideon can hold them off alone."
+            "A man shoves Gideon on the shoulder. You look away, distracting yourself."
+            $ witness_shove = True
+    "The carriage door swings open again."
+    python:
+        if witness_shove:
+            dialogue_var = "where he'd been shoved,"
+        else:
+            dialogue_var = "as if there was something dirty there,"
+    menu:
+        "*Stay quiet*":
+            pass
+        "What happened?":
+            g "Damn petty Rydells tried to refuse us passage." 
+            "He brushes his hand against his shoulder [dialogue_var], grimacing."
+            menu:
+                "Rydells?":
+                    "A side family to Velmonta." 
+                    "His hand falls onto his lap."
+                    "Side… family?" 
+                    "You blink a few times, then sigh." 
+                "*Try to fall back asleep*":
+                    "Despite your attempts, you really can't fall asleep again."
+    menu:
+        "How far're we from the estate?":
+            g "We’ll get there after passing through the rest of the territory."
+            jump arrival
+        "Anything else I need to know?":
+            jump arrival
             
-
-
-
-
-    
-    
+label arrival:
+    "His hand flies to his chin, a finger hovering over his mouth."
+    g "Don’t let yourself believe you’re safe simply given the way things will seem."
+    menu:
+        "What d'you mean?":
+            "Your question is met with a simple shaking of the head."
+        "*Ponder over his meaning*":
+            "Your pondering doesn't work. You're even more confused now."
+    "The carriage passes by townspeople huddling around braziers. Firewood's being hauled from carts to maintain the flame. It looks like there are even people designated to do so."
+    "...Not a hint of famine nor conflict in the people's expressions. They look to be at peace, at a loss for nothing."
+    "In essence, the life you and Lin had always dreamed of..."
+    "You dismiss her from your mind before it starts to hurt."
+    menu:
+        "Rydell seems to care for its people.":
+            "Gideon sighs."
+            g "Of course. All of us must love our citizens."
+            menu:
+                "Well… what about Scab City?":
+                    "You keep your voice even, despite the bitterness inside."
+                    g "The Lower District?"
+                    "He tilts his head."
+                    menu:
+                        "Never mind. I'm just being unreasonable.":
+                            "Scab City isn't any noble’s responsibility, after all. The damn law ensures that."
+                            
+                    
+                "*Keep your bitterness to yourself.*"
+                    pass
+            "You silently curse the emperor again. Your ‘own fault’ for starving, huh?"
+            
+        "*Keep staring out the window*":
+            pass
+    "Your heart quickens as Gideon looks at the rags you'd insisted on bringing. However, he purses his lips and doesn't speak."
