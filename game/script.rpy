@@ -80,6 +80,7 @@ label start:
     jump shed_scene
 
 label shed_scene:
+    play music lin_theme loop
     show screen top_bar()
     show lin normal
     menu:
@@ -304,7 +305,7 @@ label carriage_ride:
         "How far're we from the estate?":
             g "We’ll get there after passing through the rest of the territory."
             menu:
-                "Anything else I need to know":
+                "Anything else I need to know?":
                     jump arrival
         "Anything else I need to know?":
             jump arrival
