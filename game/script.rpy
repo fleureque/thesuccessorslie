@@ -18,7 +18,9 @@ init python:
 
 
 default glossary_dict = {
-"The plague": "An ailment, glaring and recognisable no matter which canvas it appears  on. You'll all return to the same artist in the end, won't you?"
+"The Plague": "An ailment, glaring and recognisable no matter which canvas it appears  on. You'll all return to the same artist in the end, won't you?",
+"Emperor Marchetti": "The Emperor who has long since forsaken people like you.",
+"Myllith of Moon": "The religious figure of the empire, consecrated in legend and eternity.",
 }
 
 default messages = {
@@ -114,7 +116,7 @@ label shed_scene:
     menu:
         "I'm not going unless that damn scumlord drags me out of 'ere himself. With his fat, gleaming fingers.":
             "You shudder."
-            "Lin tries to correct you - 'Emperor Marchetti, [name]!' - just like always."
+            "Lin tries to correct you - '{a=glossary:Emperor Marchetti}🔻 Emperor Marchetti{/a}, [name]!' - just like always."
             show lin sick
             "But her voice fails."
     show lin normal
@@ -125,4 +127,10 @@ label shed_scene:
     "And then you freeze. The light hitting the corner of the room shifts slightly - not in intensity, but in shape."
     "The shadow's changed, and that means he's here. Time's up."
     "Lin's jaw tightens. Her eyes glaze over."
+    "As you shake her, she stirs slightly, expression oddly serene."
+    "You pray internally. '{a=glossary:Myllith of Moon}🔻 Myllith of Moon{/a}... please not again...'"
+    menu:
+        "Why's the plague flaring up again??":
+            pass
+        
     
