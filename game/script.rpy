@@ -23,7 +23,8 @@ default glossary_dict = {
 "Myllith of Moon": "The religious figure of the empire, consecrated in legend and eternity.",
 "Death": "The stench of bodies missing the warmth you've learned to love.",
 "The Revver Gang": "The pseudo-authority in your district. You have their protection. Still, you must be careful.",
-"Trusty Stick": "The pummelling weapon you've used whenever it comes down to it. It's been with you through thick and thin."
+"Trusty Stick": "The pummelling weapon you've used whenever it comes down to it. It's been with you through thick and thin.",
+"Matriarch Marianne": "Known as the 'Angel of Velmonta'. Perhaps the only truly benevolent figure in Scab City. The reason everyone knows of Velmonta.",
 }
 
 default messages = {
@@ -167,11 +168,12 @@ label first_meeting:
             "You rack your mind over what else to say, but you've already said all that needed to be said. All you can mutter is “please…” as you shut my eyes." 
     "You take in every last sensation: rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime."
     "A clicking sound jolts you to your feet as a cloaked figure steps in." with vpunch
-    $ gideon = "Cloaked Figure"
+    $ gideon = "The Cloaked Figure"
     "You grab {a=glossary:Trusty Stick}🔻 Trusty Stick{/a}, wielding it defensively."
     menu:
         "Who're you?":
             g "You can call me Gideon. I'm not here to hurt you."
+            $ gideon = "Gideon"
         "How'd you get 'ere?":
             g "I apologise, but this shed isn't incredibly special."
             "You grit your teeth."
@@ -183,3 +185,49 @@ label first_meeting:
     menu:
         "Look. I'll let you in on somethin'. Outsiders ain't welcome in these alleys."
     g "You'll freeze tomorrow. Do you even have any other clothes? Those rags on your back aren't all you have, are they?"
+    "You tense watching him swing his sword, then tut. He's doing it subconsciously."
+    "A sour smile forms on your face. Your hand tightens around Trusty Stick."
+    menu:
+        "You dare run your mouth blabberin’ like this, noble?":
+            pass
+    g "Your voice is shaking, child."
+    "An emphasis on the last word. You flush."
+    menu:
+        "What's it to you?":
+            pass
+        "Even the church done forsaken this place. Whatever laws you're used to don't apply 'ere.":
+            pass
+    "He peels his hood down, eyes locking into yours."
+    g "Come with me and you'll be safe."
+    "You catch yourself softening and steel up again."
+    menu:
+        "This sorta kidnappin' happens all the time. Kids don't come back after they get taken.":
+            pass
+    g "Kidnapped? Not saved?"
+    "You plant your feet in place, adamant."
+    "[gideon] points at the emblem on his cloak."
+    g "Do you really not recognise this crest?"
+    "You find yourself at a loss for words."
+    g "I'm a knight of Velmonta - Gideon. Do you know what that means?"
+    $ gideon = "Gideon"
+    menu:
+        "Think I'm stupid? Your blue cloak and crest ain't enough to prove noth'-!":
+            pass
+    "You get interrupted halfway through as he pulls out official-looking documents, as if having anticipated your reaction."
+    "You grab them, hold them close, and examine them."
+    "...At last, you hand them back and lower your stick."
+    menu:
+        "Well… what's someone from that lofty house doin' all the way out here?":
+            pass
+    g "You have been chosen for adoption by {a=glossary:Madame Marianne}🔻 Madame Marianne{/a} herself."
+    menu:
+        "Matriarch Marianne? I… oh, lord!":
+            pass
+    "Trusty Stick falls from your hands as your mouth hangs agape. You don't even hear it clatter on the ground." with vpunch
+    "Gideon chuckles."
+    g "Once again: come with me and you'll be safe."
+    menu:
+        "The orphanage? This is too sudden. I...":
+            pass
+    g "Not to the orphanage."
+
