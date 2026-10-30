@@ -25,6 +25,8 @@ default glossary_dict = {
 "Revvers": "The pseudo-authority in your district. You have their protection. Still, you must be careful.",
 "Trusty Stick": "The pummelling weapon you've used whenever it comes down to it. It's been with you through thick and thin.",
 "Matriarch Marianne": "Known as the 'Angel of Velmonta'. Perhaps the only truly benevolent figure in Scab City. The reason everyone knows of Velmonta.",
+"Sensations of Scab City": "Rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime."
+"Velmonta": "A prestigious and incredibly well-known noble house, even in Scab City."
 }
 
 default messages = {
@@ -166,7 +168,7 @@ label first_meeting:
         "...May you be safe, Lin.":
             "Your words still don't feel final enough."
             "You rack your mind over what else to say, but you've already said all that needed to be said. All you can mutter is “please…” as you shut my eyes." 
-    "You take in every last sensation: rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime."
+    "You take in every {a=glossary:Sensations of Scab City}🔻 last sensation{/a} around you. "
     show gideon hidden 
     "A clicking sound jolts you to your feet as a cloaked figure steps in." with vpunch
     
@@ -191,7 +193,7 @@ label first_meeting:
     "You tense watching him swing his sword, then tut. He's doing it subconsciously."
     "A sour smile forms on your face. Your hand tightens around Trusty Stick."
     menu:
-        "You dare run your mouth blabberin’ like this, noble?":
+        "You dare run your mouth blabberin' like this, noble?":
             pass
     g "Your voice is shaking, child."
     "An emphasis on the last word. You flush."
@@ -212,7 +214,7 @@ label first_meeting:
     "[gideon] points at the emblem on his cloak."
     g "Do you really not recognise this crest?"
     "You find yourself at a loss for words."
-    g "I'm a knight of Velmonta - Gideon. Do you know what that means?"
+    g "I'm a knight of {a=glossary:Velmonta}🔻 Velmonta{/a} - Gideon. Do you know what that means?"
     $ gideon = "Gideon"
     menu:
         "Think I'm stupid? Your blue cloak and crest ain't enough to prove noth'-!":
@@ -234,4 +236,49 @@ label first_meeting:
         "The orphanage? This is too sudden. I...":
             pass
     g "Not to the orphanage."
+    jump carriage_ride
 
+label carriage_ride:
+    "Resting your head on your hand, you look through the carriage window. Emaciated children shiver as you pass them by. Is it awe? Or are they too lost to care at this point?"
+    "Gideon's gaze is directed towards them too, expression unreadable. Does it make him sick to his stomach, seeing their gaunt, haunting faces?"
+    "Your nose starts to burn."
+    "Turning away from the window, you tap your fingers on your lap."
+    menu:
+        "Your name was Gideon?":
+            g "Indeed. Why?"
+        "*Stay silent and stare at him*":
+            "..."
+            g "Do you have something to say?"
+    menu:
+        "N-nevermind.":
+            "Gideon nods and looks back out the window."
+        "Where do I find you in the future?":
+            "His eyes widen"
+            g "How direct."
+            "He leans back."
+            g "The barracks. They are a short distance from the outer wall."
+    "In the warmth of the cloak Gideon had draped around you, you grow drowsy despite the time."
+    "As you drift off, you can't help but harbour the naive hope that Lin, somewhere out there, is doing well for herself."
+    "You sleep for a while, mind floating out of your body."
+    "The carriage suddenly jolts to a stop." with vpunch
+    menu:
+        "Are we here?":
+            pass
+    g "No. Don't move. Stay in the carriage."
+    "Stirring, you see Gideon stepping out briskly with his brow furrowed. He slams the door with a clang, muttering darkly under his breath, “Should've chosen a better route.”" with vpunch
+    "Your grogginess is now subsiding. You can't fall back asleep even if you want to."
+    "...And besides, it's not the right time of day."
+    menu:
+        "*Look at the landscape outside*":
+            "Somewhere along the journey, the filth outside had become polished stone and shrubbery. You've never left Scab City before, but you can tell: you're beyond the forest already."
+        "*Look at what Gideon's doing*":
+            "You bring your face closer against the window. There isn't any physical altercation, despite the people below being armed. The opposition is clad in the same deep blue as Gideon - but their crests are slightly different."
+            "No matter how much you strain your ears, the carriage muffles the sound, rendering it incomprehensible."
+            "With nothing left to do, you drum your fingers on the window impatiently, reading their expressions. After all, you doubt that Gideon can hold them off alone."
+            
+
+
+
+
+    
+    
