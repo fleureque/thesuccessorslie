@@ -119,7 +119,7 @@ label shed_scene:
             "But her voice fails."
     show lin normal
     "You hum to her."
-    "The same tune she'd taught you."
+    "The same tune she taught you."
     "The same tune you'll remember her by."
     "Her lips curl upwards."
     "And then you freeze. The light hitting the corner of the room shifts slightly - not in intensity, but in shape."

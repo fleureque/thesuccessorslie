@@ -207,3 +207,13 @@ init python:
 ## by a slash.
 
 # define build.itch_project = "renpytom/test-project"
+
+# Dialogue clicking
+init python:
+    #credits for this code to Globover on Reddit!
+    def dialogue_click_sound():
+        if not renpy.config.skipping:
+            renpy.sound.play("audio/click.mp3") 
+        return True
+
+    config.say_allow_dismiss = dialogue_click_sound
