@@ -22,7 +22,7 @@ default glossary_dict = {
 "Emperor Marchetti": "The Emperor who has long since forsaken people like you. To you, he'll always be 'the scumlord', ruler of nothing but inhumanity.",
 "Myllith of Moon": "The religious figure of the empire, consecrated in legend and eternity.",
 "Death": "The stench of bodies missing the warmth you've learned to love.",
-"The Revver Gang": "The pseudo-authority in your district. You have their protection. Still, you must be careful.",
+"Revvers": "The pseudo-authority in your district. You have their protection. Still, you must be careful.",
 "Trusty Stick": "The pummelling weapon you've used whenever it comes down to it. It's been with you through thick and thin.",
 "Matriarch Marianne": "Known as the 'Angel of Velmonta'. Perhaps the only truly benevolent figure in Scab City. The reason everyone knows of Velmonta.",
 }
@@ -167,7 +167,9 @@ label first_meeting:
             "Your words still don't feel final enough."
             "You rack your mind over what else to say, but you've already said all that needed to be said. All you can mutter is “please…” as you shut my eyes." 
     "You take in every last sensation: rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime."
+    show gideon hidden 
     "A clicking sound jolts you to your feet as a cloaked figure steps in." with vpunch
+    
     $ gideon = "The Cloaked Figure"
     "You grab {a=glossary:Trusty Stick}🔻 Trusty Stick{/a}, wielding it defensively."
     menu:
@@ -183,7 +185,8 @@ label first_meeting:
     "You pull your lips into a sneer as his approach drives you back."
     g "You're going to freeze."
     menu:
-        "Look. I'll let you in on somethin'. Outsiders ain't welcome in these alleys."
+        "Look. I'll let you in on somethin'. Outsiders ain't welcome in these alleys.":
+            pass
     g "You'll freeze tomorrow. Do you even have any other clothes? Those rags on your back aren't all you have, are they?"
     "You tense watching him swing his sword, then tut. He's doing it subconsciously."
     "A sour smile forms on your face. Your hand tightens around Trusty Stick."
@@ -197,6 +200,7 @@ label first_meeting:
             pass
         "Even the church done forsaken this place. Whatever laws you're used to don't apply 'ere.":
             pass
+    show gideon cloaked
     "He peels his hood down, eyes locking into yours."
     g "Come with me and you'll be safe."
     "You catch yourself softening and steel up again."
@@ -219,7 +223,7 @@ label first_meeting:
     menu:
         "Well… what's someone from that lofty house doin' all the way out here?":
             pass
-    g "You have been chosen for adoption by {a=glossary:Madame Marianne}🔻 Madame Marianne{/a} herself."
+    g "You have been chosen for adoption by {a=glossary:Matriarch Marianne}🔻 Madame Marianne{/a} herself."
     menu:
         "Matriarch Marianne? I… oh, lord!":
             pass
