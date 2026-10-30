@@ -38,7 +38,8 @@ image ctc:
 
 #variable initialisation
 define r = Character("Runa", color="#4af5e4", what_color="#a0e8ed", ctc="ctc", ctc_position="fixed")
-define l = Character("Lynn", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed")
+define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed")
+define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
 
 define gui.text_font = "fonts/garamond.ttf"
 define gui.text_instance = "light"
@@ -47,12 +48,40 @@ define gui.text_size = 35
  
 
 label temp_end_message:
-    hide osric 
-    hide wynfled
-    hide nightcumb
     "Hello! It's the author here."
     "The storyline after this section hasn't been written yet. I'll be sending you back to the main menu."
     "If you want to keep your progress, please navigate 'back' and save the story there."
     "Once more is written you should be able to access the rest from there."
     "Alright - bye!"
     $ MainMenu(confirm=False)()
+
+
+label start:
+
+    define mc = Character("[name + ' (You)']", what_color="#bb799a", ctc="ctc", ctc_position="fixed")
+
+    python:
+        name = renpy.input("Enter your name: (max 20 chars)", length=20, default="Runa")
+        name = name.strip().title()
+
+        if not name:
+            name = "Runa"
+    
+    jump shed_scene
+
+label shed_scene:
+    show lin normal
+    menu:
+        "L-Lin. It… it'll be over soon, okay?":
+            pass
+    "Your hand lies unmoving against your sister's."
+    "She's lying on a blanket for a mattress, barely moving against the freezing floor."
+    l "D-don't want it to be over."
+    show lin sick
+    "She frowns and lets out a hacking cough."
+    menu:
+        "Do you even hear yourself?":
+            pass
+    "You look away as you hear her response."
+    show lin normal
+    l "We promised to get out of here..."
