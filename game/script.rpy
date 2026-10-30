@@ -366,4 +366,33 @@ label arrival:
             "Gideon raises an eyebrow humorously."
     "You turn back to the window."
     "Extravagant black railing now lines the passage, with bountiful flower baskets hanging from each division. The fiery red begins to fade into a muted orange warmth as you approach the inner wall."
-
+    #EXPRESSION smiling
+    g "How is it?"
+    menu:
+        "Beautiful.":
+            "Internally, you think the opposite. But nobody needs to know."
+        "Disgusting.":
+            "Gideon stares at you evenly for a second."
+            menu:
+                "Um, I mean disgustingly beautiful.":
+                    "Gideon doesn't pursue it further."
+    g "The flames usually look even better over the backdrop of night."
+    "A footman walks around, opening the door. He extends a hand."
+    $ npc = "Footman"
+    npc "Welcome, Young Lady [name]."
+    "The gate to the inner wall opens. A woman runs through, holding a pair of slippers."
+    e "Hello, Miss [name]. I'm Estelle. It's great to meet you!"
+    "Bending down, she slips the footwear onto your feet. It's strangely sleek against your skin, but not an unwelcome sensation."
+    "She begins to guide you through the doorway."
+    menu:
+        "Bye, Gideon!":
+            "Gideon looks disappointed that you've already forgotten his advice."
+            "Below his expression, too, he looks slightly worried."
+        "*Don't bid Gideon farewell*":
+            "You decide it's better to follow his advice immediately."
+    "You approach the softly lit inner chateau. It has spires that strech into the sky, and flags painting deep blue streaks in the air. The stairs stop before a pair of heavy-set double-oak doors."
+    "Estelle knocks five times in a meaningful rhythm, and the doors creak open to reveal the unsmiling footmen who drew them open."
+    "The floor's lined with marble, so polished that the light cascading from the chandelier reflects back in dazzling shades."
+    "The foyer stretches out endlessly before you, spectacular and impossible."
+    "Your heart beats faster. Velmonta's beautiful."
+    "Beautiful, but devoid of life."
