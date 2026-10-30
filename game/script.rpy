@@ -27,6 +27,7 @@ default glossary_dict = {
 "Matriarch Marianne": "Known as the 'Angel of Velmonta'. Perhaps the only truly benevolent figure in Scab City. The reason everyone knows of Velmonta.",
 "Sensations of Scab City": "Rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime.",
 "Velmonta": "A prestigious and incredibly well-known noble house, even in Scab City.",
+"Velmonta's Reputation": "Known as a 'bastion of light' against darkness. The phrase is common knowledge.",
 }
 
 default messages = {
@@ -49,6 +50,7 @@ define r = Character("Runa", color="#4af5e4", what_color="#a0e8ed", ctc="ctc", c
 define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed")
 define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
+define npc = Character("[npc]", color="#747474", what_color="#c8c4c1", ctc="ctc", ctc_position="fixed")
 
 define gui.text_font = "fonts/garamond.ttf"
 define gui.text_instance = "light"
@@ -343,3 +345,25 @@ label arrival:
         "*Keep staring out the window*":
             pass
     "Your heart quickens as Gideon looks at the rags you'd insisted on bringing. However, he purses his lips and doesn't speak."
+    "The carriage draws close to wrought iron gates embedded into a towering wall of grey stone. Upon the wall, flaming torches illuminate its perimeter."
+    "It looks incredibly expensive to maintain. You hide a grimace."
+    "Gideon nods at you and exits the carriage, leaving the door open this time."
+    "You shudder at the sudden blast of warmth, the source of the heat being the flames licking wildly at impervious stone."
+    "Feudal brilliance is full of fiery brilliance, it seems. It suddenly occurs to you that {a=glossary:Velmonta's Reputation}🔻 Velmonta's reputation{/a} may have been more than symbolic."
+    "Tearing my eyes away, you look back at Gideon. He hands an overly embellished document to the guard for inspection."
+    "The guard clears his throat and hands the document back after briefly skimming over it."
+    $ npc = "Guard"
+    npc "Welcome to Velmonta. You may return to your carriage now."
+    "Two people clad in deep blue liveries, with some effort, draw the doors open. The horses are spurred into movement again."
+    "Gideon turns to you."
+    g "Don't approach me until you're safe."
+    "His hands trace around his sword scabbard. You're used to it by now."
+    g "Truly safe. Not just fooled by the appearance of safety."
+    menu:
+        "Oh... okay.":
+            "Gideon smiles briefly."
+        "You have a habit of giving cryptic advice, Gideon.":
+            "Gideon raises an eyebrow humorously."
+    "You turn back to the window."
+    "Extravagant black railing now lines the passage, with bountiful flower baskets hanging from each division. The fiery red begins to fade into a muted orange warmth as you approach the inner wall."
+
