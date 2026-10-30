@@ -25,8 +25,8 @@ default glossary_dict = {
 "Revvers": "The pseudo-authority in your district. You have their protection. Still, you must be careful.",
 "Trusty Stick": "The pummelling weapon you've used whenever it comes down to it. It's been with you through thick and thin.",
 "Matriarch Marianne": "Known as the 'Angel of Velmonta'. Perhaps the only truly benevolent figure in Scab City. The reason everyone knows of Velmonta.",
-"Sensations of Scab City": "Rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime."
-"Velmonta": "A prestigious and incredibly well-known noble house, even in Scab City."
+"Sensations of Scab City": "Rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime.",
+"Velmonta": "A prestigious and incredibly well-known noble house, even in Scab City.",
 }
 
 default messages = {
@@ -57,6 +57,7 @@ define gui.text_size = 35
  
 
 label temp_end_message:
+    
     "Hello! It's the author here."
     "The storyline after this section hasn't been written yet. I'll be sending you back to the main menu."
     "If you want to keep your progress, please navigate 'back' and save the story there."
@@ -79,6 +80,7 @@ label start:
     jump shed_scene
 
 label shed_scene:
+    show screen top_bar()
     show lin normal
     menu:
         "L-Lin. It… it'll be over soon, okay?":
@@ -253,11 +255,11 @@ label carriage_ride:
         "N-nevermind.":
             "Gideon nods and looks back out the window."
         "Where do I find you in the future?":
-            "His eyes widen"
+            "His eyes widen."
             g "How direct."
             "He leans back."
             g "The barracks. They are a short distance from the outer wall."
-    "In the warmth of the cloak Gideon had draped around you, you grow drowsy despite the time."
+    "In the warmth of the cloak Gideon draped around you, you grow drowsy despite the time."
     "As you drift off, you can't help but harbour the naive hope that Lin, somewhere out there, is doing well for herself."
     "You sleep for a while, mind floating out of your body."
     "The carriage suddenly jolts to a stop." with vpunch
@@ -281,9 +283,9 @@ label carriage_ride:
     "The carriage door swings open again."
     python:
         if witness_shove:
-            dialogue_var = "where he'd been shoved,"
+            dialogue_var = "where he'd been shoved"
         else:
-            dialogue_var = "as if there was something dirty there,"
+            dialogue_var = "as if there was something dirty there"
     menu:
         "*Stay quiet*":
             pass
@@ -292,7 +294,7 @@ label carriage_ride:
             "He brushes his hand against his shoulder [dialogue_var], grimacing."
             menu:
                 "Rydells?":
-                    "A side family to Velmonta." 
+                    g "A side family to Velmonta." 
                     "His hand falls onto his lap."
                     "Side… family?" 
                     "You blink a few times, then sigh." 
@@ -301,7 +303,9 @@ label carriage_ride:
     menu:
         "How far're we from the estate?":
             g "We’ll get there after passing through the rest of the territory."
-            jump arrival
+            menu:
+                "Anything else I need to know":
+                    jump arrival
         "Anything else I need to know?":
             jump arrival
             
@@ -331,7 +335,7 @@ label arrival:
                             "Scab City isn't any noble’s responsibility, after all. The damn law ensures that."
                             
                     
-                "*Keep your bitterness to yourself.*"
+                "*Keep your bitterness to yourself.*":
                     pass
             "You silently curse the emperor again. Your ‘own fault’ for starving, huh?"
             

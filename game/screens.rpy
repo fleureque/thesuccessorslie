@@ -1652,3 +1652,18 @@ screen alert(message):
         xmaximum 700
         box_wrap True
         text "[message]"
+
+
+screen top_bar():
+
+    tag menu
+
+    imagemap:
+        idle "gui/no_hover_bar.PNG"
+        hover "gui/no_hover_bar.PNG"
+        hotspot (326, 1, 131, 69):
+            hovered  "gui/log_hover.PNG"
+        hotspot (204, 5, 122, 68):
+            hovered  "gui/compass_hover.PNG"
+        hotspot (77, 4, 123, 66):
+            hovered  "gui/gallery_hover.PNG"
