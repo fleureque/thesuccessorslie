@@ -18,7 +18,7 @@ init python:
 
 
 default glossary_dict = {
-
+"The plague": "An ailment, glaring and recognisable no matter which canvas it appears  on. You'll all return to the same artist in the end, won't you?"
 }
 
 default messages = {
@@ -75,6 +75,7 @@ label shed_scene:
         "L-Lin. It… it'll be over soon, okay?":
             pass
     "Your hand lies unmoving against your sister's."
+    "Her hand's callused, the muscle beneath thin and firm."
     "She's lying on a blanket for a mattress, barely moving against the freezing floor."
     l "D-don't want it to be over."
     show lin sick
@@ -85,3 +86,43 @@ label shed_scene:
     "You look away as you hear her response."
     show lin normal
     l "We promised to get out of here..."
+    "From her lips come a laugh. It's a tinkling sound, jarring against her frailty."
+    "Following her gaze to the vial in the corner, you dig your nails into your arm, carving marks in angry red."
+    menu:
+        "I can't leave you like this.":
+            pass
+    l "No, Runa. Don't be weak. Leave. And once you're done… get me out too."
+    "A faint smile traces her lips."
+    show lin sick
+    "She opens her mouth to continue, but is interrupted by a succession of hard coughs. Coughs you've seen before."
+    "This isn't the first time you've seen {a=glossary:The Plague}🔻 the plague{/a}."
+    "A woman had been afflicted with the same ailment, claimed by the same painter. A woman, just like Lin, lying unmoving. Lips purple." 
+    "Above her, a man screaming with all the soul he had left. The very world being torn from him. Eyes, flitting to yours before he crawled away; to die away from your witness. "
+    "..."
+    "You grit your teeth."
+    menu:
+        "*Make a motion to stand.*":
+            show lin normal
+            "Lin grabs your arm."
+            l "Don't go..."
+            menu:
+                "What makes you think I'm going?":
+                    pass
+        "I know! That's why I'll survive!":
+            "Lin laughs."
+            l "You have to, 'kay?"
+    menu:
+        "I'm not going unless that damn scumlord drags me out of 'ere himself. With his fat, gleaming fingers.":
+            "You shudder."
+            "Lin tries to correct you - 'Emperor Marchetti, [name]!' - just like always."
+            show lin sick
+            "But her voice fails."
+    show lin normal
+    "You hum to her."
+    "The same tune she'd taught you."
+    "The same tune you'll remember her by."
+    "Her lips curl upwards."
+    "And then you freeze. The light hitting the corner of the room shifts slightly - not in intensity, but in shape."
+    "The shadow's changed, and that means he's here. Time's up."
+    "Lin's jaw tightens. Her eyes glaze over."
+    
