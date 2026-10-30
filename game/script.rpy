@@ -22,7 +22,8 @@ default glossary_dict = {
 "Emperor Marchetti": "The Emperor who has long since forsaken people like you. To you, he'll always be 'the scumlord', ruler of nothing but inhumanity.",
 "Myllith of Moon": "The religious figure of the empire, consecrated in legend and eternity.",
 "Death": "The stench of bodies missing the warmth you've learned to love.",
-"The Revver Gang": "The pseudo-authority in your district. You have their protection. Still, you must be careful."
+"The Revver Gang": "The pseudo-authority in your district. You have their protection. Still, you must be careful.",
+"Trusty Stick": "The pummelling weapon you've used whenever it comes down to it. It's been with you through thick and thin."
 }
 
 default messages = {
@@ -43,6 +44,7 @@ image ctc:
 #variable initialisation
 define r = Character("Runa", color="#4af5e4", what_color="#a0e8ed", ctc="ctc", ctc_position="fixed")
 define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed")
+define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
 
 define gui.text_font = "fonts/garamond.ttf"
@@ -163,5 +165,21 @@ label first_meeting:
         "...May you be safe, Lin.":
             "Your words still don't feel final enough."
             "You rack your mind over what else to say, but you've already said all that needed to be said. All you can mutter is “please…” as you shut my eyes." 
+    "You take in every last sensation: rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime."
+    "A clicking sound jolts you to your feet as a cloaked figure steps in." with vpunch
+    $ gideon = "Cloaked Figure"
+    "You grab {a=glossary:Trusty Stick}🔻 Trusty Stick{/a}, wielding it defensively."
+    menu:
+        "Who're you?":
+            g "You can call me Gideon. I'm not here to hurt you."
+        "How'd you get 'ere?":
+            g "I apologise, but this shed isn't incredibly special."
+            "You grit your teeth."
+            "He muses on."
+            g "This place, no, isn't important. But you... you are."
     
-    "You take in every last sensation: rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime. "
+    "You pull your lips into a sneer as his approach drives you back."
+    g "You're going to freeze."
+    menu:
+        "Look. I'll let you in on somethin'. Outsiders ain't welcome in these alleys."
+    g "You'll freeze tomorrow. Do you even have any other clothes? Those rags on your back aren't all you have, are they?"
