@@ -432,4 +432,44 @@ label first_blood:
     #show portrait of cassian 
     "Estelle strokes your shoulder."
     e "That is your father, Miss [name]."
+    menu:
+        "An honour...":
+            pass
     "You feel a strange repulsion, but know not at what."
+    "The gallery ends. Estelle hurriedly wraps a shawl around you, guiding you across the lengthy courtyard."
+    "You reach a mansion no less impressive than the main chateau. However, its outer edifice has polished wood in the place of carved stone."
+    e "This is the private residential."
+    "You walk into the mansion, after being given the accede from the footmen flanking its heavy doors."
+    "The residential building is tall and looming; however, you only march up one floor - “the successor’s floor” - before stopping outside a door next to a statue of a knight, cuirass and sword decorating his stone body."
+    "Estelle speaks while drawing keys from her pocket."
+    e "Your bath was drawn as soon as we saw the carriage. We do aim to be quick."
+    menu:
+        "Bath? What's that?":
+            "Estelle looks up and down your grimy figure. A hint of sympathy?"
+            "Whatever it is in her expression, you bristle at it."
+            "Estelle explains how to use a bath."
+        "What happens after I bathe?":
+            e "Dinner, Miss."
+    "She swings the door open, handing you a pile of fresh clothes and a towel."
+    "And finally, you're alone with the flowery fragrance of bathwater."
+
+label bath_scene:
+    "An unpleasant tingling instantly attacks you as you dip your feet into the swirling liquid. You hiss. It isn't unreasonably warm, but blood rushes into your limbs, bringing with it an intense itching."
+    "Then comes the pain."
+    menu:
+        "*Pick at your skin to detract from the pain*.":
+            "It gradually fades into the back of your mind, though you remain tense."
+        "*Inspect your hand":
+            "Raising your hand up against the gleaming chandelier, you see your clean wrist for the first time - something beyond your imagination. The colour of your skin - the true one - beneath all that grime. You let your hand fall again."
+    "Today had passed by in a daze. Too much to think about, too much to take in, too much to see. Even the light was - no, is - dizzying."
+    "Your mind suddenly flashes to Lin. What would her hand look like?"
+    "Is it wrong that you feel glad, rather than guilty, for being taken here? Leaving her behind?"
+    menu:
+        "*Take deep breaths*":
+            "You grab the rim of the bathtub to pull yourself up."
+            "Nobody will care that you're overwhelmed. In fact, expressing it would only hurt you."
+            "You have to suck it up."
+    "You climb out of the bathtub."
+    "A huge Myllith sigil hangs over the mirror, partly obscuring its surface. You frown, wondering why someone would choose such an impractical placement."
+    "You shake the water off and step out. The nightdress is soft – too soft against your worn skin. Nevertheless, you shrug it on."
+    
