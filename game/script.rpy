@@ -472,4 +472,35 @@ label bath_scene:
     "You climb out of the bathtub."
     "A huge Myllith sigil hangs over the mirror, partly obscuring its surface. You frown, wondering why someone would choose such an impractical placement."
     "You shake the water off and step out. The nightdress is soft – too soft against your worn skin. Nevertheless, you shrug it on."
-    
+    "You push the hanging metal aside."
+    menu:
+        "*Stare at your face*":
+            "Expressionless eyes peer back at you, penetrating and deep."
+            "You bring a hand up to your face and slowly morph it into a smile."
+            "There."
+            "Your face is a good tool."
+        "*Stare at your body*":
+            "An emaciated and gaunt body meets you."
+            "It's as clean as a noble's now."
+            "You don't know how to feel about it."
+            "Being here will change your body for certain. You try to commit the image before you into your mind."
+    "After lingering before the mirror for slightly too long, you swallow and push the ornament back in place. Then you don a shy expression and pull open the door."
+    "Estelle greets you with a... professional... sunny expression."
+    e "Don't you look a wonder, miss?"
+    menu:
+        "I-I… You’re pretty too, Estelle.":
+            "The words split out smoothly, despite tasting strange on your tongue."
+            $ dialogue_var = "I’m just a maid, dear."
+        "After taking a bath? Well, that would be expected.":
+            e "Something in the way Estelle looks at you changes."
+            $ dialogue_var = "You're quite right, miss."
+    e "[dialogue_var] Oh - here; your dinner’s already prepared."
+    "She sets a ‘small’ meal before you – a dazzling spectacle of strange meats, salads, and fruits."
+    "She closes the door for you to ‘enjoy the meal in private.’"
+    "Awe. Disgust. This mixture of emotions grapples with you as you stare at the food."
+    "It's more than you and Lin have even laid eyes on this whole winter, let alone come close to eating."
+    menu:
+        "*Eat the food*":
+            pass
+        "*Don't eat the food*":
+            pass
