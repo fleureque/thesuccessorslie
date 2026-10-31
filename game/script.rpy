@@ -87,7 +87,7 @@ label start:
 
 
 label shed_scene:
-    play music lin_theme loop
+    play music her_sickness loop fadein 1.0 fadeout 1.0 
     show screen top_bar()
     show lin normal
     menu:
@@ -150,6 +150,7 @@ label shed_scene:
         "Why's the plague flaring up again??":
             pass
     "And then a sudden rush of stillness."
+    play music last_moments loop fadein 1.0
     "Looking up aimlessly, you sense it."
     hide lin with dissolve
     "She's gone, isn't she?"
@@ -265,6 +266,7 @@ label carriage_ride:
             "Gideon nods and looks back out the window."
         "Where do I find you in the future?":
             "His eyes widen."
+            show gideon smiling
             g "How direct."
             "He leans back."
             g "The barracks. They are a short distance from the outer wall."
@@ -276,6 +278,7 @@ label carriage_ride:
         "Are we here?":
             pass
     g "No. Don't move. Stay in the carriage."
+    show gideon cloaked
     "Stirring, you see Gideon stepping out briskly with his brow furrowed. He slams the door with a clang, muttering darkly under his breath, “Should've chosen a better route.”" with vpunch
     "Your grogginess is now subsiding. You can't fall back asleep even if you want to."
     "...And besides, it's not the right time of day."
@@ -320,6 +323,7 @@ label carriage_ride:
 
 
 label arrival:
+    show gideon smiling
     "His hand flies to his chin, a finger hovering over his mouth."
     g "Don’t let yourself believe you’re safe simply given the way things will seem."
     menu:
@@ -404,6 +408,7 @@ label arrival:
     "Your heart beats faster. Velmonta's beautiful."
     "Beautiful, but devoid of life."
 
+
 label first_blood:
     "You pull your cloak a bit tighter around yourself and look down at your slippers, snug against your feet."
     "Sensing my overwhelm, Estelle squeezed my shoulder lightly in encouragement."
@@ -459,7 +464,7 @@ label bath_scene:
     menu:
         "*Pick at your skin to detract from the pain*.":
             "It gradually fades into the back of your mind, though you remain tense."
-        "*Inspect your hand":
+        "*Inspect your hand*":
             "Raising your hand up against the gleaming chandelier, you see your clean wrist for the first time - something beyond your imagination. The colour of your skin - the true one - beneath all that grime. You let your hand fall again."
     "Today had passed by in a daze. Too much to think about, too much to take in, too much to see. Even the light was - no, is - dizzying."
     "Your mind suddenly flashes to Lin. What would her hand look like?"
@@ -489,7 +494,7 @@ label bath_scene:
     e "Don't you look a wonder, miss?"
     menu:
         "I-I… You’re pretty too, Estelle.":
-            "The words split out smoothly, despite tasting strange on your tongue."
+            "The words slip out smoothly, despite tasting strange on your tongue."
             $ dialogue_var = "I’m just a maid, dear."
         "After taking a bath? Well, that would be expected.":
             e "Something in the way Estelle looks at you changes."
