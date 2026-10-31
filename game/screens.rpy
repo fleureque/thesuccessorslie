@@ -1656,14 +1656,9 @@ screen alert(message):
 
 screen top_bar():
 
-    tag menu
-
     imagemap:
-        idle "gui/no_hover_bar.PNG"
-        hover "gui/no_hover_bar.PNG"
-        hotspot (326, 1, 131, 69):
-            hovered  "gui/log_hover.PNG"
-        hotspot (204, 5, 122, 68):
-            hovered  "gui/compass_hover.PNG"
-        hotspot (77, 4, 123, 66):
-            hovered  "gui/gallery_hover.PNG"
+        ground "gui/top_not_hover.PNG"
+        hover "gui/top_hover.PNG"
+        hotspot(332, 6, 121, 68) action NullAction() #evidence log
+        hotspot(207, 6, 119, 71) action NullAction() #navigation
+        hotspot(75, 5, 124, 71) action NullAction() #gallery
