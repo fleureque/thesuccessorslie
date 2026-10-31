@@ -28,7 +28,10 @@ default glossary_dict = {
 "Sensations of Scab City": "Rotting wood, the pungent scent of filth, and the joint clamour of sickness and crime.",
 "Velmonta": "A prestigious and incredibly well-known noble house, even in Scab City.",
 "Velmonta's Reputation": "Known as a 'bastion of light' against darkness. The phrase is common knowledge.",
+"Velmonta's Origin": "Granted nobility in reward for epic conquest.",
 }
+
+default suspicion_list = {}
 
 default messages = {
 "Important choice": "Your next choice may greatly impact the storyline.",
@@ -50,6 +53,7 @@ define r = Character("Runa", color="#4af5e4", what_color="#a0e8ed", ctc="ctc", c
 define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed")
 define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
+define e = Character("Estelle", color="#b93a00", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
 define npc = Character("[npc]", color="#747474", what_color="#c8c4c1", ctc="ctc", ctc_position="fixed")
 
 define gui.text_font = "fonts/garamond.ttf"
@@ -80,6 +84,7 @@ label start:
             name = "Runa"
     
     jump shed_scene
+
 
 label shed_scene:
     play music lin_theme loop
@@ -243,6 +248,7 @@ label first_meeting:
     g "Not to the orphanage."
     jump carriage_ride
 
+
 label carriage_ride:
     "Resting your head on your hand, you look through the carriage window. Emaciated children shiver as you pass them by. Is it awe? Or are they too lost to care at this point?"
     "Gideon's gaze is directed towards them too, expression unreadable. Does it make him sick to his stomach, seeing their gaunt, haunting faces?"
@@ -311,7 +317,8 @@ label carriage_ride:
                     jump arrival
         "Anything else I need to know?":
             jump arrival
-            
+
+
 label arrival:
     "His hand flies to his chin, a finger hovering over his mouth."
     g "Don’t let yourself believe you’re safe simply given the way things will seem."
@@ -396,3 +403,33 @@ label arrival:
     "The foyer stretches out endlessly before you, spectacular and impossible."
     "Your heart beats faster. Velmonta's beautiful."
     "Beautiful, but devoid of life."
+
+label first_blood:
+    "You pull your cloak a bit tighter around yourself and look down at your slippers, snug against your feet."
+    "Sensing my overwhelm, Estelle squeezed my shoulder lightly in encouragement."
+    "A shudder runs through you, looking at her painted expression. But you quickly bow your head, then gaze around."
+    "Estelle joins you in your admiring, then coughs."
+    e "Let’s move on for now. After I take you to your room, you can wash up and get fed, alright?"
+    "She rushes you through countless salons and drawing rooms, then into a long gallery."
+    e "It’s only empty because we were expecting you today!"
+    menu:
+        "*Evaluate her excuse*":
+            "You blink up, smiling. Meanwhile, your head spins."
+            "The adoption was premeditated then? Or did a message travel faster than the carriage?"
+            "Or perhaps he sent a courrier right after Lin fell to rest..."
+            "Why would the whole estate need to be empty just for you?"
+            "Her answer is giving you more questions. You shake them out of your head."
+        "Ah! That's so consid'rate of you!":
+            #EXPRESSION smiling
+            e "Don't mention it, Miss!"
+    "Carved wax candles line the wall murals. They depict complex battlefields. The candlelight dances in holsters to animate the scene."
+    "Deep blue flags wave, dark against the blood-orange skies. Flags with the crest that you recognise as Velmonta’s."
+    "So {a=glossary:Velmonta's Origin}🔻 Velmonta's origins{/a} are just like the other houses' then."
+    "As the hallway continues, the murals are gradually replaced by framed portraits of ancestral family heads."
+    #portrait of holy looking man
+    "You can't help but notice that none look biologically related."
+    "...Adoption wasn't a recent trend, then."
+    #show portrait of cassian 
+    "Estelle strokes your shoulder."
+    e "That is your father, Miss [name]."
+    "You feel a strange repulsion, but know not at what."
