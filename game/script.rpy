@@ -71,6 +71,11 @@ label temp_end_message:
     "Alright - bye!"
     $ MainMenu(confirm=False)()
 
+label main_menu:
+    
+    call screen nav_menu
+    show scene "gui/main_menu.png"
+    return
 
 label start:
 
@@ -88,6 +93,7 @@ label start:
 
 label shed_scene:
     play music her_sickness loop fadein 1.0 fadeout 1.0 
+    scene black
     show screen top_bar()
     show lin normal
     menu:

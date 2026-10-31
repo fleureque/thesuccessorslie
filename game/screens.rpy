@@ -354,18 +354,19 @@ screen main_menu():
 
     ## This ensures that any other menu screen is replaced.
     tag menu
-
-    add gui.main_menu_background
+    use nav_menu
+    
+    """add gui.main_menu_background"""
 
     ## This empty frame darkens the main menu.
-    frame:
-        style "main_menu_frame"
+    """frame:
+        style 'main_menu_frame'"""
 
     ## The use statement includes another screen inside this one. The actual
     ## contents of the main menu are in the navigation screen.
-    use navigation
 
-    if gui.show_name:
+
+    """if gui.show_name:
 
         vbox:
             style "main_menu_vbox"
@@ -374,7 +375,7 @@ screen main_menu():
                 style "main_menu_title"
 
             text "[config.version]":
-                style "main_menu_version"
+                style 'main_menu_version'"""
 
 
 style main_menu_frame is empty
@@ -1662,3 +1663,27 @@ screen top_bar():
         hotspot(332, 6, 121, 68) action NullAction() #evidence log
         hotspot(207, 6, 119, 71) action NullAction() #navigation
         hotspot(75, 5, 124, 71) action NullAction() #gallery
+
+
+
+screen nav_menu():
+
+    imagemap:
+        ground "gui/nav_menu.PNG"
+        hover "gui/nav_menu_hover.PNG"
+
+        hotspot(626, 266, 576, 233) action Start()
+        hotspot(515, 534, 180, 82) action ShowMenu("load")
+        hotspot(512, 624, 194, 77) action ShowMenu("preferences")
+        hotspot(495, 715, 232, 55) action ShowMenu("about")
+
+        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+
+            ## Help isn't necessary or relevant to mobile devices.
+            hotspot(516, 776, 266, 110) action ShowMenu("help")
+
+        if renpy.variant("pc"):
+
+            ## The quit button is banned on iOS and unnecessary on Android and
+            ## Web.
+            textbutton _("Quit") action Quit(confirm=not main_menu)
