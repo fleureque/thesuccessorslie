@@ -57,9 +57,9 @@ image ctc:
     "gui/ctc_icon.png" with Dissolve(0.4), #This is your image
     subpixel True #This line makes sure that ATL is smooth 
 
-    yalign 0.84 xalign 0.85 #Adjust these numbers to fit your own textbox
-    linear 0.5 yalign 0.85
-    linear 0.5 yalign 0.84
+    yalign 0.78 xalign 0.80 #Adjust these numbers to fit your own textbox
+    linear 0.5 yalign 0.79
+    linear 0.5 yalign 0.78
     repeat
 
 #variable initialisation
