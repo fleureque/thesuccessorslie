@@ -1660,7 +1660,7 @@ screen top_bar():
     imagemap:
         ground "gui/top_not_hover.PNG"
         hover "gui/top_hover.PNG"
-        hotspot(332, 6, 121, 68) action NullAction() #evidence log
+        hotspot(332, 6, 121, 68) action ShowMenu("conclusion_log") #evidence log
         hotspot(207, 6, 119, 71) action NullAction() #navigation
         hotspot(75, 5, 124, 71) action NullAction() #gallery
 
@@ -1687,3 +1687,15 @@ screen nav_menu():
             ## The quit button is banned on iOS and unnecessary on Android and
             ## Web.
             textbutton _("Quit") action Quit(confirm=not main_menu)
+
+
+screen conclusion_log():
+    tag menu
+    use game_menu(_("Conclusions"), scroll="viewport"):
+
+        style_prefix "about"
+
+        vbox:
+
+            label "Your conclusions."
+            text "Conclusion 1:"
