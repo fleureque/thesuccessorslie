@@ -1702,10 +1702,3 @@ screen conclusion_log():
             text "[display]"
 
 
-screen display_image(image):
-    #credit to XxrenxX on Lemmasoft forum
-    window hide #hide the dialogue box
-    show image 
-    pause
-    hide image
-    window show

@@ -20,6 +20,14 @@ init python:
         for suspicion in observation_log:
             pass
 
+    def show_image(image):
+    #credit to XxrenxX on Lemmasoft forum
+        renpy.window_hide()
+        renpy.show(image)
+        renpy.pause()
+        renpy.hide(image)
+        renpy.window_show()
+
 
 default glossary_dict = {
 "The Plague": "An ailment, glaring and recognisable no matter which canvas it appears  on. You'll all return to the same artist in the end, won't you?",
@@ -49,18 +57,17 @@ image ctc:
     yalign 0.84 xalign 0.85 #Adjust these numbers to fit your own textbox
     linear 0.5 yalign 0.85
     linear 0.5 yalign 0.84
-    
     repeat
 
 #variable initialisation
+default npc_color = {"label": "#747474", "speech": "#c8c4c1"}
 define r = Character("Runa", color="#4af5e4", what_color="#a0e8ed", ctc="ctc", ctc_position="fixed")
 define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed")
 define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
 define e = Character("Estelle", color="#b93a00", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
 define m = Character("Marianne", color="#c32131", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
-default npc_color = {"label": "#747474", "speech": "#c8c4c1"}
-define npc = Character("[npc]", color=npc_color["label"], what_color=npc_color["speech"], ctc="ctc", ctc_position="fixed")
+define npc = Character("[npc]", color="npc_color[label]", what_color="npc_color[speech]", ctc="ctc", ctc_position="fixed")
 
 define gui.text_font = "fonts/garamond.ttf"
 define gui.text_instance = "light"
@@ -127,8 +134,8 @@ label shed_scene:
     show lin sick
     "She opens her mouth to continue, but is interrupted by a succession of hard coughs. Coughs you've seen before."
     "This isn't the first time you've seen {a=glossary:The Plague}🔻 the plague{/a}."
-    "A woman had been afflicted with the same ailment, claimed by the same painter. A woman, just like Lin, lying unmoving. Lips purple." 
-    "Above her, a man screaming with all the soul he had left. The very world being torn from him. Eyes, flitting to yours before he crawled away; to die away from your witness. "
+    "A woman had been afflicted with the same ailment, claimed by the same painter.{w} A woman, just like Lin, lying unmoving. Lips purple." 
+    "Above her, a man screaming with all the soul he had left.{w} The very world being torn from him.{w} Eyes, flitting to yours before he crawled away; to die away from your witness. "
     "..."
     "You grit your teeth."
     menu:
@@ -639,26 +646,30 @@ label scene_of_crime:
     "The crowd shifts, obscuring your vision. It's composed of servants."
     menu:
         "*Approach someone to ask what's happened*":
-            "Such a large gaggle of visibly shocked, passive onlookers is likely safe to approach."
-            "You step out tentatively and walk towards the clamour, fingers unconsciously tracing your neck."
-            mc "What… happened here?"
-            $ npc = "Brunette Valet"
-            $ npc_color["label"] = "#a68250"
-            "The valet's face is pale as he responds."
-            npc "Someon-"
-            "He stares behind you. You turn to see what he's so shocked by."
-            "Marianne Velmonta, the matriarch. She's the picture of perfection plastered on posters around Scab City."
-            "But her mouth is thin and her gait hurried. Rushing over, she calls what appears to be the boy’s name."
-            m "Dorian!" with vpunch
-            "The boy slowly turns to her, eyes wide and unfocused. With a stormy expression, she turns to the rest of us while grabbing his wrist protectively."
-            m "Please, give us some time alone."
-            "Her eyes fall on you."
-            m "Ah - are you Runa?"
-            "Nausea beginning to wash over you, you nod quietly."
-            m "You too, please. I.. no. Yes, go back to your room. This will be explained to you. But not now."
-            "She turns back to Dorian, giving you no further thought."
-            "The sight of death is nothing new. But death in this fashion? In this mansion?" 
-            "You glance one last time at Dorian, and hurry into your room. What had the valet been about to tell you?"
+            jump walk_into_crowd
         "*Run back into your room*":
             "Vague, disconcerted voices continue to drift into your room as you shut the door."
             "It's good that you returned; you don't know if outside is safe or not."
+
+
+label walk_into_crowd:
+    "Such a large gaggle of visibly shocked, passive onlookers is likely safe to approach."
+    "You step out tentatively and walk towards the clamour, fingers unconsciously tracing your neck."
+    mc "What… happened here?"
+    $ npc = "Brunette Valet"
+    $ npc_color["label"] = "#a68250"
+    "The valet's face is pale as he responds."
+    npc "Someon-"
+    "He stares behind you. You turn to see what he's so shocked by."
+    "Marianne Velmonta, the matriarch. She's the picture of perfection plastered on posters around Scab City."
+    "But her mouth is thin and her gait hurried. Rushing over, she calls what appears to be the boy’s name."
+    m "Dorian!" with vpunch
+    "The boy slowly turns to her, eyes wide and unfocused. With a stormy expression, she turns to the rest of us while grabbing his wrist protectively."
+    m "Please, give us some time alone."
+    "Her eyes fall on you."
+    m "Ah - are you Runa?"
+    "Nausea beginning to wash over you, you nod quietly."
+    m "You too, please. I.. no. Yes, go back to your room. This will be explained to you. But not now."
+    "She turns back to Dorian, giving you no further thought."
+    "The sight of death is nothing new. But death in this fashion? In this mansion?" 
+    "You glance one last time at Dorian, and hurry into your room. What had the valet been about to tell you?"
