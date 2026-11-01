@@ -246,6 +246,13 @@ screen quick_menu():
             ground "gui/prefs.png"
             hover "gui/prefs_hover.png"
             hotspot(4, 717, 200, 82) action Preference("auto-forward", "toggle")
+            hotspot(5, 804, 199, 73) action Skip() alternate Skip(fast=True, confirm=True)
+            hotspot(6, 882, 199, 77) action ShowMenu('history')
+            hotspot(1738, 720, 180, 80) action ShowMenu('save')
+            hotspot(1740, 804, 177, 74) action QuickLoad()
+            hotspot(1741, 885, 177, 73) action ShowMenu('preferences')
+            hotspot(1242, 733, 168, 39) action QuickSave()
+            hotspot(491, 734, 148, 45) action Rollback()
 
         
 
