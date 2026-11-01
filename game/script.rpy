@@ -266,7 +266,9 @@ label first_meeting:
 
 
 label carriage_ride:
+    show scene inside_carriage
     "Resting your head on your hand, you look through the carriage window. Emaciated children shiver as you pass them by. Is it awe? Or are they too lost to care at this point?"
+    show gideon neutral
     "Gideon's gaze is directed towards them too, expression unreadable. Does it make him sick to his stomach, seeing their gaunt, haunting faces?"
     "Your nose starts to burn."
     "Turning away from the window, you tap your fingers on your lap."
@@ -285,6 +287,8 @@ label carriage_ride:
             g "How direct."
             "He leans back."
             g "The barracks. They are a short distance from the outer wall."
+    scene black
+    hide gideon
     "In the warmth of the cloak Gideon draped around you, you grow drowsy despite the time."
     "As you drift off, you can't help but harbour the naive hope that Lin, somewhere out there, is doing well for herself."
     "You sleep for a while, mind floating out of your body."
@@ -297,17 +301,22 @@ label carriage_ride:
     "Stirring, you see Gideon stepping out briskly with his brow furrowed. He slams the door with a clang, muttering darkly under his breath, “Should've chosen a better route.”" with vpunch
     "Your grogginess is now subsiding. You can't fall back asleep even if you want to."
     "...And besides, it's not the right time of day."
+    hide gideon
     menu:
         "*Look at the landscape outside*":
+            show scene rydell_garden
             $ witness_shove = False
             "Somewhere along the journey, the filth outside had become polished stone and shrubbery. You've never left Scab City before, but you can tell: you're beyond the forest already."
         "*Look at what Gideon's doing*":
+            show scene guard_altercation
             "You bring your face closer against the window. There isn't any physical altercation, despite the people below being armed. The opposition is clad in the same deep blue as Gideon - but their crests are slightly different."
             "No matter how much you strain your ears, the carriage muffles the sound, rendering it incomprehensible."
             "With nothing left to do, you drum your fingers on the window impatiently, reading their expressions. After all, you doubt that Gideon can hold them off alone."
             "A man shoves Gideon on the shoulder. You look away, distracting yourself."
             $ witness_shove = True
-    "The carriage door swings open again."
+    show gideon angry
+    "The carriage door swings open again." with vpunch
+    show scene inside_carriage
     python:
         if witness_shove:
             dialogue_var = "where he'd been shoved"
@@ -315,25 +324,29 @@ label carriage_ride:
             dialogue_var = "as if there was something dirty there"
     menu:
         "*Stay quiet*":
-            pass
+            "You remain quiet for a while. Then you pipe up again."
         "What happened?":
             g "Damn petty Rydells tried to refuse us passage." 
             "He brushes his hand against his shoulder [dialogue_var], grimacing."
             menu:
                 "Rydells?":
+                    show gideon normal
                     g "A side family to Velmonta." 
                     "His hand falls onto his lap."
                     "Side… family?" 
                     "You blink a few times, then sigh." 
                 "*Try to fall back asleep*":
+                    hide gideon
+                    scene black
                     "Despite your attempts, you really can't fall asleep again."
+    show gideon normal
     menu:
         "How far're we from the estate?":
             g "We’ll get there after passing through the rest of the territory."
             menu:
                 "Anything else I need to know?":
                     jump arrival
-        "Anything else I need to know?":
+        "Anything I need to know before we get there?":
             jump arrival
 
 

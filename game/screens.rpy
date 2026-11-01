@@ -1700,3 +1700,12 @@ screen conclusion_log():
             label "Your conclusions."
             $ display = def_handle()
             text "[display]"
+
+
+screen display_image(image):
+    #credit to XxrenxX on Lemmasoft forum
+    window hide #hide the dialogue box
+    show image 
+    pause
+    hide image
+    window show
