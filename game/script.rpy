@@ -58,6 +58,7 @@ define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ct
 define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
 define e = Character("Estelle", color="#b93a00", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
+define m = Character("Marianne", color="#c32131", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
 default npc_color = {"label": "#747474", "speech": "#c8c4c1"}
 define npc = Character("[npc]", color=npc_color["label"], what_color=npc_color["speech"], ctc="ctc", ctc_position="fixed")
 
@@ -552,7 +553,7 @@ label bath_scene:
             "You look at the contraption on the side of your desk: a clock. From it comes an ever-present ticking."
             "You rest for a while."
     play sound knocking_urgent loop fadein 1.0 fadeout 1.0
-    "A harsh knocking sound forces you to your feet."
+    "A harsh knocking sound forces you to your feet." with vpunch
     stop sound fadeout 1.0
     "You need to hide your documents."
     menu:
@@ -570,30 +571,81 @@ label bath_scene:
     "A woman dressed in clothes identical to Estelle’s garb stands outside. A maid, then."
     menu:
         "*Open the door*":  
-            $ npc = "Unknown Maid"
-            $ npc_color["label"] = "#22792a"
-            play sound door_open
-            "You move the chair aside and open the door."
-            mc "You scared me the first time ‘round! Outside was empty!"
-            "You tilt your head. Why isn't she responding?"
-            "She shakes her head vigorously."
-            npc "I- I apologise, Miss. It seems I have identified the wrong room."
-            "You watch her eyes wandering past you, into your room. As much as you wait, she doesn't seem to plan on leaving. You shift uncomfortably as she continues to linger at the doorway."
-            mc "Need anythin'?"
-            "She continues staring, her expression blank. Where's Trusty Stick when you need it?"
-            "She finally shakes her head again."
-            npc "I’ll… I’ll go now."
-            mc "Okay?"
-            "You watch her retreat down the hallway, her hair whipping wildly as she looks around. You watch her approach the room next to yours."
-            "She takes out a set of keys, and you hear the sound of jingling as she steps inside."
-            "You go back in your room and shut the door, confused."
-            "Why’d she knocked instead of just unlocking your door then? After all, she had the keys to the room that she’d wanted to access."
-            "Then she must have lied."
-            $ observation_log["y"] = "The unknown maid wanted to see inside your room. She lied about having the wrong one. What was her goal?"
+            jump maid_interaction
         "*Stay quiet and keep the door shut*":
             play sound knocking_urgent 
             "The knocking continues for a bit longer, then stops."
             play sound footsteps loop fadein 1.0 fadeout 1.0
             "You hear the rustling of fabric, and then footsteps."
             play sound door_open
-            "And then the sound of a door swinging open. Judging by the time taken to travel that far, the door next to yours."
+            "And then the sound of a door swinging open. Judging by the time taken to travel that far, it's the door next to yours."
+
+
+label maid_interaction:
+    $ npc = "Unknown Maid"
+    $ npc_color["label"] = "#22792a"
+    play sound door_open
+    "You move the chair aside and open the door."
+    mc "You scared me the first time ‘round! Outside was empty!"
+    "You tilt your head. Why isn't she responding?"
+    "She shakes her head vigorously."
+    npc "I- I apologise, Miss. It seems I have identified the wrong room."
+    "You watch her eyes wandering past you, into your room. As much as you wait, she doesn't seem to plan on leaving. You shift uncomfortably as she continues to linger at the doorway."
+    mc "Need anythin'?"
+    "She continues staring, her expression blank. Where's Trusty Stick when you need it?"
+    "She finally shakes her head again."
+    npc "I’ll… I’ll go now."
+    mc "Okay?"
+    play sound footsteps loop fadein 1.0 fadeout 1.0
+    "You watch her retreat down the hallway, her hair whipping wildly as she looks around. You watch her approach the room next to yours."
+    play sound door_open
+    "She takes out a set of keys, and you hear the sound of jingling as she steps inside."
+    "You go back in your room and shut the door, confused."
+    "Why’d she knocked instead of just unlocking your door then? After all, she had the keys to the room that she’d wanted to access."
+    "Then she must have lied."
+    $ observation_log["y"] = "The unknown maid wanted to see inside your room. She lied about having the wrong one. What was her goal?"
+
+    
+
+label scene_of_crime:
+    play sound footsteps loop fadein 1.0 fadeout 1.0
+    "You hear more footsteps and quickly scramble onto the stool again, just in time to see a shadow slip past."
+    play sound scary_sound
+    "And then a scream." with vpunch
+    play sound stampede loop fadein 0.2
+    "More footsteps. Hurrying towards the scene. I jumped off the chair. Multiple voices were now outside. So quickly?"
+    menu:
+        "*Open the door and check what happened*":
+            pass
+        "*Stay inside and listen.*":
+            jump eavesdrop
+    "Opening the door, you're careful not to make a large noise."
+    "You freeze."
+    "That maid is lying flat on the floor. Blood spills from a large gash in her neck."
+    "Standing above her is a boy with dark hair, dirtied sword in hand. He's frozen, seemingly shocked by what's just happened."
+    "The crowd shifts, obscuring your vision. It's composed of servants."
+    menu:
+        "*Approach someone to ask what's happened*":
+            "Such a large gaggle of visibly shocked, passive onlookers is likely safe to approach."
+            "You step out tentatively and walk towards the clamour, fingers unconsciously tracing your neck."
+            mc "What… happened here?"
+            $ npc = "Brunette Valet"
+            $ npc_color["label"] = "#a68250"
+            "The valet's face is pale as he responds."
+            npc "Someon-"
+            "He stares behind you. You turn to see what he's so shocked by."
+            "Marianne Velmonta, the matriarch. She's the picture of perfection plastered on posters around Scab City."
+            "But her mouth is thin and her gait hurried. Rushing over, she calls what appears to be the boy’s name."
+            m "Dorian!" with vpunch
+            "The boy slowly turns to her, eyes wide and unfocused. With a stormy expression, she turns to the rest of us while grabbing his wrist protectively."
+            m "Please, give us some time alone."
+            "Her eyes fall on you."
+            m "Ah - are you Runa?"
+            "Nausea beginning to wash over you, you nod quietly."
+            m "You too, please. I.. no. Yes, go back to your room. This will be explained to you. But not now."
+            "She turns back to Dorian, giving you no further thought."
+            "The sight of death is nothing new. But death in this fashion? In this mansion?" 
+            "You glance one last time at Dorian, and hurry into your room. What had the valet been about to tell you?"
+        "*Run back into your room*":
+            "Vague, disconcerted voices continue to drift into your room as you shut the door."
+            "It's good that you returned; you don't know if outside is safe or not."
