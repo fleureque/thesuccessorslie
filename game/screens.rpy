@@ -241,20 +241,13 @@ screen quick_menu():
     zorder 100
 
     if quick_menu:
+        
+        imagemap:
+            ground "gui/prefs.png"
+            hover "gui/prefs_hover.png"
+            hotspot(4, 717, 200, 82) action Preference("auto-forward", "toggle")
 
-        hbox:
-            style_prefix "quick"
-            style "quick_menu"
-
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
-
+        
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
@@ -286,6 +279,11 @@ style quick_button_text:
 ##
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
+
+
+
+
+
 
 screen navigation():
 
@@ -1527,14 +1525,9 @@ screen quick_menu():
 
     if quick_menu:
 
-        hbox:
-            style "quick_menu"
-            style_prefix "quick"
-
-            textbutton _("Back") action Rollback()
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Menu") action ShowMenu()
+        imagemap:
+            ground "gui/prefs.png"
+            hover "gui/prefs_hover.png"
 
 
 style window:

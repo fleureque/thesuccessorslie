@@ -29,6 +29,7 @@ init python:
         renpy.window_show()
     
     renpy.music.register_channel("ux")
+    renpy.music.register_channel("ambiance")
 
 
 default glossary_dict = {
@@ -203,8 +204,9 @@ label first_meeting:
             "Your words still don't feel final enough."
             "You rack your mind over what else to say, but you've already said all that needed to be said. All you can mutter is “please…” as you shut my eyes." 
     "You take in every {a=glossary:Sensations of Scab City}🔻 last sensation{/a} around you. "
-    show gideon hidden 
     play sound footsteps loop
+    scene beige
+    show gideon hidden 
     "A clicking sound jolts you to your feet as a cloaked figure steps in." with vpunch
     stop sound fadeout 1.0
     
@@ -482,7 +484,7 @@ label first_blood:
             pass
     "You feel a strange repulsion, but know not at what."
     "The gallery ends. Estelle hurriedly wraps a shawl around you, guiding you across the lengthy courtyard."
-    "You reach a mansion no less impressive than the main chateau. However, its outer edifice has polished wood in the place of carved stone."
+    "You reach a mansion no less impressive than the main chateau.{w} However, its outer edifice has polished wood in the place of carved stone."
     e "This is the private residential."
     "You walk into the mansion, after being given the accede from the footmen flanking its heavy doors."
     "The residential building is tall and looming; however, you only march up one floor - “the successor’s floor” - before stopping outside a door next to a statue of a knight, cuirass and sword decorating his stone body."
@@ -499,24 +501,24 @@ label first_blood:
     "And finally, you're alone with the flowery fragrance of bathwater."
 
 label bath_scene:
-    "An unpleasant tingling instantly attacks you as you dip your feet into the swirling liquid. You hiss. It isn't unreasonably warm, but blood rushes into your limbs, bringing with it an intense itching."
+    "An unpleasant tingling instantly attacks you as you dip your feet into the swirling liquid.{w} You hiss.{w} It isn't unreasonably warm, but blood rushes into your limbs, bringing with it an intense itching."
     "Then comes the pain."
     menu:
         "*Pick at your skin to detract from the pain*.":
             "It gradually fades into the back of your mind, though you remain tense."
         "*Inspect your hand*":
-            "Raising your hand up against the gleaming chandelier, you see your clean wrist for the first time - something beyond your imagination. The colour of your skin - the true one - beneath all that grime. You let your hand fall again."
-    "Today had passed by in a daze. Too much to think about, too much to take in, too much to see. Even the light was - no, is - dizzying."
-    "Your mind suddenly flashes to Lin. What would her hand look like?"
-    "Is it wrong that you feel glad, rather than guilty, for being taken here? Leaving her behind?"
+            "Raising your hand up against the gleaming chandelier, you see your clean wrist for the first time - something beyond your imagination.{w} The colour of your skin - the true one - beneath all that grime.{w} You let your hand fall again."
+    "Today had passed by in a daze.{w} Too much to think about, too much to take in, too much to see.{w} Even the light was - no, is - dizzying."
+    "Your mind suddenly flashes to Lin.{w} What would her hand look like?"
+    "Is it wrong that you feel glad, rather than guilty, for being taken here?{w} Leaving her behind?"
     menu:
         "*Take deep breaths*":
             "You grab the rim of the bathtub to pull yourself up."
             "Nobody will care that you're overwhelmed. In fact, expressing it would only hurt you."
             "You have to suck it up."
     "You climb out of the bathtub."
-    "A huge Myllith sigil hangs over the mirror, partly obscuring its surface. You frown, wondering why someone would choose such an impractical placement."
-    "You shake the water off and step out. The nightdress is soft – too soft against your worn skin. Nevertheless, you shrug it on."
+    "A huge Myllith sigil hangs over the mirror, partly obscuring its surface.{w} You frown, wondering why someone would choose such an impractical placement."
+    "You shake the water off and step out.{w} The nightdress is soft – too soft against your worn skin. Nevertheless, you shrug it on."
     "You push the hanging metal aside."
     menu:
         "*Stare at your face*":
@@ -528,8 +530,9 @@ label bath_scene:
             "An emaciated and gaunt body meets you."
             "It's as clean as a noble's now."
             "You don't know how to feel about it."
-            "Being here will change your body for certain. You try to commit the image before you into your mind."
-    "After lingering before the mirror for slightly too long, you swallow and push the ornament back in place. Then you don a shy expression and pull open the door."
+            "Being here will certainly change you.{w} You try to memorise the image before you.{w} After all, even your body will eventually transform."
+    play sound open_door
+    "After lingering before the mirror for slightly too long, you swallow and push the ornament back in place.{w} Then you don a shy expression and pull open the door."
     "Estelle greets you with a... professional... sunny expression."
     e "Don't you look a wonder, miss?"
     menu:
@@ -546,9 +549,9 @@ label bath_scene:
     "It's more than you and Lin have even laid eyes on this whole winter, let alone come close to eating."
     menu:
         "*Eat the food*":
-            "Sighing, you lean back in your seat and have a few bites. The butters and fats melt away on your tongue, leaving behind a sweet aftertaste. Having never eaten for pure pleasure before, you now understood why so many people fall prey to gluttony."
+            "Sighing, you lean back in your seat and have a few bites.{w} The butters and fats melt away on your tongue, leaving behind a sweet aftertaste.{w} Having never eaten for pure pleasure before, you now understood why so many people fall prey to gluttony."
             "It's delicious, but at the same time, terrible."
-            "The intense flavour makes your head ring. It's terribly different from the washed-out, flavourless potatoes and grain you've been forced to salvage."
+            "The intense flavour makes your head ring.{w} It's terribly different from the washed-out, flavourless potatoes and grain you've been forced to salvage."
             "Besides, you're sure your stomach would explode from having more."
             $ food_eaten = True
         "*Don't eat the food*":
@@ -558,23 +561,23 @@ label bath_scene:
     menu:
         "*Explore your room*":
             "Velmonta's crest is everywhere, golden against the greenish blue coating the walls."
-            "A metal statue stands on a low-hanging shelf. It depicts a woman, standing firm with a greatsword in her gloved hands: Myllith of Moon. In all her beauty."
+            "A metal statue stands on a low-hanging shelf.{w} It depicts a woman, standing firm with a greatsword in her gloved hands: Myllith of Moon.{w} In all her beauty."
             "As you kneel down to examine the statue, your eyes fall on the plaque before it."
             "“A gift from Rosalind Marchetti.”"
             "An empress that you've never heard of."
             "How recent was her rule? Is Velmonta still close to the royal family?"
             "And if so, is that to be a good thing?"
             "Shaking your head, you tear yourself away from the statue, sitting on the bed. You feel as if you're sinking."
-            "You frown, looking around the room once more. Where would be a good place for hiding documents? Under a statue? No, would they lift that?"
-            "This room is filled with religious imagery. Statues and rosaries. Even that dagger in the drawer beneath the table. Who had this room belonged to before? You run your fingers through the blanket. It's impossibly soft."
+            "You frown, looking around the room once more. Where would be a good place for hiding documents?{w} Under the statue?{w} No, would they lift that?"
+            "This room is filled with religious imagery.{w} Statues and rosaries.{w} Even that dagger in the drawer beneath the table.{w} Who had this room belonged to before? You run your fingers through the blanket. It's impossibly soft."
             "Even more than Lin’s embrace."
             $ observation_log["x"] = "Rosalind Marchetti had ties to Velmonta, close enough to send a gift."
         "*Sit on the chair*":
             "Before the window is a heavy desk. A dip pen and ink lies next to a blank notebook and sparse parchments."
             "You relax into the chair's soft fabric. It has barely any resistance; you sink into it."
             "It's swallowing you whole."
-            "Shaking your head, you stare out into the courtyard, leaning on the desk. The flames are everywhere. The sky is slowly growing darker."
-            "As Gideon had said, the fire really does stand out in the night. But it can't possibly be practical to maintain. Even your room is lit with candles and burning wax."
+            "Shaking your head, you stare out into the courtyard, leaning on the desk. The flames are everywhere.{w} The sky is slowly growing darker."
+            "As Gideon had said, the fire really does stand out in the night.{w} But it can't possibly be practical to maintain.{w} Even your room is lit with candles and burning wax."
             "You look at the contraption on the side of your desk: a clock. From it comes an ever-present ticking."
             "You rest for a while."
     play sound knocking_urgent loop fadein 1.0 fadeout 1.0
@@ -594,7 +597,7 @@ label bath_scene:
     "Your hairs raise. You shut the door and race to draw the curtains down."
     play sound knocking_urgent loop fadein 1.0 fadeout 1.0
     "The knocking starts again. But you're not sure who's outside anymore."
-    "Looking at the door, you notice a glass hole offering vantage to the outside. With aching arms, you drag the chair over. You climb up to stand and peer through the hole."
+    "Looking at the door, you notice a glass hole offering vantage to the outside.{w} With aching arms, you drag the chair over.{w} You climb up to stand and peer through the hole."
     stop sound fadeout 1.0
     "A woman dressed in clothes identical to Estelle’s garb stands outside. A maid, then."
     menu:
@@ -618,21 +621,21 @@ label maid_interaction:
     "You tilt your head. Why isn't she responding?"
     "She shakes her head vigorously."
     npc "I- I apologise, Miss. It seems I have identified the wrong room."
-    "You watch her eyes wandering past you, into your room. As much as you wait, she doesn't seem to plan on leaving. You shift uncomfortably as she continues to linger at the doorway."
+    "You watch her eyes wandering past you, into your room.{w} As much as you wait, she doesn't seem to plan on leaving.{w} You shift uncomfortably as she continues to linger at the doorway."
     mc "Need anythin'?"
     "She continues staring, her expression blank. Where's Trusty Stick when you need it?"
     "She finally shakes her head again."
     npc "I’ll… I’ll go now."
     mc "Okay?"
     play sound footsteps loop fadein 1.0 fadeout 1.0
-    "You watch her retreat down the hallway, her hair whipping wildly as she looks around. You watch her approach the room next to yours."
+    "You watch her retreat down the hallway, her hair whipping wildly as she looks around.{w} You watch her approach the room next to yours."
     play sound open_door
     "She takes out a set of keys, and you hear the sound of jingling as she steps inside."
     play sound open_door
     "You go back in your room and shut the door, confused."
-    "Why’d she knocked instead of just unlocking your door then? After all, she had the keys to the room that she’d wanted to access."
+    "Why’d she knocked instead of just unlocking your door then?{w} After all, she had the keys to the room that she’d wanted to access."
     "Then she must have lied."
-    $ observation_log["y"] = "The unknown maid wanted to see inside your room. She lied about having the wrong one. What was her goal?"
+    $ observation_log["y"] = "The unknown maid wanted to see inside your room. She lied about having the wrong one.{w} What was her goal?"
 
     
 
@@ -644,20 +647,24 @@ label scene_of_crime:
     "And then a scream." with vpunch
     play sound stampede loop fadein 0.2
     "More footsteps. Hurrying towards the scene. You jump off the chair. Multiple voices are now outside. So quickly?"
+    stop sound
+    play ambiance crowd loop fadein 1.0 fadeout 1.0
     menu:
         "*Open the door and check what happened*":
             pass
         "*Stay inside and listen.*":
             jump eavesdrop
+    play sound open_door
     "Opening the door, you're careful not to make a large noise."
     "You freeze."
     "That maid is lying flat on the floor. Blood spills from a large gash in her neck."
-    "Standing above her is a boy with dark hair, dirtied sword in hand. He's frozen, seemingly shocked by what's just happened."
+    "Standing above her is a boy with dark hair, dirtied sword in hand.{w} He's frozen, seemingly shocked by what's just happened."
     "The crowd shifts, obscuring your vision. It's composed of servants."
     menu:
         "*Approach someone to ask what's happened*":
             jump walk_into_crowd
         "*Run back into your room*":
+            play sound open_door
             "Vague, disconcerted voices continue to drift into your room as you shut the door."
             "It's good that you returned; you don't know if outside is safe or not."
 
@@ -671,10 +678,11 @@ label walk_into_crowd:
     "The valet's face is pale as he responds."
     npc "Someon-"
     "He stares behind you. You turn to see what he's so shocked by."
-    "Marianne Velmonta, the matriarch. She's the picture of perfection plastered on posters around Scab City."
+    "Marianne Velmonta, the matriarch.{w} She's the picture of perfection plastered on posters around Scab City."
     "But her mouth is thin and her gait hurried. Rushing over, she calls what appears to be the boy’s name."
     m "Dorian!" with vpunch
-    "The boy slowly turns to her, eyes wide and unfocused. With a stormy expression, she turns to the rest of us while grabbing his wrist protectively."
+    "The boy slowly turns to her, eyes wide and unfocused.{w} With a stormy expression, she turns to the rest of us while grabbing his wrist protectively."
+    stop ambiance fadeout 2.0
     m "Please, give us some time alone."
     "Her eyes fall on you."
     m "Ah - are you Runa?"
