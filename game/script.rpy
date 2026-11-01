@@ -93,6 +93,7 @@ label main_menu:
     return
 
 label start:
+    play audio transition
 
     define mc = Character("[name + ' (You)']", what_color="#bb799a", ctc="ctc", ctc_position="fixed")
 
@@ -492,7 +493,7 @@ label first_blood:
             "Whatever it is in her expression, you bristle at it."
             "Estelle explains how to use a bath."
         "What happens after I bathe?":
-            e "Dinner, Miss."
+            e "My, well you'll have dinner, Miss."
     "She swings the door open, handing you a pile of fresh clothes and a towel."
     "And finally, you're alone with the flowery fragrance of bathwater."
 
