@@ -17,7 +17,7 @@ init python:
         renpy.restart_interaction()
 
     def def_handle():
-        for suspicion in suspicion_list:
+        for suspicion in observation_log:
             pass
 
 
@@ -59,7 +59,7 @@ define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
 define e = Character("Estelle", color="#b93a00", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
 default npc_color = {"label": "#747474", "speech": "#c8c4c1"}
-define npc = Character("[npc]", color=npc_color[0], what_color=npc_color[1], ctc="ctc", ctc_position="fixed")
+define npc = Character("[npc]", color=npc_color["label"], what_color=npc_color["speech"], ctc="ctc", ctc_position="fixed")
 
 define gui.text_font = "fonts/garamond.ttf"
 define gui.text_instance = "light"
@@ -391,7 +391,7 @@ label arrival:
             "Gideon raises an eyebrow humorously."
     "You turn back to the window."
     "Extravagant black railing now lines the passage, with bountiful flower baskets hanging from each division. The fiery red begins to fade into a muted orange warmth as you approach the inner wall."
-    #EXPRESSION smiling
+    show gideon smiling
     g "How is it?"
     menu:
         "Beautiful.":
@@ -551,7 +551,9 @@ label bath_scene:
             "As Gideon had said, the fire really does stand out in the night. But it can't possibly be practical to maintain. Even your room is lit with candles and burning wax."
             "You look at the contraption on the side of your desk: a clock. From it comes an ever-present ticking."
             "You rest for a while."
+    play sound knocking_urgent loop fadein 1.0 fadeout 1.0
     "A harsh knocking sound forces you to your feet."
+    stop sound fadeout 1.0
     "You need to hide your documents."
     menu:
         "*Hide them between the mattress and wooden planks.*":
@@ -559,6 +561,7 @@ label bath_scene:
         "*Fold them and hide them under the statue.*":
             $ paper_loc = "statue and the shelf"
     "You quickly bury the documents, taken from Lin's rags, between the [paper_loc]."
+    play sound door_open
     "Then you open the door."
     "Nobody's there."
     "Your hairs raise. You shut the door and race to draw the curtains down."
@@ -568,7 +571,8 @@ label bath_scene:
     menu:
         "*Open the door*":  
             $ npc = "Unknown Maid"
-            $ npc_color["label"] = "#3fab4a"
+            $ npc_color["label"] = "#22792a"
+            play sound door_open
             "You move the chair aside and open the door."
             mc "You scared me the first time ‘round! Outside was empty!"
             "You tilt your head. Why isn't she responding?"
@@ -587,4 +591,9 @@ label bath_scene:
             "Then she must have lied."
             $ observation_log["y"] = "The unknown maid wanted to see inside your room. She lied about having the wrong one. What was her goal?"
         "*Stay quiet and keep the door shut*":
-            pass
+            play sound knocking_urgent 
+            "The knocking continues for a bit longer, then stops."
+            play sound footsteps loop fadein 1.0 fadeout 1.0
+            "You hear the rustling of fabric, and then footsteps."
+            play sound door_open
+            "And then the sound of a door swinging open. Judging by the time taken to travel that far, the door next to yours."
