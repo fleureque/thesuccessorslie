@@ -1698,4 +1698,5 @@ screen conclusion_log():
         vbox:
 
             label "Your conclusions."
-            text "Conclusion 1:"
+            $ display = def_handle()
+            text "[display]"

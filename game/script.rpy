@@ -16,6 +16,10 @@ init python:
         renpy.hide_screen("alert")
         renpy.restart_interaction()
 
+    def def_handle():
+        for suspicion in suspicion_list:
+            pass
+
 
 default glossary_dict = {
 "The Plague": "An ailment, glaring and recognisable no matter which canvas it appears  on. You'll all return to the same artist in the end, won't you?",
@@ -31,7 +35,7 @@ default glossary_dict = {
 "Velmonta's Origin": "Granted nobility in reward for epic conquest.",
 }
 
-default suspicion_list = {}
+default observation_log = {}
 
 default messages = {
 "Important choice": "Your next choice may greatly impact the storyline.",
@@ -54,7 +58,8 @@ define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ct
 define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
 define e = Character("Estelle", color="#b93a00", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
-define npc = Character("[npc]", color="#747474", what_color="#c8c4c1", ctc="ctc", ctc_position="fixed")
+default npc_color = {"label": "#747474", "speech": "#c8c4c1"}
+define npc = Character("[npc]", color=npc_color[0], what_color=npc_color[1], ctc="ctc", ctc_position="fixed")
 
 define gui.text_font = "fonts/garamond.ttf"
 define gui.text_instance = "light"
@@ -187,7 +192,9 @@ label first_meeting:
             "You rack your mind over what else to say, but you've already said all that needed to be said. All you can mutter is “please…” as you shut my eyes." 
     "You take in every {a=glossary:Sensations of Scab City}🔻 last sensation{/a} around you. "
     show gideon hidden 
+    play sound footsteps loop
     "A clicking sound jolts you to your feet as a cloaked figure steps in." with vpunch
+    stop sound fadeout 1.0
     
     $ gideon = "The Cloaked Figure"
     "You grab {a=glossary:Trusty Stick}🔻 Trusty Stick{/a}, wielding it defensively."
@@ -200,8 +207,9 @@ label first_meeting:
             "You grit your teeth."
             "He muses on."
             g "This place, no, isn't important. But you... you are."
-    
+    play sound footsteps loop
     "You pull your lips into a sneer as his approach drives you back."
+    stop sound fadeout 1.0
     g "You're going to freeze."
     menu:
         "Look. I'll let you in on somethin'. Outsiders ain't welcome in these alleys.":
@@ -516,5 +524,67 @@ label bath_scene:
             "It's delicious, but at the same time, terrible."
             "The intense flavour makes your head ring. It's terribly different from the washed-out, flavourless potatoes and grain you've been forced to salvage."
             "Besides, you're sure your stomach would explode from having more."
+            $ food_eaten = True
         "*Don't eat the food*":
+            "You don't trust the food here yet."
+            "Better not to eat it."
+            $ food_eaten = False
+    menu:
+        "*Explore your room*":
+            "Velmonta's crest is everywhere, golden against the greenish blue coating the walls."
+            "A metal statue stands on a low-hanging shelf. It depicts a woman, standing firm with a greatsword in her gloved hands: Myllith of Moon. In all her beauty."
+            "As you kneel down to examine the statue, your eyes fall on the plaque before it."
+            "“A gift from Rosalind Marchetti.”"
+            "An empress that you've never heard of."
+            "How recent was her rule? Is Velmonta still close to the royal family?"
+            "And if so, is that to be a good thing?"
+            "Shaking your head, you tear yourself away from the statue, sitting on the bed. You feel as if you're sinking."
+            "You frown, looking around the room once more. Where would be a good place for hiding documents? Under a statue? No, would they lift that?"
+            "This room is filled with religious imagery. Statues and rosaries. Even that dagger in the drawer beneath the table. Who had this room belonged to before? You run your fingers through the blanket. It's impossibly soft."
+            "Even more than Lin’s embrace."
+            $ observation_log["x"] = "Rosalind Marchetti had ties to Velmonta, close enough to send a gift."
+        "*Sit on the chair*":
+            "Before the window is a heavy desk. A dip pen and ink lies next to a blank notebook and sparse parchments."
+            "You relax into the chair's soft fabric. It has barely any resistance; you sink into it."
+            "It's swallowing you whole."
+            "Shaking your head, you stare out into the courtyard, leaning on the desk. The flames are everywhere. The sky is slowly growing darker."
+            "As Gideon had said, the fire really does stand out in the night. But it can't possibly be practical to maintain. Even your room is lit with candles and burning wax."
+            "You look at the contraption on the side of your desk: a clock. From it comes an ever-present ticking."
+            "You rest for a while."
+    "A harsh knocking sound forces you to your feet."
+    "You need to hide your documents."
+    menu:
+        "*Hide them between the mattress and wooden planks.*":
+            $ paper_loc = "mattress and wooden planks beneath"
+        "*Fold them and hide them under the statue.*":
+            $ paper_loc = "statue and the shelf"
+    "You quickly bury the documents, taken from Lin's rags, between the [paper_loc]."
+    "Then you open the door."
+    "Nobody's there."
+    "Your hairs raise. You shut the door and race to draw the curtains down."
+    "The knocking starts again. But you're not sure who's outside anymore."
+    "Looking at the door, you notice a glass hole offering vantage to the outside. With aching arms, you drag the chair over. You climb up to stand and peer through the hole."
+    "A woman dressed in clothes identical to Estelle’s garb stands outside. A maid, then."
+    menu:
+        "*Open the door*":  
+            $ npc = "Unknown Maid"
+            $ npc_color["label"] = "#3fab4a"
+            "You move the chair aside and open the door."
+            mc "You scared me the first time ‘round! Outside was empty!"
+            "You tilt your head. Why isn't she responding?"
+            "She shakes her head vigorously."
+            npc "I- I apologise, Miss. It seems I have identified the wrong room."
+            "You watch her eyes wandering past you, into your room. As much as you wait, she doesn't seem to plan on leaving. You shift uncomfortably as she continues to linger at the doorway."
+            mc "Need anythin'?"
+            "She continues staring, her expression blank. Where's Trusty Stick when you need it?"
+            "She finally shakes her head again."
+            npc "I’ll… I’ll go now."
+            mc "Okay?"
+            "You watch her retreat down the hallway, her hair whipping wildly as she looks around. You watch her approach the room next to yours."
+            "She takes out a set of keys, and you hear the sound of jingling as she steps inside."
+            "You go back in your room and shut the door, confused."
+            "Why’d she knocked instead of just unlocking your door then? After all, she had the keys to the room that she’d wanted to access."
+            "Then she must have lied."
+            $ observation_log["y"] = "The unknown maid wanted to see inside your room. She lied about having the wrong one. What was her goal?"
+        "*Stay quiet and keep the door shut*":
             pass
