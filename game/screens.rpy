@@ -1648,16 +1648,6 @@ screen alert(message):
         text "[message]"
 
 
-screen top_bar():
-
-    imagemap:
-        ground "gui/top_not_hover.PNG"
-        hover "gui/top_hover.PNG"
-        hotspot(332, 6, 121, 68) action ShowMenu("conclusion_log") #evidence log
-        hotspot(207, 6, 119, 71) action NullAction() #navigation
-        hotspot(75, 5, 124, 71) action NullAction() #gallery
-
-
 
 screen nav_menu():
     

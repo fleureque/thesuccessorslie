@@ -90,7 +90,6 @@ label temp_end_message:
 
 label main_menu:
     
-    call screen nav_menu
     show scene "gui/main_menu.png"
     return
 
