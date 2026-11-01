@@ -1667,9 +1667,10 @@ screen top_bar():
 
 
 screen nav_menu():
-
+    
     imagemap:
-        ground "gui/nav_menu.PNG"
+        
+        ground Movie(play="gui/nav_menu.webm")
         hover "gui/nav_menu_hover.PNG"
 
         hotspot(626, 266, 576, 233) action Start()
