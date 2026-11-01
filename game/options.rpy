@@ -30,6 +30,10 @@ define config.version = "1.0"
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
+Code and story by @vchen-bit() (itch.io), @vchen-biosci (GitHub)
+Art and music by @sty.bry (Instagram)
+Additional sound effects from www.zapsplat.com"
+Visual novel adaptation of original story.
 """)
 
 
@@ -120,7 +124,7 @@ define config.window_hide_transition = Dissolve(.2)
 ## Controls the default text speed. The default, 0, is infinite, while any other
 ## number is the number of characters per second to type out.
 
-default preferences.text_cps = 0
+default preferences.text_cps = 30
 
 
 ## The default auto-forward delay. Larger numbers lead to longer waits, with 0

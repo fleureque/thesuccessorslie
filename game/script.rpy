@@ -512,6 +512,9 @@ label bath_scene:
     "It's more than you and Lin have even laid eyes on this whole winter, let alone come close to eating."
     menu:
         "*Eat the food*":
-            pass
+            "Sighing, you lean back in your seat and have a few bites. The butters and fats melt away on your tongue, leaving behind a sweet aftertaste. Having never eaten for pure pleasure before, you now understood why so many people fall prey to gluttony."
+            "It's delicious, but at the same time, terrible."
+            "The intense flavour makes your head ring. It's terribly different from the washed-out, flavourless potatoes and grain you've been forced to salvage."
+            "Besides, you're sure your stomach would explode from having more."
         "*Don't eat the food*":
             pass
