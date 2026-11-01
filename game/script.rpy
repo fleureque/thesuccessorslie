@@ -440,6 +440,7 @@ label arrival:
             "You decide it's better to follow his advice immediately."
     "You approach the softly lit inner chateau. It has spires that strech into the sky, and flags painting deep blue streaks in the air. The stairs stop before a pair of heavy-set double-oak doors."
     "Estelle knocks five times in a meaningful rhythm, and the doors creak open to reveal the unsmiling footmen who drew them open."
+    play music flaming_decadence loop fadein 1.0 fadeout 1.0
     "The floor's lined with marble, so polished that the light cascading from the chandelier reflects back in dazzling shades."
     "The foyer stretches out endlessly before you, spectacular and impossible."
     "Your heart beats faster. Velmonta's beautiful."
