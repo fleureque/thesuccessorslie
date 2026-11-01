@@ -217,7 +217,7 @@ init python:
     #credits for this code to Globover on Reddit!
     def dialogue_click_sound():
         if not renpy.config.skipping:
-            renpy.sound.play("audio/sfx/click.mp3") 
+            renpy.play("audio/sfx/click.mp3", channel="ux") 
         return True
 
     config.say_allow_dismiss = dialogue_click_sound

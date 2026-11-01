@@ -27,6 +27,8 @@ init python:
         renpy.pause()
         renpy.hide(image)
         renpy.window_show()
+    
+    renpy.music.register_channel("ux")
 
 
 default glossary_dict = {
@@ -446,7 +448,7 @@ label arrival:
 
 label first_blood:
     "You pull your cloak a bit tighter around yourself and look down at your slippers, snug against your feet."
-    "Sensing my overwhelm, Estelle squeezed my shoulder lightly in encouragement."
+    "Sensing your overwhelm, Estelle squeezes your shoulder lightly in encouragement."
     "A shudder runs through you, looking at her painted expression. But you quickly bow your head, then gaze around."
     "Estelle joins you in your admiring, then coughs."
     e "Let’s move on for now. After I take you to your room, you can wash up and get fed, alright?"
@@ -582,12 +584,15 @@ label bath_scene:
         "*Fold them and hide them under the statue.*":
             $ paper_loc = "statue and the shelf"
     "You quickly bury the documents, taken from Lin's rags, between the [paper_loc]."
-    play sound door_open
+    play sound open_door
     "Then you open the door."
     "Nobody's there."
+    play sound open_door
     "Your hairs raise. You shut the door and race to draw the curtains down."
+    play sound knocking_urgent loop fadein 1.0 fadeout 1.0
     "The knocking starts again. But you're not sure who's outside anymore."
     "Looking at the door, you notice a glass hole offering vantage to the outside. With aching arms, you drag the chair over. You climb up to stand and peer through the hole."
+    stop sound fadeout 1.0
     "A woman dressed in clothes identical to Estelle’s garb stands outside. A maid, then."
     menu:
         "*Open the door*":  
@@ -597,14 +602,14 @@ label bath_scene:
             "The knocking continues for a bit longer, then stops."
             play sound footsteps loop fadein 1.0 fadeout 1.0
             "You hear the rustling of fabric, and then footsteps."
-            play sound door_open
+            play sound open_door
             "And then the sound of a door swinging open. Judging by the time taken to travel that far, it's the door next to yours."
 
 
 label maid_interaction:
     $ npc = "Unknown Maid"
     $ npc_color["label"] = "#22792a"
-    play sound door_open
+    play sound open_door
     "You move the chair aside and open the door."
     mc "You scared me the first time ‘round! Outside was empty!"
     "You tilt your head. Why isn't she responding?"
@@ -618,8 +623,9 @@ label maid_interaction:
     mc "Okay?"
     play sound footsteps loop fadein 1.0 fadeout 1.0
     "You watch her retreat down the hallway, her hair whipping wildly as she looks around. You watch her approach the room next to yours."
-    play sound door_open
+    play sound open_door
     "She takes out a set of keys, and you hear the sound of jingling as she steps inside."
+    play sound open_door
     "You go back in your room and shut the door, confused."
     "Why’d she knocked instead of just unlocking your door then? After all, she had the keys to the room that she’d wanted to access."
     "Then she must have lied."
@@ -631,9 +637,10 @@ label scene_of_crime:
     play sound footsteps loop fadein 1.0 fadeout 1.0
     "You hear more footsteps and quickly scramble onto the stool again, just in time to see a shadow slip past."
     play sound scary_sound
+    stop music
     "And then a scream." with vpunch
     play sound stampede loop fadein 0.2
-    "More footsteps. Hurrying towards the scene. I jumped off the chair. Multiple voices were now outside. So quickly?"
+    "More footsteps. Hurrying towards the scene. You jump off the chair. Multiple voices are now outside. So quickly?"
     menu:
         "*Open the door and check what happened*":
             pass
