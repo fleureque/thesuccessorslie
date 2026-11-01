@@ -32,6 +32,7 @@ define config.version = "1.0"
 define gui.about = _p("""
 Code and story by @vchen-bit() (itch.io), @vchen-biosci (GitHub)
 Art and music by @sty.bry (Instagram)
+Some background assets obtained and modified from Pixabay
 Additional effects from www.zapsplat.com"
 Visual novel adaptation of original story.
 """)

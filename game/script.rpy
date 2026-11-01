@@ -31,6 +31,8 @@ init python:
     renpy.music.register_channel("ux")
     renpy.music.register_channel("ambiance")
 
+    #def 
+
 
 default glossary_dict = {
 "The Plague": "An ailment, glaring and recognisable no matter which canvas it appears  on. You'll all return to the same artist in the end, won't you?",
@@ -110,8 +112,7 @@ label start:
 
 label shed_scene:
     play music her_sickness loop fadein 1.0 fadeout 1.0 
-    scene black
-    show screen top_bar()
+    show old shed with dissolve
     show lin normal
     menu:
         "L-Lin. It… it'll be over soon, okay?":

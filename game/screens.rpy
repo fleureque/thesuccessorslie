@@ -139,7 +139,7 @@ style window:
 
 style namebox:
     #xpos gui.name_xpos
-    xalign 0.485
+    xalign 0.4879
     #xanchor gui.name_xalign
     xsize gui.namebox_width
     ypos gui.name_ypos - 70
