@@ -31,6 +31,9 @@ init python:
     renpy.music.register_channel("ux")
     renpy.music.register_channel("ambiance")
 
+    def thinking_time():
+        pass
+
     '''structure for observation log:
     pass in the day's observations log
     Conclusion dictionary includes a list of required observation conditions, and these are read from the observation log
@@ -38,7 +41,7 @@ init python:
     if theres a possible conclusion then display it aesthetically and let player choose which conclusion they want to draw
     example: 
     observation_log = [{"obs_index": ["Rydell's relationship with Velmonta"], "Rydell's relationship with Velmonta": "Rydell stopped the carriage, and Gideon seems to be hostile towards them"}]
-    conclusion_list = {"Gideon's truthfulness": {"meet_reqs": ["Rydell's relationship with Velmonta], "logic_display": ["Gideon said that the families don't know of your existence yet.", "But Rydell's a side family. The most hostile of the bunch.", "And they saw you through the window."]}}
+    conclusion_list = [{"conclusion_index: "Gideon's truthfulness", "meet_reqs": ["Rydell's relationship with Velmonta], "logic_display": ["Gideon said that the families don't know of your existence yet.", "But Rydell's a side family. The most hostile of the bunch.", "And they saw you through the window."], "possible choices": ["Gideon isn't trustworthy", "Can't come to a conclusion just yet"]}]
     and then find a way to somehow display. 
     needed vars: req_obs - the formal name of the observation (clickable hopefully and then displays the logic inside) eg:
     click observation_log[0] -> will display observation_log[0]["Rydell's relationship with Velmonta]
@@ -50,9 +53,16 @@ init python:
             met_conclusions.append(conclusion)
     go 1 observation at a time. 
     for conclusion in met_conclusions:
-        pass this into renpy command to show the logic display (conclusion_list[conclusion]["logic_display"]) or make a function
-    
+        pass this into renpy command to show the logic display (conclusion_list[conclusion]["logic_display"]) or make a function for it
+        something like that
     '''
+
+default observation_log = []
+
+default conclusion_list = {
+
+}
+
 
 default glossary_dict = {
 "The Plague": "An ailment, glaring and recognisable no matter which canvas it appears  on. You'll all return to the same artist in the end, won't you?",
@@ -68,7 +78,6 @@ default glossary_dict = {
 "Velmonta's Origin": "Granted nobility in reward for epic conquest.",
 }
 
-default observation_log = {}
 
 default messages = {
 "Important choice": "Your next choice may greatly impact the storyline.",
@@ -79,9 +88,9 @@ image ctc:
     "gui/ctc_icon.png" with Dissolve(0.4), #This is your image
     subpixel True #This line makes sure that ATL is smooth 
 
-    yalign 0.78 xalign 0.80 #Adjust these numbers to fit your own textbox
-    linear 0.5 yalign 0.79
-    linear 0.5 yalign 0.78
+    yalign 0.945 xalign 0.685 #Adjust these numbers to fit your own textbox
+    linear 0.5 yalign 0.955
+    linear 0.5 yalign 0.945
     repeat
 
 #variable initialisation
@@ -92,7 +101,7 @@ define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
 define e = Character("Estelle", color="#b93a00", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
 define m = Character("Marianne", color="#c32131", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
-define npc = Character("[npc]", color="npc_color[label]", what_color="npc_color[speech]", ctc="ctc", ctc_position="fixed")
+define npc = Character("[npc]", color="[npc_color['label']]", what_color="[npc_color['speech']]", ctc="ctc", ctc_position="fixed")
 
 define gui.text_font = "fonts/garamond.ttf"
 define gui.text_instance = "light"
@@ -225,7 +234,6 @@ label first_meeting:
             "You rack your mind over what else to say, but you've already said all that needed to be said. All you can mutter is “please…” as you shut my eyes." 
     "You take in every {a=glossary:Sensations of Scab City}🔻 last sensation{/a} around you. "
     play sound footsteps loop
-    scene beige
     show gideon hidden 
     "A clicking sound jolts you to your feet as a cloaked figure steps in." with vpunch
     stop sound fadeout 1.0
@@ -453,6 +461,7 @@ label arrival:
     $ npc = "Footman"
     npc "Welcome, Young Lady [name]."
     "The gate to the inner wall opens. A woman runs through, holding a pair of slippers."
+    show outer chateau with dissolve
     e "Hello, Miss [name]. I'm Estelle. It's great to meet you!"
     "Bending down, she slips the footwear onto your feet. It's strangely sleek against your skin, but not an unwelcome sensation."
     "She begins to guide you through the doorway."
@@ -462,6 +471,7 @@ label arrival:
             "Below his expression, too, he looks slightly worried."
         "*Don't bid Gideon farewell*":
             "You decide it's better to follow his advice immediately."
+    hide gideon
     "You approach the softly lit inner chateau. It has spires that strech into the sky, and flags painting deep blue streaks in the air. The stairs stop before a pair of heavy-set double-oak doors."
     "Estelle knocks five times in a meaningful rhythm, and the doors creak open to reveal the unsmiling footmen who drew them open."
     play music flaming_decadence loop fadein 1.0 fadeout 1.0
@@ -528,7 +538,7 @@ label bath_scene:
             "It gradually fades into the back of your mind, though you remain tense."
         "*Inspect your hand*":
             "Raising your hand up against the gleaming chandelier, you see your clean wrist for the first time - something beyond your imagination.{w} The colour of your skin - the true one - beneath all that grime.{w} You let your hand fall again."
-    "Today had passed by in a daze.{w} Too much to think about, too much to take in, too much to see.{w} Even the light was - no, is - dizzying."
+    "Today's passed by in a daze.{w} Too much to think about, too much to take in, too much to see.{w} Even the light was - no, is - dizzying."
     "Your mind suddenly flashes to Lin.{w} What would her hand look like?"
     "Is it wrong that you feel glad, rather than guilty, for being taken here?{w} Leaving her behind?"
     menu:
@@ -591,7 +601,7 @@ label bath_scene:
             "You frown, looking around the room once more. Where would be a good place for hiding documents?{w} Under the statue?{w} No, would they lift that?"
             "This room is filled with religious imagery.{w} Statues and rosaries.{w} Even that dagger in the drawer beneath the table.{w} Who had this room belonged to before? You run your fingers through the blanket. It's impossibly soft."
             "Even more than Lin’s embrace."
-            $ observation_log["x"] = "Rosalind Marchetti had ties to Velmonta, close enough to send a gift."
+            $ observation_log.append("Rosalind Marchetti had ties to Velmonta, close enough to send a gift.")
         "*Sit on the chair*":
             "Before the window is a heavy desk. A dip pen and ink lies next to a blank notebook and sparse parchments."
             "You relax into the chair's soft fabric. It has barely any resistance; you sink into it."
@@ -643,7 +653,7 @@ label maid_interaction:
     npc "I- I apologise, Miss. It seems I have identified the wrong room."
     "You watch her eyes wandering past you, into your room.{w} As much as you wait, she doesn't seem to plan on leaving.{w} You shift uncomfortably as she continues to linger at the doorway."
     mc "Need anythin'?"
-    "She continues staring, her expression blank. Where's Trusty Stick when you need it?"
+    "She continues staring, her expression blank.{w} Lord, where's Trusty Stick when you need it?"
     "She finally shakes her head again."
     npc "I’ll… I’ll go now."
     mc "Okay?"
@@ -655,7 +665,7 @@ label maid_interaction:
     "You go back in your room and shut the door, confused."
     "Why’d she knocked instead of just unlocking your door then?{w} After all, she had the keys to the room that she’d wanted to access."
     "Then she must have lied."
-    $ observation_log["y"] = "The unknown maid wanted to see inside your room. She lied about having the wrong one.{w} What was her goal?"
+    $ observation_log.append("The unknown maid wanted to see inside your room. She lied about having the wrong one.{w} What was her goal?")
 
     
 
@@ -698,6 +708,7 @@ label walk_into_crowd:
     "The valet's face is pale as he responds."
     npc "Someon-"
     "He stares behind you. You turn to see what he's so shocked by."
+    show marianne hesitant
     "Marianne Velmonta, the matriarch.{w} She's the picture of perfection plastered on posters around Scab City."
     "But her mouth is thin and her gait hurried. Rushing over, she calls what appears to be the boy’s name."
     m "Dorian!" with vpunch
