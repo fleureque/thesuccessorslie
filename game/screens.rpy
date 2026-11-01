@@ -253,6 +253,7 @@ screen quick_menu():
             hotspot(1741, 885, 177, 73) action ShowMenu('preferences')
             hotspot(1242, 733, 168, 39) action QuickSave()
             hotspot(491, 734, 148, 45) action Rollback()
+            hotspot(1, 962, 207, 116) action ShowMenu("conclusion_log")
 
         
 
@@ -1525,16 +1526,7 @@ style pref_vbox:
 
 ## Since a mouse may not be present, we replace the quick menu with a version
 ## that uses fewer and bigger buttons that are easier to touch.
-screen quick_menu():
-    variant "touch"
 
-    zorder 100
-
-    if quick_menu:
-
-        imagemap:
-            ground "gui/prefs.png"
-            hover "gui/prefs_hover.png"
 
 
 style window:
