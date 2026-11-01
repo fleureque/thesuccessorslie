@@ -31,8 +31,28 @@ init python:
     renpy.music.register_channel("ux")
     renpy.music.register_channel("ambiance")
 
-    #def 
-
+    '''structure for observation log:
+    pass in the day's observations log
+    Conclusion dictionary includes a list of required observation conditions, and these are read from the observation log
+    Conclusion dictionary iterated through to see if there are any which have the right conditions to come to a conclusion
+    if theres a possible conclusion then display it aesthetically and let player choose which conclusion they want to draw
+    example: 
+    observation_log = [{"obs_index": ["Rydell's relationship with Velmonta"], "Rydell's relationship with Velmonta": "Rydell stopped the carriage, and Gideon seems to be hostile towards them"}]
+    conclusion_list = {"Gideon's truthfulness": {"meet_reqs": ["Rydell's relationship with Velmonta], "logic_display": ["Gideon said that the families don't know of your existence yet.", "But Rydell's a side family. The most hostile of the bunch.", "And they saw you through the window."]}}
+    and then find a way to somehow display. 
+    needed vars: req_obs - the formal name of the observation (clickable hopefully and then displays the logic inside) eg:
+    click observation_log[0] -> will display observation_log[0]["Rydell's relationship with Velmonta]
+    then iterate through the conclusions list
+    observations = []
+    met_conclusions = []
+    for conclusion in conclusion list:
+        if conclusion_list[conclusion]["meet_reqs"] in observations:
+            met_conclusions.append(conclusion)
+    go 1 observation at a time. 
+    for conclusion in met_conclusions:
+        pass this into renpy command to show the logic display (conclusion_list[conclusion]["logic_display"]) or make a function
+    
+    '''
 
 default glossary_dict = {
 "The Plague": "An ailment, glaring and recognisable no matter which canvas it appears  on. You'll all return to the same artist in the end, won't you?",
