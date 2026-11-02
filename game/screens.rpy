@@ -576,6 +576,12 @@ screen about():
             text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
+screen chapter_display():
+    vbox:
+        text "Chapter [chapter]"
+        xalign 0.02
+        yalign 0.02
+
 style about_label is gui_label
 style about_label_text is gui_label_text
 style about_text is gui_text
@@ -1673,16 +1679,16 @@ screen nav_menu():
             textbutton _("Quit") action Quit(confirm=not main_menu)
 
 
-screen conclusion_log():
+screen conclusion_log(display):
     tag menu
     use game_menu(_("Conclusions"), scroll="viewport"):
-
+    
         style_prefix "about"
 
         vbox:
-
             label "Your conclusions."
-            $ display = def_handle()
-            text "[display]"
+            
+            
+            
 
 

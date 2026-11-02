@@ -31,8 +31,21 @@ init python:
     renpy.music.register_channel("ux")
     renpy.music.register_channel("ambiance")
 
-    def thinking_time():
-        pass
+    '''def handle_obs() -> tuple[str, bool]:
+        init python:
+
+            conclusion_list = [{"obs_index": ["Rydell's relationship with Velmonta"], "Rydell's relationship with Velmonta": "Rydell stopped the carriage, and Gideon seems to be hostile towards them"}]
+            for conclusion in conclusion_list:
+                if conclusion_list[conclusion]["meet_reqs"] in observations:
+                met_conclusions.append(conclusion)
+
+            displayed_text = []
+            for conclusion in conclusion_list:
+                if conclusion in met_conclusions:
+                    displayed_text.append(["{color="#dd174c"}" + f"> {conclusion}" + "{/color}", True])
+                else:
+                    displayed_text.append(["{color="#eaaf51"}" + f"> {conclusion}" + "{/color}", False])
+            return displayed_text'''
 
     '''structure for observation log:
     pass in the day's observations log
@@ -55,13 +68,20 @@ init python:
     for conclusion in met_conclusions:
         pass this into renpy command to show the logic display (conclusion_list[conclusion]["logic_display"]) or make a function for it
         something like that
+
+    The interface I want is like a list of things I've done, and the conclusions are numbered. Eg:
+    > Conclusion 1
+    (if clicked, expand) -> "Conditions not met"
+    > Conclusion 2
+    > Conclusion 3
+    If conditions are met then the button turns red, and the player has the option to think about the evidence and make the relevant conclusions
     '''
 
-default observation_log = []
+'''default observation_log = []
 
 default conclusion_list = {
 
-}
+}'''
 
 
 default glossary_dict = {
@@ -102,7 +122,7 @@ define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
 define e = Character("Estelle", color="#b93a00", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
 define m = Character("Marianne", color="#c32131", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
 define npc = Character("[npc]", color="[npc_color['label']]", what_color="[npc_color['speech']]", ctc="ctc", ctc_position="fixed")
-
+default chapter = "1: Fading Light"
 define gui.text_font = "fonts/garamond.ttf"
 define gui.text_instance = "light"
 define gui.text_axis = {"width" : 125}
@@ -119,12 +139,12 @@ label temp_end_message:
     "Alright - bye!"
     $ MainMenu(confirm=False)()
 
-label main_menu:
-    
+'''label main_menu:
     show scene "gui/main_menu.png"
-    return
+    return'''
 
 label start:
+    
     play audio transition
 
     define mc = Character("[name + ' (You)']", what_color="#bb799a", ctc="ctc", ctc_position="fixed")
@@ -140,29 +160,24 @@ label start:
 
 
 label shed_scene:
+    show screen chapter_display()
     play music her_sickness loop fadein 1.0 fadeout 1.0 
     show old shed with dissolve
     show lin normal
-    menu:
-        "L-Lin. It… it'll be over soon, okay?":
-            pass
+    mc "L-Lin. It… it'll be over soon, okay?"
     "Your hand lies unmoving against your sister's."
     "Her hand's callused, the muscle beneath thin and firm."
     "She's lying on a blanket for a mattress, barely moving against the freezing floor."
     l "D-don't want it to be over."
     show lin sick
     "She frowns and lets out a hacking cough."
-    menu:
-        "Do you even hear yourself?":
-            pass
+    mc "Do you even hear yourself?"
     "You look away as you hear her response."
     show lin normal
     l "We promised to get out of here..."
     "From her lips come a laugh. It's a tinkling sound, jarring against her frailty."
     "Following her gaze to the vial in the corner, you dig your nails into your arm, carving marks in angry red."
-    menu:
-        "I can't leave you like this.":
-            pass
+    mc "I can't leave you like this."
     l "No, Runa. Don't be weak. Leave. And once you're done… get me out too."
     "A faint smile traces her lips."
     show lin sick
@@ -218,6 +233,8 @@ label shed_scene:
     "A scream rings outside." with vpunch
     "The {a=glossary:Revvers}🔻 Revvers{/a} must be patrolling already. You press yourself against the wall, as time seems to stretch on and on..."
     "...They have been patrolling much more frequently lately. Political unrest and such."
+    "...How much time do you have left to clean the shed?"
+    jump first_meeting
 
 
 label first_meeting:
@@ -309,7 +326,7 @@ label first_meeting:
 label carriage_ride:
     show scene inside_carriage
     "Resting your head on your hand, you look through the carriage window. Emaciated children shiver as you pass them by. Is it awe? Or are they too lost to care at this point?"
-    show gideon neutral
+    show gideon normal
     "Gideon's gaze is directed towards them too, expression unreadable. Does it make him sick to his stomach, seeing their gaunt, haunting faces?"
     "Your nose starts to burn."
     "Turning away from the window, you tap your fingers on your lap."
@@ -334,11 +351,11 @@ label carriage_ride:
     "As you drift off, you can't help but harbour the naive hope that Lin, somewhere out there, is doing well for herself."
     "You sleep for a while, mind floating out of your body."
     "The carriage suddenly jolts to a stop." with vpunch
+    show gideon normal
     menu:
         "Are we here?":
             pass
     g "No. Don't move. Stay in the carriage."
-    show gideon cloaked
     "Stirring, you see Gideon stepping out briskly with his brow furrowed. He slams the door with a clang, muttering darkly under his breath, “Should've chosen a better route.”" with vpunch
     "Your grogginess is now subsiding. You can't fall back asleep even if you want to."
     "...And besides, it's not the right time of day."
@@ -355,9 +372,9 @@ label carriage_ride:
             "With nothing left to do, you drum your fingers on the window impatiently, reading their expressions. After all, you doubt that Gideon can hold them off alone."
             "A man shoves Gideon on the shoulder. You look away, distracting yourself."
             $ witness_shove = True
-    show gideon angry
+    show gideon normal
     "The carriage door swings open again." with vpunch
-    show scene inside_carriage
+    #show scene inside_carriage
     python:
         if witness_shove:
             dialogue_var = "where he'd been shoved"
@@ -392,7 +409,7 @@ label carriage_ride:
 
 
 label arrival:
-    show gideon smiling
+    show gideon normal
     "His hand flies to his chin, a finger hovering over his mouth."
     g "Don’t let yourself believe you’re safe simply given the way things will seem."
     menu:
@@ -416,21 +433,21 @@ label arrival:
                     menu:
                         "Never mind. I'm just being unreasonable.":
                             "Scab City isn't any noble’s responsibility, after all. The damn law ensures that."
-                            
-                    
                 "*Keep your bitterness to yourself.*":
                     pass
             "You silently curse the emperor again. Your ‘own fault’ for starving, huh?"
-            
         "*Keep staring out the window*":
             pass
     "Your heart quickens as Gideon looks at the rags you'd insisted on bringing. However, he purses his lips and doesn't speak."
     "The carriage draws close to wrought iron gates embedded into a towering wall of grey stone. Upon the wall, flaming torches illuminate its perimeter."
     "It looks incredibly expensive to maintain. You hide a grimace."
     "Gideon nods at you and exits the carriage, leaving the door open this time."
+    jump reach_mansion
+
+label reach_mansion:
     "You shudder at the sudden blast of warmth, the source of the heat being the flames licking wildly at impervious stone."
     "Feudal brilliance is full of fiery brilliance, it seems. It suddenly occurs to you that {a=glossary:Velmonta's Reputation}🔻 Velmonta's reputation{/a} may have been more than symbolic."
-    "Tearing my eyes away, you look back at Gideon. He hands an overly embellished document to the guard for inspection."
+    "Tearing your eyes away, you look back at Gideon. He hands an overly embellished document to the guard for inspection."
     "The guard clears his throat and hands the document back after briefly skimming over it."
     $ npc = "Guard"
     npc "Welcome to Velmonta. You may return to your carriage now."
@@ -441,10 +458,13 @@ label arrival:
     g "Truly safe. Not just fooled by the appearance of safety."
     menu:
         "Oh... okay.":
+            show gideon smiling
             "Gideon smiles briefly."
         "You have a habit of giving cryptic advice, Gideon.":
+            show gideon smiling
             "Gideon raises an eyebrow humorously."
     "You turn back to the window."
+    show gideon normal
     "Extravagant black railing now lines the passage, with bountiful flower baskets hanging from each division. The fiery red begins to fade into a muted orange warmth as you approach the inner wall."
     show gideon smiling
     g "How is it?"
@@ -479,9 +499,11 @@ label arrival:
     "The foyer stretches out endlessly before you, spectacular and impossible."
     "Your heart beats faster. Velmonta's beautiful."
     "Beautiful, but devoid of life."
+    jump first_blood
 
 
 label first_blood:
+    $ chapter = "2: First Blood"
     "You pull your cloak a bit tighter around yourself and look down at your slippers, snug against your feet."
     "Sensing your overwhelm, Estelle squeezes your shoulder lightly in encouragement."
     "A shudder runs through you, looking at her painted expression. But you quickly bow your head, then gaze around."
@@ -529,6 +551,7 @@ label first_blood:
             e "My, well you'll have dinner, Miss."
     "She swings the door open, handing you a pile of fresh clothes and a towel."
     "And finally, you're alone with the flowery fragrance of bathwater."
+    jump bath_scene
 
 label bath_scene:
     "An unpleasant tingling instantly attacks you as you dip your feet into the swirling liquid.{w} You hiss.{w} It isn't unreasonably warm, but blood rushes into your limbs, bringing with it an intense itching."
@@ -577,6 +600,9 @@ label bath_scene:
     "She closes the door for you to ‘enjoy the meal in private.’"
     "Awe. Disgust. This mixture of emotions grapples with you as you stare at the food."
     "It's more than you and Lin have even laid eyes on this whole winter, let alone come close to eating."
+    jump alone
+
+label alone:
     menu:
         "*Eat the food*":
             "Sighing, you lean back in your seat and have a few bites.{w} The butters and fats melt away on your tongue, leaving behind a sweet aftertaste.{w} Having never eaten for pure pleasure before, you now understood why so many people fall prey to gluttony."
@@ -601,7 +627,7 @@ label bath_scene:
             "You frown, looking around the room once more. Where would be a good place for hiding documents?{w} Under the statue?{w} No, would they lift that?"
             "This room is filled with religious imagery.{w} Statues and rosaries.{w} Even that dagger in the drawer beneath the table.{w} Who had this room belonged to before? You run your fingers through the blanket. It's impossibly soft."
             "Even more than Lin’s embrace."
-            $ observation_log.append("Rosalind Marchetti had ties to Velmonta, close enough to send a gift.")
+            ''' $ observation_log.append("Rosalind Marchetti had ties to Velmonta, close enough to send a gift.")'''
         "*Sit on the chair*":
             "Before the window is a heavy desk. A dip pen and ink lies next to a blank notebook and sparse parchments."
             "You relax into the chair's soft fabric. It has barely any resistance; you sink into it."
@@ -640,6 +666,7 @@ label bath_scene:
             "You hear the rustling of fabric, and then footsteps."
             play sound open_door
             "And then the sound of a door swinging open. Judging by the time taken to travel that far, it's the door next to yours."
+    jump scene_of_crime
 
 
 label maid_interaction:
@@ -665,8 +692,8 @@ label maid_interaction:
     "You go back in your room and shut the door, confused."
     "Why’d she knocked instead of just unlocking your door then?{w} After all, she had the keys to the room that she’d wanted to access."
     "Then she must have lied."
-    $ observation_log.append("The unknown maid wanted to see inside your room. She lied about having the wrong one.{w} What was her goal?")
-
+    '''$ observation_log.append("The unknown maid wanted to see inside your room. She lied about having the wrong one.{w} What was her goal?")'''
+    jump scene_of_crime
     
 
 label scene_of_crime:
@@ -708,16 +735,19 @@ label walk_into_crowd:
     "The valet's face is pale as he responds."
     npc "Someon-"
     "He stares behind you. You turn to see what he's so shocked by."
-    show marianne hesitant
+    show marianne serious
     "Marianne Velmonta, the matriarch.{w} She's the picture of perfection plastered on posters around Scab City."
     "But her mouth is thin and her gait hurried. Rushing over, she calls what appears to be the boy’s name."
+    show marianne hesitant
     m "Dorian!" with vpunch
     "The boy slowly turns to her, eyes wide and unfocused.{w} With a stormy expression, she turns to the rest of us while grabbing his wrist protectively."
     stop ambiance fadeout 2.0
+    show marianne serious
     m "Please, give us some time alone."
     "Her eyes fall on you."
     m "Ah - are you Runa?"
     "Nausea beginning to wash over you, you nod quietly."
+    show marianne hesitant
     m "You too, please. I.. no. Yes, go back to your room. This will be explained to you. But not now."
     "She turns back to Dorian, giving you no further thought."
     "The sight of death is nothing new. But death in this fashion? In this mansion?" 
