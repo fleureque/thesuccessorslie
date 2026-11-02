@@ -33,6 +33,14 @@ init python:
 
     def add_observation(observation : dict):
         observation_log[observation["title"]] = observation["description"]
+        observation_list = []
+        for observation in observation_log:
+            observation_list.append(observation)
+        for conclusion in conclusions:
+            if conclusions[conclusion]["meet_reqs"] in observation_list and not unlocked:
+                alert(messages["Condition met"])
+                conclusions[conclusion]["unlocked"] = True
+
 
 default observation_log = {}
 
@@ -40,7 +48,8 @@ default conclusions = {
     "suspicious_maid" : {
         "display" : "The maid was checking inside your room. For what reason?",
         "meet_reqs" : ["says_wrong_room", "maid_has_keys"],
-        "logic_display" : ["The maid had the keys to the room she intended to enter, yet still knocked.", "She must have lied."]
+        "logic_display" : ["The maid had the keys to the room she intended to enter, yet still knocked.", "She must have lied."],
+        "unlocked" : False
     }
 }
 
@@ -61,7 +70,7 @@ default glossary_dict = {
 
 default messages = {
 "Important choice": "Your next choice may greatly impact the storyline.",
-"Condition met": "The conditions have been met for a new conclusion to be drawn. Check it out in your log."
+"Condition met": "The conditions have been met for a new conclusion to be drawn! Check it out in your log."
 }
     
 image ctc:
@@ -286,7 +295,6 @@ label first_meeting:
 
 
 label carriage_ride:
-    show scene inside_carriage
     "Resting your head on your hand, you look through the carriage window. Emaciated children shiver as you pass them by. Is it awe? Or are they too lost to care at this point?"
     show gideon normal
     "Gideon's gaze is directed towards them too, expression unreadable. Does it make him sick to his stomach, seeing their gaunt, haunting faces?"
@@ -589,7 +597,7 @@ label alone:
             "You frown, looking around the room once more. Where would be a good place for hiding documents?{w} Under the statue?{w} No, would they lift that?"
             "This room is filled with religious imagery.{w} Statues and rosaries.{w} Even that dagger in the drawer beneath the table.{w} Who had this room belonged to before? You run your fingers through the blanket. It's impossibly soft."
             "Even more than Lin’s embrace."
-            ''' $ observation_log.append("Rosalind Marchetti had ties to Velmonta, close enough to send a gift.")'''
+            $ add_observation({"title": "royalty_ties", "description": "Rosalind Marchetti had ties to Velmonta, close enough to send a gift."})
         "*Sit on the chair*":
             "Before the window is a heavy desk. A dip pen and ink lies next to a blank notebook and sparse parchments."
             "You relax into the chair's soft fabric. It has barely any resistance; you sink into it."
@@ -657,7 +665,7 @@ label maid_interaction:
             "She takes out a set of keys, and you hear the sound of jingling as she steps inside."
             play sound open_door
             "You go back in your room and shut the door, confused."
-            $ observation_log["maid_has_keys"] = "The maid had keys to the room she was planning on entering."
+            $ add_observation({"title": "maid_has_keys", "description": "The maid had keys to the room she was planning on entering."})
     jump scene_of_crime
     
 
