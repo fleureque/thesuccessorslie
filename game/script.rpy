@@ -40,7 +40,7 @@ default conclusions = {
     "suspicious_maid" : {
         "display" : "The maid was checking inside your room. For what reason?",
         "meet_reqs" : ["says_wrong_room", "maid_has_keys"],
-        "logic_display" : ["The maid knocked instead of directly entering your room.", "She claimed to have the wrong room upon seeing you.", "But she had the keys to the room she intended to enter.", "The maid must have lied."]
+        "logic_display" : ["The maid had the keys to the room she intended to enter, yet still knocked.", "She must have lied."]
     }
 }
 
