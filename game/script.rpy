@@ -31,6 +31,9 @@ init python:
     renpy.music.register_channel("ux")
     renpy.music.register_channel("ambiance")
 
+    def add_observation(observation : dict):
+        observation_log[observation["title"]] = observation["description"]
+
 default observation_log = {}
 
 default conclusions = {
@@ -637,7 +640,7 @@ label maid_interaction:
     "You tilt your head. Why isn't she responding?"
     "She shakes her head vigorously."
     npc "I- I apologise, Miss. It seems I have identified the wrong room."
-    $ observation_log["says_wrong_room"] = "Maid claimed to have the wrong room."
+    $ add_observation({"title" : "says_wrong_room", "description" : "Maid claimed to have the wrong room."})
     "You watch her eyes wandering past you, into your room.{w} As much as you wait, she doesn't seem to plan on leaving.{w} You shift uncomfortably as she continues to linger at the doorway."
     mc "Need anythin'?"
     "She continues staring, her expression blank.{w} Lord, where's Trusty Stick when you need it?"
