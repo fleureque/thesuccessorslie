@@ -254,7 +254,7 @@ screen quick_menu():
             hotspot(1741, 885, 177, 73) action ShowMenu('preferences')
             hotspot(1242, 733, 168, 39) action QuickSave()
             hotspot(491, 734, 148, 45) action Rollback()
-            hotspot(1, 962, 207, 116) action ShowMenu("conclusion_log")
+            hotspot(1, 962, 207, 116) action ShowMenu("deduction_log")
 
         
 
@@ -1640,7 +1640,7 @@ screen glossary(target):
 #just reusing the glossary code bc its easier
 image alert = Frame("gui/glossary_bg.png", Borders(20, 20, 20, 20))
 screen alert(message):
-    button background None #action Hide("alert")
+    button background None action Hide("alert")
       
     frame:
         
@@ -1679,14 +1679,22 @@ screen nav_menu():
             textbutton _("Quit") action Quit(confirm=not main_menu)
 
 
-screen conclusion_log(display):
+screen deduction_log():
     tag menu
-    use game_menu(_("Conclusions"), scroll="viewport"):
+    use game_menu(_("Deductions"), scroll="viewport"):
     
-        style_prefix "about"
+        #style_prefix "about"
 
         vbox:
-            label "Your conclusions."
+
+            text "Observations:" color "#fdcbb7e6" size 50
+            text "By making certain observations, you may fulfil the conditions for coming to relevant conclusions. These conclusions may influence your future choices/inform your actions. Beware that not all conclusions may be correct." size 30
+
+            
+
+
+
+            
             
             
             

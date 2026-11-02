@@ -31,58 +31,15 @@ init python:
     renpy.music.register_channel("ux")
     renpy.music.register_channel("ambiance")
 
-    '''def handle_obs() -> tuple[str, bool]:
-        init python:
+default observation_log = {}
 
-            conclusion_list = [{"obs_index": ["Rydell's relationship with Velmonta"], "Rydell's relationship with Velmonta": "Rydell stopped the carriage, and Gideon seems to be hostile towards them"}]
-            for conclusion in conclusion_list:
-                if conclusion_list[conclusion]["meet_reqs"] in observations:
-                met_conclusions.append(conclusion)
-
-            displayed_text = []
-            for conclusion in conclusion_list:
-                if conclusion in met_conclusions:
-                    displayed_text.append(["{color="#dd174c"}" + f"> {conclusion}" + "{/color}", True])
-                else:
-                    displayed_text.append(["{color="#eaaf51"}" + f"> {conclusion}" + "{/color}", False])
-            return displayed_text'''
-
-    '''structure for observation log:
-    pass in the day's observations log
-    Conclusion dictionary includes a list of required observation conditions, and these are read from the observation log
-    Conclusion dictionary iterated through to see if there are any which have the right conditions to come to a conclusion
-    if theres a possible conclusion then display it aesthetically and let player choose which conclusion they want to draw
-    example: 
-    observation_log = [{"obs_index": ["Rydell's relationship with Velmonta"], "Rydell's relationship with Velmonta": "Rydell stopped the carriage, and Gideon seems to be hostile towards them"}]
-    conclusion_list = [{"conclusion_index: "Gideon's truthfulness", "meet_reqs": ["Rydell's relationship with Velmonta], "logic_display": ["Gideon said that the families don't know of your existence yet.", "But Rydell's a side family. The most hostile of the bunch.", "And they saw you through the window."], "possible choices": ["Gideon isn't trustworthy", "Can't come to a conclusion just yet"]}]
-    and then find a way to somehow display. 
-    needed vars: req_obs - the formal name of the observation (clickable hopefully and then displays the logic inside) eg:
-    click observation_log[0] -> will display observation_log[0]["Rydell's relationship with Velmonta]
-    then iterate through the conclusions list
-    observations = []
-    met_conclusions = []
-    for conclusion in conclusion list:
-        if conclusion_list[conclusion]["meet_reqs"] in observations:
-            met_conclusions.append(conclusion)
-    go 1 observation at a time. 
-    for conclusion in met_conclusions:
-        pass this into renpy command to show the logic display (conclusion_list[conclusion]["logic_display"]) or make a function for it
-        something like that
-
-    The interface I want is like a list of things I've done, and the conclusions are numbered. Eg:
-    > Conclusion 1
-    (if clicked, expand) -> "Conditions not met"
-    > Conclusion 2
-    > Conclusion 3
-    If conditions are met then the button turns red, and the player has the option to think about the evidence and make the relevant conclusions
-    '''
-
-'''default observation_log = []
-
-default conclusion_list = {
-
-}'''
-
+default conclusions = {
+    "suspicious_maid" : {
+        "display" : "The maid was checking inside your room. For what reason?",
+        "meet_reqs" : ["says_wrong_room", "maid_has_keys"],
+        "logic_display" : ["The maid knocked instead of directly entering your room.", "She claimed to have the wrong room upon seeing you.", "But she had the keys to the room she intended to enter.", "The maid must have lied."]
+    }
+}
 
 default glossary_dict = {
 "The Plague": "An ailment, glaring and recognisable no matter which canvas it appears  on. You'll all return to the same artist in the end, won't you?",
@@ -101,6 +58,7 @@ default glossary_dict = {
 
 default messages = {
 "Important choice": "Your next choice may greatly impact the storyline.",
+"Condition met": "The conditions have been met for a new conclusion to be drawn. Check it out in your log."
 }
     
 image ctc:
@@ -112,6 +70,7 @@ image ctc:
     linear 0.5 yalign 0.955
     linear 0.5 yalign 0.945
     repeat
+
 
 #variable initialisation
 default npc_color = {"label": "#747474", "speech": "#c8c4c1"}
@@ -678,21 +637,24 @@ label maid_interaction:
     "You tilt your head. Why isn't she responding?"
     "She shakes her head vigorously."
     npc "I- I apologise, Miss. It seems I have identified the wrong room."
+    $ observation_log["says_wrong_room"] = "Maid claimed to have the wrong room."
     "You watch her eyes wandering past you, into your room.{w} As much as you wait, she doesn't seem to plan on leaving.{w} You shift uncomfortably as she continues to linger at the doorway."
     mc "Need anythin'?"
     "She continues staring, her expression blank.{w} Lord, where's Trusty Stick when you need it?"
     "She finally shakes her head again."
     npc "I’ll… I’ll go now."
     mc "Okay?"
-    play sound footsteps loop fadein 1.0 fadeout 1.0
-    "You watch her retreat down the hallway, her hair whipping wildly as she looks around.{w} You watch her approach the room next to yours."
-    play sound open_door
-    "She takes out a set of keys, and you hear the sound of jingling as she steps inside."
-    play sound open_door
-    "You go back in your room and shut the door, confused."
-    "Why’d she knocked instead of just unlocking your door then?{w} After all, she had the keys to the room that she’d wanted to access."
-    "Then she must have lied."
-    '''$ observation_log.append("The unknown maid wanted to see inside your room. She lied about having the wrong one.{w} What was her goal?")'''
+    menu:
+        "*Quickly shut the door*":
+            pass
+        "*Watch where she goes*":
+            play sound footsteps loop fadein 1.0 fadeout 1.0
+            "You watch her retreat down the hallway, her hair whipping wildly as she looks around.{w} You watch her approach the room next to yours."
+            play sound open_door
+            "She takes out a set of keys, and you hear the sound of jingling as she steps inside."
+            play sound open_door
+            "You go back in your room and shut the door, confused."
+            $ observation_log["maid_has_keys"] = "The maid had keys to the room she was planning on entering."
     jump scene_of_crime
     
 
