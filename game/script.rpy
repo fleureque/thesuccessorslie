@@ -77,7 +77,7 @@ default glossary_dict = {
 
 default messages = {
 "Important choice": "Your next choice may greatly impact the storyline.",
-"Condition met": "The conditions have been met for a new conclusion to be drawn! Check it out in your log."
+"Condition met": "You've collected all the evidence needed for a new conclusion! Check it out in your log."
 }
     
 image ctc:
@@ -138,6 +138,11 @@ label start:
 
 
 label shed_scene:
+    $ reputation = {
+        "fool" : 0,
+        "cunning" : 0,
+        "sharp" : 0
+    }
     show screen chapter_display()
     play music her_sickness loop fadein 1.0 fadeout 1.0 
     show old shed with dissolve
@@ -320,6 +325,7 @@ label carriage_ride:
         "N-nevermind.":
             $ gideon_trust -= 2
             "Gideon nods and looks back out the window."
+            $ gideon_alliance = False
         "Where do I find you in the future?":
             $ gideon_alliance = True
             $ gideon_trust += 5
@@ -513,16 +519,13 @@ label first_blood:
             "Why would the whole estate need to be empty just for you?"
             "Her answer is giving you more questions. You shake them out of your head."
         "Ah! That's so consid'rate of you!":
-            #EXPRESSION smiling
             e "Don't mention it, Miss!"
     "Carved wax candles line the wall murals. They depict complex battlefields. The candlelight dances in holsters to animate the scene."
     "Deep blue flags wave, dark against the blood-orange skies. Flags with the crest that you recognise as Velmonta’s."
     "So {a=glossary:Velmonta's Origin}🔻 Velmonta's origins{/a} are just like the other houses' then."
     "As the hallway continues, the murals are gradually replaced by framed portraits of ancestral family heads."
-    #portrait of holy looking man
     "You can't help but notice that none look biologically related."
     "...Adoption wasn't a recent trend, then."
-    #show portrait of cassian 
     "Estelle strokes your shoulder."
     e "That is your father, Miss [name]."
     menu:
@@ -538,6 +541,7 @@ label first_blood:
     e "Your bath was drawn as soon as we saw the carriage. We do aim to be quick."
     menu:
         "Bath? What's that?":
+            $ reputation["fool"] += 2
             "Estelle looks up and down your grimy figure. A hint of sympathy?"
             "Whatever it is in her expression, you bristle at it."
             "Estelle explains how to use a bath."
@@ -584,9 +588,11 @@ label bath_scene:
     e "Don't you look a wonder, miss?"
     menu:
         "I-I… You’re pretty too, Estelle.":
+            $ reputation["fool"] += 2
             "The words slip out smoothly, despite tasting strange on your tongue."
             $ dialogue_var = "I’m just a maid, dear."
         "After taking a bath? Well, that would be expected.":
+            $ reputation["sharp"] += 5
             e "Something in the way Estelle looks at you changes."
             $ dialogue_var = "You're quite right, miss."
     e "[dialogue_var] Oh - here; your dinner’s already prepared."
@@ -605,6 +611,7 @@ label alone:
             "Besides, you're sure your stomach would explode from having more."
             $ food_eaten = True
         "*Don't eat the food*":
+            $ reputation["sharp"] += 3
             "You don't trust the food here yet."
             "Better not to eat it."
             $ food_eaten = False
@@ -668,7 +675,7 @@ label maid_interaction:
     $ npc_color["label"] = "#22792a"
     play sound open_door
     "You move the chair aside and open the door."
-    mc "You scared me the first time ‘round! Outside was empty!"
+    mc "You scared me the first time ‘round! Outside was empty!{w} Did Estelle send you?"
     "You tilt your head. Why isn't she responding?"
     "She shakes her head vigorously."
     npc "I- I apologise, Miss. It seems I have identified the wrong room."

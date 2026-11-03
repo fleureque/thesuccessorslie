@@ -1645,13 +1645,13 @@ screen alert(message):
     frame:
         
         background "glossary_background"
-        xalign 0.1 yalign 0.53
+        xalign 0.08 yalign 0.6
         xpadding 30 ypadding 30
         has vbox
         spacing 10
         xmaximum 700
         box_wrap True
-        text "[message]"
+        text "[message]" color "#ffca9c" size 30
 
 
 
