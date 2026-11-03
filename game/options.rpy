@@ -30,7 +30,7 @@ define config.version = "1.0"
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
-Code and story by @vchen-bit() (itch.io), @vchen-biosci (GitHub)
+Code and story by @fleureque() (itch.io), @fleureque (GitHub)
 Art and music by @sty.bry (Instagram)
 Some background assets obtained and modified from Pixabay
 Additional effects from www.zapsplat.com"

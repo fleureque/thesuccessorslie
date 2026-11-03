@@ -49,6 +49,10 @@ init python:
                     conclusions[conclusion]["unlocked"] = True
 
 
+    def deduction_display():
+        pass
+
+
 default observation_log = {}
 
 default conclusions = {
@@ -94,7 +98,7 @@ image ctc:
 #variable initialisation
 default npc_color = {"label": "#747474", "speech": "#c8c4c1"}
 define r = Character("Runa", color="#4af5e4", what_color="#a0e8ed", ctc="ctc", ctc_position="fixed")
-define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed")
+define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed", voice_tag = "lin")
 define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
 define e = Character("Estelle", color="#b93a00", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
@@ -701,6 +705,15 @@ label maid_interaction:
     jump scene_of_crime
     
 
+label eavesdrop:
+    "You hear the sound of a large crowd and a commotion outside."
+    "Yet you can't make heads nor tails of what's happening. You're slightly disoriented."
+    "The voices continue on for a while, then suddenly dissipate."
+    "You hear the sound of a door slamming."
+    "You're left incredibly confused."
+    jump stigma
+
+
 label scene_of_crime:
     play sound footsteps loop fadein 1.0 fadeout 1.0
     "You hear more footsteps and quickly scramble onto the stool again, just in time to see a shadow slip past."
@@ -713,8 +726,9 @@ label scene_of_crime:
     play ambiance crowd loop fadein 1.0 fadeout 1.0
     menu:
         "*Open the door and check what happened*":
-            pass
+            $ saw_murder = True
         "*Stay inside and listen.*":
+            $ saw_murder = False
             jump eavesdrop
     play sound open_door
     "Opening the door, you're careful not to make a large noise."
@@ -729,6 +743,7 @@ label scene_of_crime:
             play sound open_door
             "Vague, disconcerted voices continue to drift into your room as you shut the door."
             "It's good that you returned; you don't know if outside is safe or not."
+            jump eavesdrop
 
 
 label walk_into_crowd:
@@ -757,3 +772,38 @@ label walk_into_crowd:
     "She turns back to Dorian, giving you no further thought."
     "The sight of death is nothing new. But death in this fashion? In this mansion?" 
     "You glance one last time at Dorian, and hurry into your room. What had the valet been about to tell you?"
+    jump stigma
+
+label stigma:
+    $ chapter = "3: Stigma"
+    "Last night, you eventually drifted to sleep despite your worries. Estelle now awakens you."
+    "Outside is not yet bright, but it seems that nobles have a different routine, waking up unnaturally early."
+    if saw_murder:
+        menu:
+            "*Ask about the murder.*":
+                $ reputation["fool"] += 2
+                "You gaze up at her."
+                mc "Miss Estelle?"
+                e "Oh - there’s no need to call me ‘Miss’. But you have a question?"
+                mc "Why’d a maid try to attack Dorian last night?"
+                "Estelle blinks, then tucks her hair behind her ear."
+                e "It doesn’t happen often."
+                mc "But why?"
+                "You swallow and sheepishly stare at the floor after receiving a sharp look from her."
+                "She sighs."
+                e "I’m sorry, Miss Runa. It’s just… I’m not entirely sure yet."
+            "*Don't mention the murder*":
+                "You decide it's better not to touch a sensitive spot so soon."
+    "Rubbing your eyes, you watch as she turns to the closet to pick out clothes."
+    e "These might not fit you yet, but they won’t be small; we got large ones just in case. You’ll be fitted sometime."
+    "Estelle offers you a cheery grin."
+    "As she explains the function of each clothing piece, its materials, and how to wear it, you nod along."
+    "Her gaze is calm and measured as she speaks, despite her eager attitude."
+    "Meanwhile, the fine lines and countless calluses on her hands betray her years of experience."
+    e "I’ll be taking you to the Morning Parlour for breakfast." 
+    "She corrects your posture gently with her hands."
+    e "Last night was a bit different.{w} Usually meals are had with family."
+    mc "Um. How many siblings do I have?"
+    "She finishes adjusting the dress." 
+    e "Three total.{w} Young Masters Silvian and Dorian, and Young Lady Florence.{w} Shall we go now?"
+    "You commit their names to memory. And you're glad she's willing to answer your questions…"
