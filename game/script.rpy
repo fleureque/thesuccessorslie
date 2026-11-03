@@ -303,20 +303,26 @@ label first_meeting:
 
 label carriage_ride:
     "Resting your head on your hand, you look through the carriage window. Emaciated children shiver as you pass them by. Is it awe? Or are they too lost to care at this point?"
+    $ gideon_trust = 10
     show gideon normal
     "Gideon's gaze is directed towards them too, expression unreadable. Does it make him sick to his stomach, seeing their gaunt, haunting faces?"
     "Your nose starts to burn."
     "Turning away from the window, you tap your fingers on your lap."
     menu:
         "Your name was Gideon?":
+            $ gideon_trust += 2
             g "Indeed. Why?"
         "*Stay silent and stare at him*":
+            $ gideon_trust -= 2
             "..."
             g "Do you have something to say?"
     menu:
         "N-nevermind.":
+            $ gideon_trust -= 2
             "Gideon nods and looks back out the window."
         "Where do I find you in the future?":
+            $ gideon_alliance = True
+            $ gideon_trust += 5
             "His eyes widen."
             show gideon smiling
             g "How direct."
@@ -351,7 +357,6 @@ label carriage_ride:
             $ witness_shove = True
     show gideon normal
     "The carriage door swings open again." with vpunch
-    #show scene inside_carriage
     python:
         if witness_shove:
             dialogue_var = "where he'd been shoved"
@@ -361,10 +366,12 @@ label carriage_ride:
         "*Stay quiet*":
             "You remain quiet for a while. Then you pipe up again."
         "What happened?":
+            $ gideon_trust += 2
             g "Damn petty Rydells tried to refuse us passage." 
             "He brushes his hand against his shoulder [dialogue_var], grimacing."
             menu:
                 "Rydells?":
+                    $ gideon_trust += 2
                     show gideon normal
                     g "A side family to Velmonta." 
                     "His hand falls onto his lap."
@@ -387,13 +394,16 @@ label carriage_ride:
 
 label arrival:
     show gideon normal
-    "His hand flies to his chin, a finger hovering over his mouth."
-    g "Don’t let yourself believe you’re safe simply given the way things will seem."
-    menu:
-        "What d'you mean?":
-            "Your question is met with a simple shaking of the head."
-        "*Ponder over his meaning*":
-            "Your pondering doesn't work. You're even more confused now."
+    if gideon_trust > 16:
+        "His hand flies to his chin, a finger hovering over his mouth."
+        g "Don’t let yourself believe you’re safe simply given the way things will seem."
+        menu:
+            "What d'you mean?":
+                "Your question is met with a simple shaking of the head."
+            "*Ponder over his meaning*":
+                "Your pondering doesn't work. You're even more confused now."
+    else:
+        g "...Not especially."
     "The carriage passes by townspeople huddling around braziers. Firewood's being hauled from carts to maintain the flame. It looks like there are even people designated to do so."
     "...Not a hint of famine nor conflict in the people's expressions. They look to be at peace, at a loss for nothing."
     "In essence, the life you and Lin had always dreamed of..."
@@ -430,16 +440,17 @@ label reach_mansion:
     npc "Welcome to Velmonta. You may return to your carriage now."
     "Two people clad in deep blue liveries, with some effort, draw the doors open. The horses are spurred into movement again."
     "Gideon turns to you."
-    g "Don't approach me until you're safe."
-    "His hands trace around his sword scabbard. You're used to it by now."
-    g "Truly safe. Not just fooled by the appearance of safety."
-    menu:
-        "Oh... okay.":
-            show gideon smiling
-            "Gideon smiles briefly."
-        "You have a habit of giving cryptic advice, Gideon.":
-            show gideon smiling
-            "Gideon raises an eyebrow humorously."
+    if gideon_alliance:
+        g "Don't approach me until you're safe."
+        "His hands trace around his sword scabbard. You're used to it by now."
+        g "Truly safe. Not just fooled by the appearance of safety."
+        menu:
+            "Oh... okay.":
+                show gideon smiling
+                "Gideon smiles briefly."
+            "You have a habit of giving cryptic advice, Gideon.":
+                show gideon smiling
+                "Gideon raises an eyebrow humorously."
     "You turn back to the window."
     show gideon normal
     "Extravagant black railing now lines the passage, with bountiful flower baskets hanging from each division. The fiery red begins to fade into a muted orange warmth as you approach the inner wall."
@@ -464,10 +475,16 @@ label reach_mansion:
     "She begins to guide you through the doorway."
     menu:
         "Bye, Gideon!":
-            "Gideon looks disappointed that you've already forgotten his advice."
-            "Below his expression, too, he looks slightly worried."
+            if gideon_alliance:
+                "Gideon looks disappointed that you've already forgotten his advice."
+                "Below his expression, too, he looks slightly worried."
+            else:
+                "Gideon nods and waves back."
         "*Don't bid Gideon farewell*":
-            "You decide it's better to follow his advice immediately."
+            if gideon_alliance:
+                "You decide it's better to follow his advice immediately."
+            else:
+                "You're not close with him anyways."
     hide gideon
     "You approach the softly lit inner chateau. It has spires that strech into the sky, and flags painting deep blue streaks in the air. The stairs stop before a pair of heavy-set double-oak doors."
     "Estelle knocks five times in a meaningful rhythm, and the doors creak open to reveal the unsmiling footmen who drew them open."
