@@ -32,14 +32,21 @@ init python:
     renpy.music.register_channel("ambiance")
 
     def add_observation(observation : dict):
+        global observation_log
+        global conclusions
         observation_log[observation["title"]] = observation["description"]
         observation_list = []
-        for observation in observation_log:
-            observation_list.append(observation)
+        for title in observation_log:
+            observation_list.append(title)
         for conclusion in conclusions:
-            if conclusions[conclusion]["meet_reqs"] in observation_list and not unlocked:
-                alert(messages["Condition met"])
-                conclusions[conclusion]["unlocked"] = True
+            if not conclusions[conclusion]["unlocked"]:
+                conditions_met = True
+                for condition in conclusions[conclusion]["meet_reqs"]:
+                    if not condition in observation_list:
+                        conditions_met = False
+                if conditions_met:
+                    alert(messages["Condition met"])
+                    conclusions[conclusion]["unlocked"] = True
 
 
 default observation_log = {}
