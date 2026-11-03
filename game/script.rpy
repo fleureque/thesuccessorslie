@@ -165,7 +165,7 @@ label shed_scene:
     "From her lips come a laugh. It's a tinkling sound, jarring against her frailty."
     "Following her gaze to the vial in the corner, you dig your nails into your arm, carving marks in angry red."
     mc "I can't leave you like this."
-    l "No, Runa. Don't be weak. Leave. And once you're done… get me out too."
+    l "No, [name]. Don't be weak. Leave. And once you're done… get me out too."
     "A faint smile traces her lips."
     show lin sick
     "She opens her mouth to continue, but is interrupted by a succession of hard coughs. Coughs you've seen before."
@@ -478,6 +478,7 @@ label reach_mansion:
     "A footman walks around, opening the door. He extends a hand."
     $ npc = "Footman"
     npc "Welcome, Young Lady [name]."
+    show estelle normal
     "The gate to the inner wall opens. A woman runs through, holding a pair of slippers."
     show outer chateau with dissolve
     e "Hello, Miss [name]. I'm Estelle. It's great to meet you!"
@@ -765,7 +766,7 @@ label walk_into_crowd:
     show marianne serious
     m "Please, give us some time alone."
     "Her eyes fall on you."
-    m "Ah - are you Runa?"
+    m "Ah - are you [name]?"
     "Nausea beginning to wash over you, you nod quietly."
     show marianne hesitant
     m "You too, please. I.. no. Yes, go back to your room. This will be explained to you. But not now."
@@ -791,7 +792,7 @@ label stigma:
                 mc "But why?"
                 "You swallow and sheepishly stare at the floor after receiving a sharp look from her."
                 "She sighs."
-                e "I’m sorry, Miss Runa. It’s just… I’m not entirely sure yet."
+                e "I’m sorry, Miss [name]. It’s just… I’m not entirely sure yet."
             "*Don't mention the murder*":
                 "You decide it's better not to touch a sensitive spot so soon."
     "Rubbing your eyes, you watch as she turns to the closet to pick out clothes."
@@ -807,3 +808,86 @@ label stigma:
     "She finishes adjusting the dress." 
     e "Three total.{w} Young Masters Silvian and Dorian, and Young Lady Florence.{w} Shall we go now?"
     "You commit their names to memory. And you're glad she's willing to answer your questions…"
+    jump first_breakfast
+
+label first_breakfast:
+    pass
+    "The Morning Room is bright and well lit, with the large white table laid with matching tableware and cloth.{w} At the end of the table sits the matriarch, Marianne, and patriarch, Cassian, whom you recognise from his portrait."
+    "Opposite you is Dorian; next to him is Florence.{w} On your side, separating you from the family heads is Silvian."
+    "The atmosphere in the room is heavy, in contrast to the light from the sprawling chandelier."
+    "Cassian fidgets slightly, then clears his throat."
+    c "Your name is [name]. Is that correct?"
+    menu:
+        "Y-yes, sir. I mean, Dad. No! Father. I apologise.":
+            $ reputation["fool"] += 5
+            "He nods tersely before turning to Marianne, whispering something in her ear while frowning.{w} She nods at him slowly after meeting his words with her own."
+        "Yes. How do you know?":
+            $ reputation["sharp"] += 5
+            "Cassian has a distasteful look on his face."
+            c "...It would be expected for me to know the name of my new daughter."
+    "Gathering himself, he speaks again."
+    c "Well, [name]. To celebrate your entry into this household, we shall bestow upon you a new name."
+    init python:
+        noble_name = renpy.input("Enter your noble name: (max 20 chars)", length=20, default="Veruna")
+            noble_name = name.strip().title()
+
+            if not name:
+                name = "Veruna"
+    c "From now on, it shall be [noble_name]. Observe it well: [noble_name] Velmonta’."
+    menu:
+        "I'd prefer to keep my usual name, actually.":
+            $ reputation["sharp"] += 2
+            "Cassian and Marianne look at each other.{w} Sternly, Marianne lays her eyes on yours."
+            m "It would do you well to listen in this household."
+            "Your cheeks sting."
+        "*Fidget with your collar, then bow your head.*":
+            $ reputation["fool"] += 2
+    "Of course, you need a new, fancier name, don't you? To mark your new life?"
+    "What, was your old one too common?"
+    "Tightening around my fork, your hand betrays a slight tremor.{w} You've barely touched the food before you, and you don't plan to do so anytime soon."
+    "The patriarch sighs."
+    c "Dear, allow me to introduce you to your new siblings." 
+    "He rises, with everyone at the table following suit."
+    "He begins walking –"
+    c "This is Florence"
+    "– naming each child in turn –"
+    c "Dorian"
+    "– and announcing the last –"
+    c "And lovely Silvian"
+    "– as he passes him by."
+    "…You already know their names from Estelle's words."
+    "Having completed a full circuit, Cassian sits, satisfied, with everyone mirroring him.{w} Dorian turns to lock gazes with you, an amused glint in his eyes."
+    menu:
+        "*Avert your gaze*":
+            $ reputation["fool"] += 2
+            "You quickly avert your gaze, taken aback."
+        "*Stare him down*":
+            $ reputation["sharp"] += 2
+            "His eyes grow darker as he holds your gaze."    
+    if saw_murder:
+        "Is murdering people so common here that he can smile like this the day after?"
+        "Had you not seen him take that maid’s life, you wouldn’t have guessed that anything was amiss."
+    menu:
+        "*Act stupid*":
+            $ choice = "stupid"
+            $ reputation["fool"] += 5
+            "You bow your head." 
+            mc "Nice to… meet you all. I’m – oh, never mind, you already… know."
+            "You laugh, hands fidgeting under the table."
+        "*Act calm*":
+            $ choice = "calm"
+            $ reputation["sharp"] += 5
+            "You smile calmly."
+            mc "Nice to meet you all. As you know, I'm [noble_name]. Wonderful to be part of this house."
+    "Florence curves her lips up, ['unenthused' if choice == 'stupid' else 'eyes narrowing ever so slightly']."
+    f "It is a pleasure, sister. Fate has ordained our meeting, it seems."
+    "Such flowery language!"
+    if choice =="stupid":
+        "You beam at her."
+        mc "Yes, our meetin’ is a miracle." 
+    if choice == "calm":
+        "You smile gently."
+        mc "Of course."
+    "Your eyes wander down. Chained to her neck is a morllith, with Myllith’s sigil encased within the prayer strands."
+    d "Name's Dorian. Welcome to Velmonta."
+    
