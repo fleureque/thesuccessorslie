@@ -34,7 +34,7 @@ Code and story by @fleureque() (itch.io), @fleureque (GitHub)
 Art and music by @sty.bry (Instagram)
 Some background assets obtained and modified from Pixabay
 Additional effects from www.zapsplat.com"
-Visual novel adaptation of original story.
+Visual novel adaptation of original story. Still in early development, this is a demo.
 """)
 
 

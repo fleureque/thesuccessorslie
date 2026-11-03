@@ -478,9 +478,11 @@ label reach_mansion:
     "A footman walks around, opening the door. He extends a hand."
     $ npc = "Footman"
     npc "Welcome, Young Lady [name]."
-    show estelle normal
+    show estelle normal at right
     "The gate to the inner wall opens. A woman runs through, holding a pair of slippers."
     show outer chateau with dissolve
+    show estelle normal at right
+    show gideon normal at left
     e "Hello, Miss [name]. I'm Estelle. It's great to meet you!"
     "Bending down, she slips the footwear onto your feet. It's strangely sleek against your skin, but not an unwelcome sensation."
     "She begins to guide you through the doorway."
@@ -498,6 +500,7 @@ label reach_mansion:
                 "You're not close with him anyways."
     hide gideon
     "You approach the softly lit inner chateau. It has spires that strech into the sky, and flags painting deep blue streaks in the air. The stairs stop before a pair of heavy-set double-oak doors."
+    play sound knocking_urgent
     "Estelle knocks five times in a meaningful rhythm, and the doors creak open to reveal the unsmiling footmen who drew them open."
     play music flaming_decadence loop fadein 1.0 fadeout 1.0
     "The floor's lined with marble, so polished that the light cascading from the chandelier reflects back in dazzling shades."
@@ -827,12 +830,11 @@ label first_breakfast:
             c "...It would be expected for me to know the name of my new daughter."
     "Gathering himself, he speaks again."
     c "Well, [name]. To celebrate your entry into this household, we shall bestow upon you a new name."
-    init python:
+    python:
         noble_name = renpy.input("Enter your noble name: (max 20 chars)", length=20, default="Veruna")
-            noble_name = name.strip().title()
-
-            if not name:
-                name = "Veruna"
+        noble_name = name.strip().title()
+        if not noble_name:
+            noble_name = "Veruna"
     c "From now on, it shall be [noble_name]. Observe it well: [noble_name] Velmonta’."
     menu:
         "I'd prefer to keep my usual name, actually.":
@@ -867,16 +869,17 @@ label first_breakfast:
     if saw_murder:
         "Is murdering people so common here that he can smile like this the day after?"
         "Had you not seen him take that maid’s life, you wouldn’t have guessed that anything was amiss."
+    alert("First impressions are important. Choose wisely!")
     menu:
         "*Act stupid*":
             $ choice = "stupid"
-            $ reputation["fool"] += 5
+            $ reputation["fool"] += 10
             "You bow your head." 
             mc "Nice to… meet you all. I’m – oh, never mind, you already… know."
             "You laugh, hands fidgeting under the table."
         "*Act calm*":
             $ choice = "calm"
-            $ reputation["sharp"] += 5
+            $ reputation["sharp"] += 10
             "You smile calmly."
             mc "Nice to meet you all. As you know, I'm [noble_name]. Wonderful to be part of this house."
     "Florence curves her lips up, ['unenthused' if choice == 'stupid' else 'eyes narrowing ever so slightly']."
@@ -888,6 +891,48 @@ label first_breakfast:
     if choice == "calm":
         "You smile gently."
         mc "Of course."
-    "Your eyes wander down. Chained to her neck is a morllith, with Myllith’s sigil encased within the prayer strands."
+    $ glossary_dict["Morllith"]: "An accessory used for guided prayer. It is considered outdated but remains a staple for the truly devout. Very rare in Scab City."
+    "Your eyes wander down. Chained to her neck is a {a=glossary:Morllith}🔻 morllith{/a}, with Myllith’s sigil encased within the prayer strands."
     d "Name's Dorian. Welcome to Velmonta."
-    
+    if choice == "stupid":
+        "You swallow, then nod."
+        mc "A-ah, hi!"
+    else:
+        "You tilt your head slowly, then smile again."
+        mc "Thank you. I hope we shall get along well."
+    "The blonde boy calmly pushes his book aside." 
+    s "Silvian. It’s nice to meet you too, sister [noble_name]."
+    "You glance at the book’s cover. It's a vivid red."
+    "You smile ['diffidently' if choice == 'stupid' else 'confidently'] back."
+    "Cassian turns to the matriarch, picking at his decorated sleeves."
+    c "Dear, Marianne - have you anything to add?"
+    "She waits, thinking. {w} Then, evenly, she asks,"
+    m "Are you aware of the successorship, [noble_name]?"
+    "Florence, diagonal to you, grows pale.{w} Her fingers flit to her sleeved arm, flinching as she moves her fingers over the fabric."
+    "The boy next to you - Silvian - tenses inconspicuously.{w} Dorian grins, eyes widening, but you can hear his leg jerking up and down opposite you."    
+    "You clear my throat."
+    if choice=="stupid":
+        mc "N-no, Ma’am. I mean Miss. I! Mother."
+        "You tilt your head down in defeat, cheeks flushing."
+        "Marianne coughs quietly, atmosphere awkward."
+    if choice=="calm":
+        mc "No, Mother. But I'd like to know."
+    m "No, no, it’s fine. Your father will talk to you later."
+    if saw_murder:
+        "You stare into her eyes that betray no hint of remembrance over last night’s occurrences.{w} Are these people crazy?{w} Or are you?"
+    "Cassian’s eyes widen as he looks at his wife in… betrayal? He reaches for his wine, but spills some onto the tablecloth."
+    c "Ah - forgive me." 
+    "At their avoidance, you blink a few times, then turn back to the meal before you."
+    "Dorian’s eyes are still digging deep into your soul. But so are the matriarch’s."
+    "She's staring at your hand in what seems to be faint disapproval.{w} You follow her gaze down, tilting your head in mild confusion."
+    "…You're holding the wrong fork, huh."
+    "The breakfast continues."
+    if saw_murder:
+        "Nobody seems willing to address last night’s event."
+        "We successors live on the same floor, do we not? Hazarding a guess - especially due to the proximity of Dorian’s room from yours - everyone was close enough to have heard the disturbance."
+        "Yet nobody moves to talk about it. Still, the air remains heavy throughout."
+    else:
+        "The meal continues with a heavy atmosphere. You don't know why."
+        "Did you kill the mood or something?"
+
+
