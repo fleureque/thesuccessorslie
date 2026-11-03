@@ -568,7 +568,8 @@ label bath_scene:
             "Nobody will care that you're overwhelmed. In fact, expressing it would only hurt you."
             "You have to suck it up."
     "You climb out of the bathtub."
-    "A huge Myllith sigil hangs over the mirror, partly obscuring its surface.{w} You frown, wondering why someone would choose such an impractical placement."
+    $ glossary_dict["Myllith Sigil"]: "A sign of the Goddess, used to entice Her Blessings. These can be anything, but are traditionally for loyalty to the Crown, improved social harmony and success in military conquest."
+    "A huge {a=glossary:Myllith Sigil}🔻 Myllith sigil{/a} hangs over the mirror, partly obscuring its surface.{w} You frown, wondering why someone would choose such an impractical placement."
     "You shake the water off and step out.{w} The nightdress is soft – too soft against your worn skin. Nevertheless, you shrug it on."
     "You push the hanging metal aside."
     menu:
