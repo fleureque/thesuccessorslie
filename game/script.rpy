@@ -157,7 +157,7 @@ label shed_scene:
     }
     show screen info_display()
     play music her_sickness loop fadein 1.0 fadeout 1.0 
-    show old shed with dissolve
+    show scene old shed with dissolve
     show lin normal
     mc "L-Lin. It… it'll be over soon, okay?"
     "Your hand lies unmoving against your sister's."
@@ -319,6 +319,7 @@ label first_meeting:
 
 
 label carriage_ride:
+    show inside_carriage with dissolve
     "Resting your head on your hand, you look through the carriage window. Emaciated children shiver as you pass them by. Is it awe? Or are they too lost to care at this point?"
     $ gideon_trust = 10
     show gideon normal
@@ -363,7 +364,7 @@ label carriage_ride:
     hide gideon
     menu:
         "*Look at the landscape outside*":
-            show scene rydell_garden
+            show rydell_garden with dissolve
             $ witness_shove = False
             "Somewhere along the journey, the filth outside became polished stone and shrubbery. You've never left Scab City before, but you can tell: you're beyond the forest already."
         "*Look at what Gideon's doing*":
@@ -812,6 +813,7 @@ label walk_into_crowd:
     jump stigma
 
 label stigma:
+    play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
     $ chapter = "3: Stigma"
     "Last night, you eventually drifted to sleep despite your worries. Estelle now awakens you."
     "Outside is not yet bright, but it seems that nobles have a different routine, waking up unnaturally early."
@@ -1183,6 +1185,9 @@ label confront_tess:
     "You stare at him.{w} His expression remains dumb."
     mc "Alright then, Tess. You can go now." 
     "You wave your hand. He bows and leaves. You turn to the ticking clock. How long will it be until the next attack?"
-
-    
+    menu:
+        "*Prepare yourself for another attack*":
+            pass
+        "*Wait it out*":
+            pass
 
