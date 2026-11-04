@@ -576,7 +576,7 @@ screen about():
             text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
-screen chapter_display():
+screen info_display():
     vbox:
         text "Chapter [chapter]"
         xalign 0.02

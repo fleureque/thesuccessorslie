@@ -155,7 +155,7 @@ label shed_scene:
     $ mental_state = {
         "stress" : 10
     }
-    show screen chapter_display()
+    show screen info_display()
     play music her_sickness loop fadein 1.0 fadeout 1.0 
     show old shed with dissolve
     show lin normal
@@ -634,6 +634,7 @@ label alone:
             $ food_eaten = False
     menu:
         "*Explore your room*":
+            $ know_dagger = True
             "Velmonta's crest is everywhere, golden against the greenish blue coating the walls."
             "A metal statue stands on a low-hanging shelf.{w} It depicts a woman, standing firm with a greatsword in her gloved hands: Myllith of Moon.{w} In all her beauty."
             "As you kneel down to examine the statue, your eyes fall on the plaque before it."
@@ -647,6 +648,7 @@ label alone:
             "Even more than Lin’s embrace."
             $ add_observation({"title": "royalty_ties", "description": "Rosalind Marchetti had ties to Velmonta, close enough to send a gift."})
         "*Sit on the chair*":
+            $ know_dagger = False
             "Before the window is a heavy desk. A dip pen and ink lies next to a blank notebook and sparse parchments."
             "You relax into the chair's soft fabric. It has barely any resistance; you sink into it."
             "It's swallowing you whole."
@@ -676,8 +678,10 @@ label alone:
     "A woman dressed in clothes identical to Estelle’s garb stands outside. A maid, then."
     menu:
         "*Open the door*":  
+            $ talk_to_maid = True
             jump maid_interaction
         "*Stay quiet and keep the door shut*":
+            $ talk_to_maid = False
             play sound knocking_urgent 
             "The knocking continues for a bit longer, then stops."
             play sound footsteps loop fadein 1.0 fadeout 1.0
@@ -692,6 +696,7 @@ label maid_interaction:
     $ npc_color["label"] = "#22792a"
     play sound open_door
     "You move the chair aside and open the door."
+    $ alert("Something feels off. Make your next decision wisely.")
     mc "You scared me the first time ‘round! Outside was empty!{w} Did Estelle send you?"
     "You tilt your head. Why isn't she responding?"
     menu:
@@ -702,15 +707,15 @@ label maid_interaction:
             mc "Wh-what are you-?"
             play sound scary_sound
             stop music
-            "She reaches into her garters as you back away.{w} Her hand comes out again, dagger in grasp."
+            "She reaches into her long, bulky sock as you back away.{w} Her hand comes out again, dagger in grasp."
             "You have barely any time to react, but inch away."
-            "Running doesn't save you. How could it? You're completely unarmed."
+            "Running doesn't save you. Well, how could it? You're entirely unarmed."
             alert("Ending unlocked: Early Death!")
             "Next thing you know, you're in a world of pain."
             "Your story ends here, without you even knowing why."
             "What a sad way to go out.{w} Lin will join you soon, won't she?"
             $ MainMenu(confirm=False)()
-        "*Raise an eyebrow and stare at her confidently*":
+        "*Raise an eyebrow; stare at her confidently but cluelessly*":
             pass
     "She shakes her head vigorously."
     npc "I- I apologise, Miss. It seems I have identified the wrong room."
@@ -764,7 +769,7 @@ label scene_of_crime:
     play sound open_door
     "Opening the door, you're careful not to make a large noise."
     "You freeze."
-    "That maid is lying flat on the floor. Blood spills from a large gash in her neck."
+    "That maid is lying flat on the floor. Blood spills from a large gash in her neck. In her hand is... a dagger."
     "Standing above her is a boy with dark hair, dirtied sword in hand.{w} He's frozen, seemingly shocked by what's just happened."
     "The crowd shifts, obscuring your vision. It's composed of servants."
     menu:
@@ -1127,3 +1132,57 @@ label to_lunch_transition:
     "You follow him out quietly, glancing to Tess who joins you at your side." 
     "He's glancing at you, worried, measuring how you're handling the revelation."
     "You train your eyes on Cassian’s figure.{w} Eventually they wander back to the valet’s darkened fingertips."
+    jump for_mutual_benefit
+
+label for_mutual_benefit:
+    alert("Congratulations on surviving for 4 chapters so far!")
+    $ chapter = "4: For Mutual Benefit"
+    if saw_murder:
+        "You haven't been able to get the thought of the dead maid out of your mind."
+        if talk_to_maid:
+            "And certainly haven't been able to forget how close of a shave you had with death."
+            "On your first day, at that."
+            "You'd opened the door like a fool. What if that dagger had been aimed at, well, you?"
+        "Luckily, Tess is right in front of you, waiting on you."
+        $ alert("Your next choice may heavily impact the storyline.")
+        menu:
+            "You were there. You saw it.":
+                jump confront_tess
+            "*Sigh"
+
+label confront_tess:
+    "Tess’s hand pauses."
+    t "I was, Miss."
+    "He puts the teapot down."
+    t "Well, I assume you’re speaking about… that?"
+    mc "Last night? Yes." 
+    "You run your hand over the notebook cover."
+    mc "I won’t push you ‘bout what she was tryin’ to do nor why she had to die.{w} But you need to tell me if I’m in danger too."
+    "Of course, whatever response he gives you will serve his own interests.{w} All the more information.{w} But also, all the more questions."
+    t "In danger…" 
+    "He rubs his neck with an innocent expression.{w} You reach for the teacup, but it's searing hot.{w} Your hand jerks away. He doesn't seem to notice.{w} You thank Myllith for saving you from embarrassment."
+    "Finally, he notices your stare." 
+    t "I’m not really in a place to say, Miss."
+    mc "I’m serious, Tess." 
+    "You wave your hand over the cup, judging its temperature.{w} Still too hot."
+    mc "Nobody’d have peace of mind after seeing someone dead like that."
+    "You swallow."
+    t "As far as I'm aware, movements both into and out of Velmonta are monitored."
+    mc "But that maid still got here."
+    t "Not only movements." 
+    "He picks the teapot up again." 
+    t "Information is monitored as well.{w} Nobody outside of here should know about you yet.{w} And certainly not enough to pinpoint you as a target."
+    t "Do you know just how rare such an attack is?{w} It takes a miracle for someone to even get that close to a successor.{w} Suffice to say, you're safe."
+    "So the attacks come from outside; that makes sense."
+    "But why are the successors targeted?{w} You can't rest easy just yet without knowing."
+    mc "So what’m I meant to do ‘till then?{w} Do I just stay here?{w} Wait here with death loomin’ over me?"
+    "He blinks."
+    t "Miss Florence spends her time in the Summertide Chapel.{w} Master Silvian either reads or studies.{w} Master Dorian does… things."
+    mc "That’s too lax of them."
+    t "I don’t quite understand, Miss."
+    "You stare at him.{w} His expression remains dumb."
+    mc "Alright then, Tess. You can go now." 
+    "You wave your hand. He bows and leaves. You turn to the ticking clock. How long will it be until the next attack?"
+
+    
+
