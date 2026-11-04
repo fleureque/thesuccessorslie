@@ -694,6 +694,24 @@ label maid_interaction:
     "You move the chair aside and open the door."
     mc "You scared me the first time ‘round! Outside was empty!{w} Did Estelle send you?"
     "You tilt your head. Why isn't she responding?"
+    menu:
+        "*Close the door*":
+            "As you try to shut the door, her eyes lock onto your hand."
+            "A strange look comes over her face as she slams herself against the door, stopping it from shutting."
+            "You cuss as she sweeps inside. She locks the door for you."
+            mc "Wh-what are you-?"
+            play sound scary_sound
+            stop music
+            "She reaches into her garters as you back away.{w} Her hand comes out again, dagger in grasp."
+            "You have barely any time to react, but inch away."
+            "Running doesn't save you. How could it? You're completely unarmed."
+            alert("Ending unlocked: Early Death!")
+            "Next thing you know, you're in a world of pain."
+            "Your story ends here, without you even knowing why."
+            "What a sad way to go out.{w} Lin will join you soon, won't she?"
+            $ MainMenu(confirm=False)()
+        "*Raise an eyebrow and stare at her confidently*":
+            pass
     "She shakes her head vigorously."
     npc "I- I apologise, Miss. It seems I have identified the wrong room."
     $ add_observation({"title" : "says_wrong_room", "description" : "Maid claimed to have the wrong room."})
