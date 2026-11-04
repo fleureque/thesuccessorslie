@@ -149,7 +149,7 @@ label shed_scene:
     $ reputation = {
         "fool" : 0,
         "cunning" : 0,
-        "sharp" : 0
+        "sharp" : 0,
         "sympathetic" : 0
     }
     $ mental_state = {
@@ -157,7 +157,7 @@ label shed_scene:
     }
     show screen info_display()
     play music her_sickness loop fadein 1.0 fadeout 1.0 
-    show scene old shed with dissolve
+    show old shed with dissolve
     show lin normal
     mc "L-Lin. It… it'll be over soon, okay?"
     "Your hand lies unmoving against your sister's."
@@ -711,7 +711,7 @@ label maid_interaction:
             "She reaches into her long, bulky sock as you back away.{w} Her hand comes out again, dagger in grasp."
             "You have barely any time to react, but inch away."
             "Running doesn't save you. Well, how could it? You're entirely unarmed."
-            alert("Ending unlocked: Early Death!")
+            $ alert("Ending unlocked: Early Death!")
             "Next thing you know, you're in a world of pain."
             "Your story ends here, without you even knowing why."
             "What a sad way to go out.{w} Lin will join you soon, won't she?"
@@ -1048,7 +1048,7 @@ label mandate_explanation:
     "Cassian pulls a chair out, watching you closely as you acquiesce."
     c "I’m required by mandate, you see, to inform you about the successorship."
     "You should choose quickly how you want to present yourself in this meeting with him."
-    alert("Your choice may considerably affect your reputation moving forward. Pick carefully!")
+    $ alert("Your choice may considerably affect your reputation moving forward. Pick carefully!")
     menu:
         "*Act like a bumbling mess*":
             $ choice = "stupid"
@@ -1137,7 +1137,7 @@ label to_lunch_transition:
     jump for_mutual_benefit
 
 label for_mutual_benefit:
-    alert("Congratulations on surviving for 4 chapters so far!")
+    $ alert("Congratulations on surviving for 4 chapters so far!")
     $ chapter = "4: For Mutual Benefit"
     if saw_murder:
         "You haven't been able to get the thought of the dead maid out of your mind."
