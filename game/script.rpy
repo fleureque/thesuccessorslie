@@ -96,20 +96,24 @@ image ctc:
 
 
 #variable initialisation
-default npc_color = {"label": "#747474", "speech": "#c8c4c1"}
+$ npc_color = {"label": "#747474", "speech": "#c8c4c1"}
 define r = Character("Runa", color="#4af5e4", what_color="#a0e8ed", ctc="ctc", ctc_position="fixed")
 define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed", voice_tag = "lin")
 define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
-define e = Character("Estelle", color="#b93a00", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
+define e = Character("Estelle", color="#7dd94f", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
 define m = Character("Marianne", color="#c32131", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
-define npc = Character("[npc]", color="[npc_color['label']]", what_color="[npc_color['speech']]", ctc="ctc", ctc_position="fixed")
+define d = Character("Dorian", color="#d07ecf", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
+define f = Character("Florence", color="#91ebff", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
+define c = Character("Cassian", color="#fafc91", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
+define m = Character("Silvian", color="#f5f1f1", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
+define t = Character("Tess", color="#c3a021", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
+define npc = Character("[npc]", ctc="ctc", ctc_position="fixed")
 default chapter = "1: Fading Light"
 define gui.text_font = "fonts/garamond.ttf"
 define gui.text_instance = "light"
 define gui.text_axis = {"width" : 125}
 define gui.text_size = 35
- 
 
 
 label temp_end_message:
@@ -146,6 +150,9 @@ label shed_scene:
         "fool" : 0,
         "cunning" : 0,
         "sharp" : 0
+    }
+    $ mental_state = {
+        "stress" : 10
     }
     show screen chapter_display()
     play music her_sickness loop fadein 1.0 fadeout 1.0 
@@ -502,7 +509,7 @@ label reach_mansion:
     "You approach the softly lit inner chateau. It has spires that strech into the sky, and flags painting deep blue streaks in the air. The stairs stop before a pair of heavy-set double-oak doors."
     play sound knocking_urgent
     "Estelle knocks five times in a meaningful rhythm, and the doors creak open to reveal the unsmiling footmen who drew them open."
-    play music flaming_decadence loop fadein 1.0 fadeout 1.0
+    play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
     "The floor's lined with marble, so polished that the light cascading from the chandelier reflects back in dazzling shades."
     "The foyer stretches out endlessly before you, spectacular and impossible."
     "Your heart beats faster. Velmonta's beautiful."
@@ -790,6 +797,7 @@ label stigma:
                 mc "Miss Estelle?"
                 e "Oh - there’s no need to call me ‘Miss’. But you have a question?"
                 mc "Why’d a maid try to attack Dorian last night?"
+                $ asked_estelle = True
                 "Estelle blinks, then tucks her hair behind her ear."
                 e "It doesn’t happen often."
                 mc "But why?"
@@ -798,6 +806,7 @@ label stigma:
                 e "I’m sorry, Miss [name]. It’s just… I’m not entirely sure yet."
             "*Don't mention the murder*":
                 "You decide it's better not to touch a sensitive spot so soon."
+                $ asked_estelle = False
     "Rubbing your eyes, you watch as she turns to the closet to pick out clothes."
     e "These might not fit you yet, but they won’t be small; we got large ones just in case. You’ll be fitted sometime."
     "Estelle offers you a cheery grin."
@@ -814,7 +823,6 @@ label stigma:
     jump first_breakfast
 
 label first_breakfast:
-    pass
     "The Morning Room is bright and well lit, with the large white table laid with matching tableware and cloth.{w} At the end of the table sits the matriarch, Marianne, and patriarch, Cassian, whom you recognise from his portrait."
     "Opposite you is Dorian; next to him is Florence.{w} On your side, separating you from the family heads is Silvian."
     "The atmosphere in the room is heavy, in contrast to the light from the sprawling chandelier."
@@ -869,7 +877,7 @@ label first_breakfast:
     if saw_murder:
         "Is murdering people so common here that he can smile like this the day after?"
         "Had you not seen him take that maid’s life, you wouldn’t have guessed that anything was amiss."
-    alert("First impressions are important. Choose wisely!")
+    $ alert("First impressions are important. Choose wisely!")
     menu:
         "*Act stupid*":
             $ choice = "stupid"
@@ -934,5 +942,30 @@ label first_breakfast:
     else:
         "The meal continues with a heavy atmosphere. You don't know why."
         "Did you kill the mood or something?"
+    jump back_in_room
 
 
+label back_in_room:
+    "You sit, looking out towards the crackling fires in the courtyard.{w} Your hands push lightly against the window."
+    "Glass is such a wonderful invention. No wonder it's everywhere."
+    "Everywhere except Scab City."
+    $ glossary_dict["About Thinking"] = "Thinking can help you orient yourself and inform your future decisions. But beware, as too much paranoia isn't healthy!"
+    "You now have some free time.{w} You can choose either to rest or {a=glossary:About Thinking}🔻 analyse{/a} the situation a bit more."
+    menu:
+        "*Think about the situation*":
+            if saw_murder:
+                "Why did Marianne choose to bring you here before such an attack?{w} Did they truly have no knowledge beforehand?{w} Was it premeditated?{w} If so, by whom?{w} Or are you overthinking things?"
+                if asked_estelle:
+                    "Estelle told you that such attacks aren't common. Is that simply consolation? Otherwise, isn't it too on the nose for an attempt to happen immediately after coming here?"
+                "Your plan to make yourself less of a ['target' if choice=='calm' else 'threat'] is succeeding so far."
+                "Clearly the mealtime successfully established you as a ['strong character' if choice=='calm' else 'fool']."
+        "*Rest for a while*":
+            "You choose to rest. After all, being too stressed can't possibly be good."
+    play sound knocking_urgent loop fadein 0.5 fadeout 0.5
+    "A knock rings out. You bring your hand to your chest.{w} Who is it?"
+    "Dragging the chair towards the door, you wonder how you managed to do so last night.{w} It feels much heavier today."
+    mc "Scab, it's taking a while…"
+    "The jingling of keys sounds outside."
+    $ npc = "Tess"
+    npc "I’m coming in, Miss."
+    "Before you move the chair even halfway, the door slowly creaks open. A flash of brown hair precedes a round face."

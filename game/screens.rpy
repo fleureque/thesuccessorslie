@@ -1620,6 +1620,7 @@ style slider_slider:
     variant "small"
     xsize 900
 
+
 image glossary_background = Frame("gui/glossary_bg.png", Borders(20, 20, 20, 20))
 screen glossary(target):
     button background None action Hide("glossary")
@@ -1637,13 +1638,13 @@ screen glossary(target):
         text glossary_dict[target]
         text "(Click to continue.)" size 22 
 
+
 #just reusing the glossary code bc its easier
 image alert = Frame("gui/glossary_bg.png", Borders(20, 20, 20, 20))
 screen alert(message):
     button background None action Hide("alert")
       
     frame:
-        
         background "glossary_background"
         xalign 0.08 yalign 0.6
         xpadding 30 ypadding 30
@@ -1652,7 +1653,6 @@ screen alert(message):
         xmaximum 700
         box_wrap True
         text "[message]" color "#ffca9c" size 30
-
 
 
 screen nav_menu():
