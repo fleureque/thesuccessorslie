@@ -1689,7 +1689,7 @@ screen deduction_log():
 
             text "Observations:" color "#fdcbb7e6" size 50
             text "By making certain observations, you may fulfil the conditions for coming to relevant conclusions. These conclusions may influence your future choices/inform your actions. Beware that not all conclusions may be correct." size 30
-
+            
             
 
 

@@ -150,6 +150,7 @@ label shed_scene:
         "fool" : 0,
         "cunning" : 0,
         "sharp" : 0
+        "sympathetic" : 0
     }
     $ mental_state = {
         "stress" : 10
@@ -817,16 +818,27 @@ label stigma:
     "Meanwhile, the fine lines and countless calluses on her hands betray her years of experience."
     e "I’ll be taking you to the Morning Parlour for breakfast." 
     "She corrects your posture gently with her hands."
-    e "Last night was a bit different.{w} Usually meals are had with family."
-    mc "Um. How many siblings do I have?"
+    e "Last night was a bit different.{w} Usually meals are had with family - so you'll meet your siblings too."
     "She finishes adjusting the dress." 
-    e "Three total.{w} Young Masters Silvian and Dorian, and Young Lady Florence.{w} Shall we go now?"
-    "You commit their names to memory. And you're glad she's willing to answer your questions…"
+    e "Shall we go now?"
+    menu:
+        "Um. How many siblings do I have?":
+            $ know_siblings = True
+            e "Right. That's a good question."
+            e "Three total.{w} Young Masters Silvian and Dorian, and Young Lady Florence.{w} Shall we go now?"
+            "You commit their names to memory. And you're glad she's willing to answer your questions…"
+        "Yes. Let's go.":
+            $ know_siblings = False
+            pass
     jump first_breakfast
 
 label first_breakfast:
     "The Morning Room is bright and well lit, with the large white table laid with matching tableware and cloth.{w} At the end of the table sits the matriarch, Marianne, and patriarch, Cassian, whom you recognise from his portrait."
-    "Opposite you is Dorian; next to him is Florence.{w} On your side, separating you from the family heads is Silvian."
+    if know_siblings:
+        "Opposite you is Dorian; next to him is Florence.{w} On your side, separating you from the family heads is Silvian."
+    else:
+        "Three other children sit around you.{w} A boy with black hair and purple eyes opposite you, with a pious-looking girl next to him.{w} And on your side, a silver-blonde boy."
+        "These must be the other successors."
     "The atmosphere in the room is heavy, in contrast to the light from the sprawling chandelier."
     "Cassian fidgets slightly, then clears his throat."
     c "Your name is [name]. Is that correct?"
@@ -841,10 +853,16 @@ label first_breakfast:
     "Gathering himself, he speaks again."
     c "Well, [name]. To celebrate your entry into this household, we shall bestow upon you a new name."
     python:
-        noble_name = renpy.input("Enter your noble name: (max 20 chars)", length=20, default="Veruna")
-        noble_name = noble_name.strip().title()
-        if not noble_name:
-            noble_name = "Veruna"
+        valid_name = False
+        while not valid_name:
+            noble_name = renpy.input("Enter your noble name: (max 20 chars)", length=20, default="Veruna")
+            noble_name = noble_name.strip().title()
+            if not noble_name:
+                noble_name = "Veruna"
+            if not noble_name == name:
+                valid_name = True
+            else:
+                alert("Your new name cannot be the same as your old one. Try again.")
     c "From now on, it shall be [noble_name]. Observe it well: [noble_name] Velmonta’."
     menu:
         "I'd prefer to keep my usual name, actually.":
@@ -893,8 +911,8 @@ label first_breakfast:
             "You smile calmly."
             mc "Nice to meet you all. As you know, I'm [noble_name]. Wonderful to be part of this house."
     "Florence curves her lips up, ['unenthused' if choice == 'stupid' else 'eyes narrowing ever so slightly']."
-    f "It is a pleasure, sister. Fate has ordained our meeting, it seems."
-    "Such flowery language!"
+    f "It is a pleasure, sister [noble_name]. Fate has ordained our meeting, it seems."
+    "Such flowery language! And adapting so quickly to your new name..."
     if choice =="stupid":
         "You beam at her."
         mc "Yes, our meetin’ is a miracle." 
@@ -998,3 +1016,96 @@ label back_in_room:
     t "Do you want to go now?"
     "You look at him, taken aback for a moment."
     mc "Alright."
+    jump mandate_explanation
+
+label mandate_explanation:
+    c "Sit, [noble_name]."
+    "Cassian pulls a chair out, watching you closely as you acquiesce."
+    c "I’m required by mandate, you see, to inform you about the successorship."
+    "You should choose quickly how you want to present yourself in this meeting with him."
+    alert("Your choice may considerably affect your reputation moving forward. Pick carefully!")
+    menu:
+        "*Act like a bumbling mess*":
+            $ choice = "stupid"
+        "*Act like a smart cookie*":
+            $ choice = "sharp"
+    if choice == "stupid":
+        mc "A-ah, yes, Father."
+        "You stammer, watching as he sits himself down in front of you."
+    elif choice == "sharp":
+        mc "Mandate, hm."
+        "You muse gently as he sits himself down in front of you."
+    "The study smells of ash – there are no windows, and the only source of light comes from holstered candles pinned to the walls.{w} It's an oddly threatening room."
+    c "You are eligible to be selected as Velmonta’s successor." 
+    "He stares into your eyes."
+    "Is this it? Is this why everyone had such averse reactions to its mention then?"
+    if choice == "stupid":
+        $ dialogue_var = "smiles"
+        "You jerk your head up, bringing your hand to your chest."
+        mc "I couldn’t dream o-"
+        c "Perhaps there will come a time when you wish to vie for the position. And you will have the opportunity, [noble_name]."
+        "You gape, then check yourself and nod quietly."
+    elif choice == "sharp":
+        $ dialogue_var = "doesn't change his expression"
+        mc "Which entails?"
+        c "All of Velmonta's resources at your disposal. Unimaginable political power, alliances. Everything you could dream of."
+        "You stare cooly back at him as he scans your eyes for a reaction."
+    c "Good."
+    "He [dialogue_var]."
+    if saw_murder:
+        menu:
+            "*Confront him about the murder of the maid*":
+                $ reputation["sharp"] += 2
+                $ dialogue_var = "Let us head to luncheon."
+                jump quiz_cassian
+            "*End the conversation here*":
+                $ dialogue_var = "let's to luncheon!"
+    jump to_lunch_transition
+    
+
+label quiz_cassian:
+    mc "One more thing, Father. If… if you would."
+    "He pauses." 
+    c "Yes, [noble_name]?"
+    mc "Dorian yesterday. What happened? With the…"
+    c "Ah." 
+    "His smile falls."
+    c "We are trying to find the house that sent the attacker."
+    "He looks to his right."
+    c "Though it is hard, since the assassin is now deceased."
+    mc "Anything happ’ning next?"
+    c "Next? We shall file paperwork and identify, if possible, where the woman’s allegiances lay."
+    menu:
+        "You can take lives?? Just like that? All you gotta do is paperwork?":
+            $ reputation["sympathetic"] += 5
+            "You swallow."
+            "Blinking, he tilts his head."
+            c "Sorry?"
+            mc "Why’d they try to kill Dorian yesterday?"
+            c "[noble_name]."
+            mc "“Am I in danger too? Tell me! I can’t…"
+            "A sob slips from your lips."
+            "He pats your shoulder, staring you in the eyes calmly."
+            c "It doesn’t happen often.{w} You’ll learn how to deal with these situations as you spend more time here."
+            $ add_observation({"title" : "murder_rare", "description" : "Cassian claimed that murders are rare and that you'll adapt."})
+            "Learn to deal with these situations?{w} How?{w} You stare at the ground unmoving.{w} He closes his eyes."
+            c "[noble_name]."
+            mc "DON'T CALL ME THAT!"
+            "His eyes widen."
+            "You freeze, then grit your teeth."
+            mc "Sorry. I’m bein’ unreasonable."
+        "A good course of action, Father.":
+            "His breath hitches in his throat for a second."
+            "He looks taken aback at how lightly you're taking it."
+            "Now he thinks you're a sociopath, huh."
+            c "...Thank you."
+    jump to_lunch_transition
+    
+label to_lunch_transition:
+    c "[dialogue_var]" 
+    "Cassian slowly rises."
+    if reputation["sharp"] > 20 or reputation["fool"] > 20:
+        "He looks away from me; is he mad?{w} Disappointed?{w} Understanding?"
+    "You follow him out quietly, glancing to Tess who joins you at your side." 
+    "He's glancing at you, worried, measuring how you're handling the revelation."
+    "You train your eyes on Cassian’s figure.{w} Eventually they wander back to the valet’s darkened fingertips."
