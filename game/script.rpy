@@ -106,7 +106,7 @@ define m = Character("Marianne", color="#c32131", what_color="#ea969e", ctc="ctc
 define d = Character("Dorian", color="#d07ecf", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
 define f = Character("Florence", color="#91ebff", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
 define c = Character("Cassian", color="#fafc91", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
-define m = Character("Silvian", color="#f5f1f1", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
+define s = Character("Silvian", color="#f5f1f1", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
 define t = Character("Tess", color="#c3a021", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
 define npc = Character("[npc]", ctc="ctc", ctc_position="fixed")
 default chapter = "1: Fading Light"
@@ -749,6 +749,7 @@ label scene_of_crime:
     "The crowd shifts, obscuring your vision. It's composed of servants."
     menu:
         "*Approach someone to ask what's happened*":
+            $ dialogue_var = "talked_to_tess"
             jump walk_into_crowd
         "*Run back into your room*":
             play sound open_door
@@ -966,6 +967,32 @@ label back_in_room:
     "Dragging the chair towards the door, you wonder how you managed to do so last night.{w} It feels much heavier today."
     mc "Scab, it's taking a while…"
     "The jingling of keys sounds outside."
-    $ npc = "Tess"
+    $ npc = "Unknown Male Voice"
     npc "I’m coming in, Miss."
+    play sound open_door
     "Before you move the chair even halfway, the door slowly creaks open. A flash of brown hair precedes a round face."
+    if dialogue_var=="talked_to_tess":
+        "You blink."
+        mc "Ah - you?"
+        "It was the boy you asked yesterday about the murder."
+        "His eyes flicker in recognition."
+        t "Oh! Yes. I’m Tess, your valet. It seems we meet again."
+    else:
+        mc "You flinch back, not recognising the new face."
+        "He clears his throat, then steps in." 
+        t "I've been assigned as your valet, Miss."
+    mc "Ah! I’m - no, you already know. Sorry."
+    "You notice ink stains on his fingertips as you tilt your head down."
+    mc "Is it just you ‘nd Estelle?"
+    "He blinks."
+    t "Yes. You can appeal to your parents if you need more help…"
+    mc "No, no. More’s too many."
+    "You chuckle."
+    mc "Oh - where’s Estelle?"
+    t "She's sorting your clothes."
+    "Smacking his hand against his head, he looks at you apologetically."
+    t "I forgot, I came here to deliver a message.{w} The patriarch would like to meet you in his private study."
+    "He rubs his neck."
+    t "Do you want to go now?"
+    "You look at him, taken aback for a moment."
+    mc "Alright."
