@@ -101,13 +101,13 @@ define r = Character("Runa", color="#4af5e4", what_color="#a0e8ed", ctc="ctc", c
 define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed", voice_tag = "lin")
 define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
-define e = Character("Estelle", color="#7dd94f", what_color="#fdcdb0", ctc="ctc", ctc_position="fixed")
+define e = Character("Estelle", color="#7dd94f", what_color="#d7ffcc", ctc="ctc", ctc_position="fixed")
 define m = Character("Marianne", color="#c32131", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
-define d = Character("Dorian", color="#d07ecf", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
-define f = Character("Florence", color="#91ebff", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
-define c = Character("Cassian", color="#fafc91", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
-define s = Character("Silvian", color="#f5f1f1", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
-define t = Character("Tess", color="#c3a021", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
+define d = Character("Dorian", color="#d07ecf", what_color="#d7afdc", ctc="ctc", ctc_position="fixed")
+define f = Character("Florence", color="#91ebff", what_color="#b4f1f9", ctc="ctc", ctc_position="fixed")
+define c = Character("Cassian", color="#fafc91", what_color="#f7fed0", ctc="ctc", ctc_position="fixed")
+define s = Character("Silvian", color="#f5f1f1", what_color="#d4d6d1", ctc="ctc", ctc_position="fixed")
+define t = Character("Tess", color="#34c29a", what_color="#96eadf", ctc="ctc", ctc_position="fixed")
 define npc = Character("[npc]", ctc="ctc", ctc_position="fixed")
 default chapter = "1: Fading Light"
 define gui.text_font = "fonts/garamond.ttf"
@@ -232,10 +232,10 @@ label shed_scene:
 
 
 label first_meeting:
-    "The shed's now cleaner than it has ever been before, thanks to your handiwork. It had protected you and Lin to the very end - both from the cold and strange hagglers."
+    "The shed's now cleaner than it has ever been before, thanks to your handiwork. It protected you and Lin to the very end - both from the cold and strange hagglers."
     "And all that remains now is the blanket. It'd done little to keep you warm, but you were lucky to have even that."
     "You hesitate but draw it close and fold it into a neat square, being careful not to give away the shape of the folder within."
-    "The shadow had come at some point again this morning, and now you see it slipping away."
+    "The shadow came at some point again this morning, and now you see it slipping away."
     "In the direction of the entrance, no less."
     menu:
         "*Conclude by giving Lin's memory Myllith's curved salute.*":
@@ -364,7 +364,7 @@ label carriage_ride:
         "*Look at the landscape outside*":
             show scene rydell_garden
             $ witness_shove = False
-            "Somewhere along the journey, the filth outside had become polished stone and shrubbery. You've never left Scab City before, but you can tell: you're beyond the forest already."
+            "Somewhere along the journey, the filth outside became polished stone and shrubbery. You've never left Scab City before, but you can tell: you're beyond the forest already."
         "*Look at what Gideon's doing*":
             show scene guard_altercation
             "You bring your face closer against the window. There isn't any physical altercation, despite the people below being armed. The opposition is clad in the same deep blue as Gideon - but their crests are slightly different."
@@ -423,7 +423,7 @@ label arrival:
         g "...Not especially."
     "The carriage passes by townspeople huddling around braziers. Firewood's being hauled from carts to maintain the flame. It looks like there are even people designated to do so."
     "...Not a hint of famine nor conflict in the people's expressions. They look to be at peace, at a loss for nothing."
-    "In essence, the life you and Lin had always dreamed of..."
+    "In essence, the life you and Lin always dreamed of..."
     "You dismiss her from your mind before it starts to hurt."
     menu:
         "Rydell seems to care for its people.":
@@ -583,7 +583,7 @@ label bath_scene:
             "Nobody will care that you're overwhelmed. In fact, expressing it would only hurt you."
             "You have to suck it up."
     "You climb out of the bathtub."
-    $ glossary_dict["Myllith Sigil"]: "A sign of the Goddess, used to entice Her Blessings. These can be anything, but are traditionally for loyalty to the Crown, improved social harmony and success in military conquest."
+    $ glossary_dict["Myllith Sigil"] = "A sign of the Goddess, used to entice Her Blessings. These can be anything, but are traditionally for loyalty to the Crown, improved social harmony and success in military conquest."
     "A huge {a=glossary:Myllith Sigil}🔻 Myllith sigil{/a} hangs over the mirror, partly obscuring its surface.{w} You frown, wondering why someone would choose such an impractical placement."
     "You shake the water off and step out.{w} The nightdress is soft – too soft against your worn skin. Nevertheless, you shrug it on."
     "You push the hanging metal aside."
@@ -720,6 +720,7 @@ label eavesdrop:
     "You hear the sound of a large crowd and a commotion outside."
     "Yet you can't make heads nor tails of what's happening. You're slightly disoriented."
     "The voices continue on for a while, then suddenly dissipate."
+    stop ambiance fadeout 2.0
     "You hear the sound of a door slamming."
     "You're left incredibly confused."
     jump stigma
@@ -841,7 +842,7 @@ label first_breakfast:
     c "Well, [name]. To celebrate your entry into this household, we shall bestow upon you a new name."
     python:
         noble_name = renpy.input("Enter your noble name: (max 20 chars)", length=20, default="Veruna")
-        noble_name = name.strip().title()
+        noble_name = noble_name.strip().title()
         if not noble_name:
             noble_name = "Veruna"
     c "From now on, it shall be [noble_name]. Observe it well: [noble_name] Velmonta’."
@@ -854,17 +855,17 @@ label first_breakfast:
         "*Fidget with your collar, then bow your head.*":
             $ reputation["fool"] += 2
     "Of course, you need a new, fancier name, don't you? To mark your new life?"
-    "What, was your old one too common?"
+    "What, is your real one too common?"
     "Tightening around my fork, your hand betrays a slight tremor.{w} You've barely touched the food before you, and you don't plan to do so anytime soon."
     "The patriarch sighs."
     c "Dear, allow me to introduce you to your new siblings." 
     "He rises, with everyone at the table following suit."
     "He begins walking –"
-    c "This is Florence"
+    c "This is Florence,"
     "– naming each child in turn –"
-    c "Dorian"
+    c "Dorian,"
     "– and announcing the last –"
-    c "And lovely Silvian"
+    c "And lovely Silvian."
     "– as he passes him by."
     "…You already know their names from Estelle's words."
     "Having completed a full circuit, Cassian sits, satisfied, with everyone mirroring him.{w} Dorian turns to lock gazes with you, an amused glint in his eyes."
@@ -900,7 +901,7 @@ label first_breakfast:
     if choice == "calm":
         "You smile gently."
         mc "Of course."
-    $ glossary_dict["Morllith"]: "An accessory used for guided prayer. It is considered outdated but remains a staple for the truly devout. Very rare in Scab City."
+    $ glossary_dict["Morllith"] = "An accessory used for guided prayer. It is considered outdated but remains a staple for the truly devout. Very rare in Scab City."
     "Your eyes wander down. Chained to her neck is a {a=glossary:Morllith}🔻 morllith{/a}, with Myllith’s sigil encased within the prayer strands."
     d "Name's Dorian. Welcome to Velmonta."
     if choice == "stupid":
@@ -909,7 +910,7 @@ label first_breakfast:
     else:
         "You tilt your head slowly, then smile again."
         mc "Thank you. I hope we shall get along well."
-    "The blonde boy calmly pushes his book aside." 
+    "The silvery-blonde boy calmly pushes his book aside." 
     s "Silvian. It’s nice to meet you too, sister [noble_name]."
     "You glance at the book’s cover. It's a vivid red."
     "You smile ['diffidently' if choice == 'stupid' else 'confidently'] back."
@@ -928,7 +929,7 @@ label first_breakfast:
         mc "No, Mother. But I'd like to know."
     m "No, no, it’s fine. Your father will talk to you later."
     if saw_murder:
-        "You stare into her eyes that betray no hint of remembrance over last night’s occurrences.{w} Are these people crazy?{w} Or are you?"
+        "You stare into her eyes that betray no hint of remembrance over last night’s occurrence.{w} Are these people crazy?{w} Or are you?"
     "Cassian’s eyes widen as he looks at his wife in… betrayal? He reaches for his wine, but spills some onto the tablecloth."
     c "Ah - forgive me." 
     "At their avoidance, you blink a few times, then turn back to the meal before you."
@@ -938,7 +939,7 @@ label first_breakfast:
     "The breakfast continues."
     if saw_murder:
         "Nobody seems willing to address last night’s event."
-        "We successors live on the same floor, do we not? Hazarding a guess - especially due to the proximity of Dorian’s room from yours - everyone was close enough to have heard the disturbance."
+        "You successors live on the same floor, do you not? Hazarding a guess - especially due to the proximity of Dorian’s room from yours - everyone was close enough to have heard the disturbance."
         "Yet nobody moves to talk about it. Still, the air remains heavy throughout."
     else:
         "The meal continues with a heavy atmosphere. You don't know why."
@@ -965,6 +966,7 @@ label back_in_room:
     play sound knocking_urgent loop fadein 0.5 fadeout 0.5
     "A knock rings out. You bring your hand to your chest.{w} Who is it?"
     "Dragging the chair towards the door, you wonder how you managed to do so last night.{w} It feels much heavier today."
+    stop sound
     mc "Scab, it's taking a while…"
     "The jingling of keys sounds outside."
     $ npc = "Unknown Male Voice"
