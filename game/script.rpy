@@ -847,10 +847,68 @@ label ch3_5a_confront:
     mc "Sorry. I’m bein’ unreasonable."
     jump ch3_6_lunch
 
-label ch3_6_lunch
+label ch3_6_lunch:
     c "Let us head to luncheon."
     "Cassian slowly rises."
     "He looks away from you; is he mad?{w} Disappointed?{w} Understanding?"
     "You follow him out quietly, glancing to Tess who joins you at your side." 
     "He's glancing back at you, worried, measuring how you're handling the revelation."
     "You train your eyes on Cassian’s figure.{w} Eventually they wander back to the valet’s darkened fingertips."
+
+
+label ch4_1_mutual_benefit:
+    $ chapter = "4: For Mutual Benefit"
+    "You haven't been able to get the thought of the dead maid out of your mind."
+    "And certainly haven't been able to forget how close of a shave you had with death."
+    "On your first day, at that."
+    "You'd opened the door like a fool. What if that dagger had been aimed at, well, you?"
+    "Luckily, Tess is right in front of you, waiting on you."
+    menu:
+        "*Ask Tess about the murder*":
+            jump ch4_1a_confront
+
+label ch4_1a_confront:
+    mc "You were there. You saw it."
+    "Tess’s hand pauses."
+    t "I was, Miss."
+    "He puts the teapot down."
+    t "Well, I assume you’re speaking about… that?"
+    mc "Last night? Yes." 
+    "You run your hand over the notebook cover."
+    mc "I won’t push you ‘bout what she was tryin’ to do nor why she had to die.{w} But you need to tell me if I’m in danger too."
+    "Of course, whatever response he gives you will serve his own interests.{w} All the more information.{w} But also, all the more questions."
+    t "In danger…" 
+    "He rubs his neck with an innocent expression.{w} You reach for the teacup, but it's searing hot.{w} Your hand jerks away. He doesn't seem to notice.{w} You thank Myllith for saving you from embarrassment."
+    "Finally, he notices your stare." 
+    t "I’m not really in a place to say, Miss."
+    mc "I’m serious, Tess." 
+    "You wave your hand over the cup, judging its temperature.{w} Still too hot."
+    mc "Nobody’d have peace of mind after seeing someone dead like that."
+    "You swallow."
+    t "As far as I'm aware, movements both into and out of Velmonta are monitored."
+    mc "But that maid still got here."
+    t "Not only movements." 
+    "He picks the teapot up again." 
+    t "Information is monitored as well.{w} Nobody outside of here should know about you yet.{w} And certainly not enough to pinpoint you as a target."
+    t "Do you know just how rare such an attack is?{w} It takes a miracle for someone to even get that close to a successor.{w} Suffice to say, you're safe."
+    "So the attacks come from outside; that makes sense."
+    "But why are the successors targeted?{w} You can't rest easy just yet without knowing."
+    mc "So what’m I meant to do ‘till then?{w} Do I just stay here?{w} Wait here with death loomin’ over me?"
+    "He blinks."
+    t "Miss Florence spends her time in the Summertide Chapel.{w} Master Silvian either reads or studies.{w} Master Dorian does… things."
+    mc "That’s too lax of them."
+    t "I don’t quite understand, Miss."
+    "You stare at him.{w} His expression remains dumb."
+    mc "Alright then, Tess. You can go now." 
+    "You wave your hand. He bows and leaves. You turn to the ticking clock. How long will it be until the next attack?"
+    $ glossary_dict["Myllith Dagger"] = "A ceremonial dagger. It is not frowned upon to use it outside of prayer. After all, Myllith thrives on bloodshed."
+    "The {a=glossary:Myllith Dagger}🔻 Myllith dagger{/a} in the drawer. From when you were exploring your room."
+    "You've never gripped one like this before, only seen them paraded around by the Church.{w} This one’s velvet scabbard is engraved with Velmonta’s sigil."  
+    "Who is your enemy? Whose observation do you have to avoid?{w} Paranoia has saved me too many times to count; it won't hurt now.{w} You slip the dagger into your dress pocket.{w} Before the bathroom mirror, you're assured that the fabric falls smoothly over the pocket, as if there were nothing there."
+    "You walk out of the bathroom and cast your gaze towards Lin’s rags."
+    "Had you really been considering slicing them into strips?" 
+    "Your face twitches into a half-smile.{w} A wistful one."
+    play sound open_door
+    "You leave your room."
+    "Despite being aware that this is a corridor, the absence of sunlight makes you uneasy.{w} You wrinkle your nose as you walk by Dorian’s room.{w} There isn't a single remnant of blood. It looks and smells of artificial cleanliness."
+    "Your neck tingles. Hand on pocket, you make it through the passage, down the stairs, rushing until the courtyard.{w} You stop to breathe, nose burning in the strange mixture of fresh air and crackling fire."
