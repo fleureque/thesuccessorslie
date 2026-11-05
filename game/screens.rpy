@@ -581,6 +581,7 @@ screen info_display():
         text "Chapter [chapter]"
         xalign 0.02
         yalign 0.02
+        text "Part [part]"
 
 style about_label is gui_label
 style about_label_text is gui_label_text

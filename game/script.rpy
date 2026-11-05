@@ -159,6 +159,7 @@ label start:
 
 
 label ch1_1_shed:
+    $ part = "1"
     show screen info_display()
     play music her_sickness loop fadein 1.0 fadeout 1.0 
     show old shed with dissolve
@@ -236,6 +237,7 @@ label ch1_1_shed:
     jump ch1_2_gideon
 
 label ch1_2_gideon:
+    $ part = "2"
     "The shed's now cleaner than it has ever been before, thanks to your handiwork.{w} It protected you and Lin to the very end - both from the cold and strange hagglers."
     "And all that remains now is the blanket. It's done little to keep you warm, but you were lucky to have even that."
     "You hesitate but draw it close and fold it into a neat square, being careful not to give away the shape of the folder within."
@@ -303,6 +305,7 @@ label ch1_2_gideon:
     jump ch1_3_carriage_ride
 
 label ch1_3_carriage_ride:
+    $ part = "3"
     show inside_carriage with dissolve
     "Resting your head on your hand, you look through the carriage window. Emaciated children shiver as you pass them by.{w} Is it awe?{w} Or are they too lost to care at this point?"
     show gideon normal
@@ -365,6 +368,7 @@ label ch1_3_carriage_ride:
             jump ch1_4_arrival
 
 label ch1_4_arrival:
+    $ part = "4"
     "His hand flies to his chin, a finger hovering over his mouth."
     g "Don’t let yourself believe you’re safe simply given the way things will seem."
     mc "What d’you mean?"
@@ -444,6 +448,7 @@ label ch1_4_arrival:
     "Beautiful, but devoid of life."
 
 label ch2_1_first_blood:
+    $ part = "1"
     $ chapter = "2: First Blood"
     "You pull your cloak a bit tighter around yourself and look down at your slippers, snug against your feet."
     "Sensing your overwhelm, Estelle squeezes your shoulder lightly in encouragement."
@@ -496,6 +501,7 @@ label ch2_1_first_blood:
     jump ch2_2_wash
 
 label ch2_2_wash:
+    $ part = "2"
     "An unpleasant tingling instantly attacks you as you dip your feet into the swirling liquid.{w} You hiss.{w} It isn't unreasonably warm, but blood rushes into your limbs, bringing with it an intense itching."
     "Then comes the pain."
     menu:
@@ -544,6 +550,7 @@ label ch2_2_wash:
     jump ch2_3_alone
 
 label ch2_3_alone:
+    $ part = "3"
     "Sighing, you lean back in your seat and have a few bites.{w} The butters and fats melt away on your tongue, leaving behind a sweet aftertaste.{w} Having never eaten for pure pleasure before, you now understood why so many people fall prey to gluttony."
     "It's delicious, but at the same time, terrible."
     "The intense flavour makes your head ring.{w} It's terribly different from the washed-out, flavourless potatoes and grain you've been forced to salvage."
@@ -587,6 +594,7 @@ label ch2_3_alone:
     jump ch2_4_maid
 
 label ch2_4_maid:
+    $ part = "4"
     "You move the chair aside and open the door." 
     mc "You scared me the first time ‘round! Outside was empty!" 
     "You tilt your head.{w} Why isn't she responding?"
@@ -609,6 +617,7 @@ label ch2_4_maid:
     jump ch2_5_murder
 
 label ch2_5_murder:
+    $ part = "5"
     play sound footsteps loop fadein 1.0 fadeout 1.0
     "You hear more footsteps and quickly scramble onto the stool again, just in time to see a shadow slip past."
     play sound scary_sound
@@ -654,6 +663,7 @@ label ch2_5_murder:
     jump ch3_1_stigma
 
 label ch3_1_stigma:
+    $ part = "1"
     $ chapter = "3: Stigma"
     "You'd eventually drifted to sleep despite your worries.{w} Estelle now awakens you.{w} Outside is not yet bright, but it seems that nobles had a different routine, waking up unnaturally early."
     show estelle normal at right
@@ -684,6 +694,7 @@ label ch3_1_stigma:
     hide estelle
 
 label ch3_2_breakfast:
+    $ part = "2"
     show marianne serious
     "The Morning Room is bright and well lit, the large white table laid with matching tableware and cloth.{w} At the end of the table sits the matriarch, Marianne, and patriarch, Cassian, whom you recognise from his portrait."
     show dorian normal at right
@@ -743,7 +754,7 @@ label ch3_2_breakfast:
     "Cassian turns to the matriarch, picking at his decorated sleeves."
     "She waits, thinking. Then she begins to speak evenly."
     m "Are you aware of the successorship, [noble_name]?"
-    "Florence, diagonal to you, grows pale.{w} Her fingers flit to her sleeved arm, flinching as she moves her fingers over the fabric."
+    "Florence, diagonal to you, grows pale.{w} Her fingers flit to her sleeved arm, flinching as she moves her fingers over the fabric." with vpunch
     "The boy next to you - Silvian - tenses inconspicuously."
     "Dorian grins, eyes widening. You can hear his leg jerking up and down opposite you."
     "You clear your throat." 
@@ -758,11 +769,13 @@ label ch3_2_breakfast:
     "Dorian’s eyes are still digging deep into your soul.{w} But so are the matriarch’s.{w} She's staring at your hand in what seems to be faint disapproval.{w} You follow her gaze down, tilting your head in confusion."
     "…You're holding the wrong fork, huh."
     "The breakfast continues, but nobody seems willing to address last night’s event."
-    "You successors lived on the same floor, do you not? Hazarding a guess - especially due to the proximity of Dorian’s room from yours - everyone was close enough to have heard the disturbance."
+    "You successors live on the same floor, do you not? Hazarding a guess - especially due to the proximity of Dorian’s room from yours - everyone was close enough to have heard the disturbance."
     "Yet nobody moves to address it."
     jump ch3_3_room
 
+
 label ch3_3_room:
+    $ part = "3"
     "You sit, looking out towards the crackling fires in the courtyard.{w} Your hands push lightly against the window."
     "Glass is such a wonderful invention. No wonder it's everywhere."
     "Everywhere except Scab City."
@@ -812,6 +825,7 @@ label ch3_3_room:
     
 
 label ch3_4_mandate:
+    $ part = "4"
     c "Sit, [noble_name]."
     "Cassian pulls a chair out, watching you closely as you acquiesce."
     c "I’m required by mandate, you see, to inform you about the successorship."
@@ -832,6 +846,7 @@ label ch3_4_mandate:
             jump ch3_5a_confront
 
 label ch3_5a_confront:
+    $ part = "5"
     mc "One more thing, Father. If… if you would."
     "He pauses." 
     c "Yes, [noble_name]?"
@@ -855,13 +870,14 @@ label ch3_5a_confront:
     $ add_observation({"title" : "murder_rare", "description" : "Cassian claimed that murders are rare and that you'll adapt."})
     "Learn to deal with these situations?{w} How?{w} You stare at the ground unmoving.{w} He closes his eyes."
     c "[noble_name]."
-    mc "DON'T CALL ME THAT!"
+    mc "DON'T CALL ME THAT!" with vpunch
     "His eyes widen."
     "You freeze, then grit your teeth."
     mc "Sorry. I’m bein’ unreasonable."
     jump ch3_6_lunch
 
 label ch3_6_lunch:
+    $ part = "6"
     c "Let us head to luncheon."
     "Cassian slowly rises."
     "He looks away from you; is he mad?{w} Disappointed?{w} Understanding?"
@@ -871,6 +887,7 @@ label ch3_6_lunch:
 
 
 label ch4_1_mutual_benefit:
+    $ part = "1"
     $ chapter = "4: For Mutual Benefit"
     "You haven't been able to get the thought of the dead maid out of your mind."
     "And certainly haven't been able to forget how close of a shave you had with death."
@@ -931,6 +948,7 @@ label ch4_1a_confront:
     jump ch4_2_gideon
 
 label ch4_2_gideon:
+    $ part = "2"
     show gideon normal
     "Gideon looks at you languidly. His hair is like rust and the sweat on his face its catalyst."
     show gideon smiling
@@ -987,5 +1005,54 @@ label ch4_2_gideon:
     g "It would be best to stay unnoticed on the way back."
     "He sits back on his hay, picking his sword up."
     mc "Alright."
+    hide gideon with dissolve
     "Your spine crawls as you leave the barracks."
     jump temp_end_message
+
+label ch4_3_dinner:
+    $ part = "3"
+    "Velmonta is no longer as empty as it was when you first arrived.{w} You now see maids and servants walking around with pails of water and mops in hand. A woman with a different livery hauling firewood.{w} But still, no nobility from other houses. Everyone here is from the main line."
+    "So had Estelle been right? Was it empty yesterday only due to your arrival? But if so, why?{w} To avoid commotion? If anything, it would only stir up more suspicion from the other houses."
+    "You sheepishly approach a friendly-looking maid."
+    mc "Excuse me, d’you know where we have dinner?"
+    $ alter_npc("Friendly-Looking Maid")
+    npc "Miss [noble_name]? The dining hall’s down that end."
+    mc "‘Kay, thank you!"
+    "Most of the staff threw you some glances; aside from that, you don't attract attention as you walk through the salons to the gallery."
+    $ glossary_dict["Myllith's Salute"] = "A curved salute resembling the moon. It is thought to both demonstrate loyalty to the Crown (scumlord) and bring Her Blessings upon the recipient."
+    "You can't help but pause as you pass the tired man’s portrait again in the gallery. Weary dedication and effortless piety still radiate from his kind face.{w} You perform {a=glossary:Myllith's Salute}🔻 the curved salute{/a} in acknowledgement of his faith."
+    "Entering the dining hall, you glance around. A valet and a maid for each successor;{w} two lady’s maids for Marianne; two valets for Cassian at the head of the table;{w} a butler and kitchen staff scattered through the room, setting the table."
+    show estelle normal
+    "Tess and Estelle are already there. The other valets and maids are conversing in a subdued manner, while yours were silent and taciturn.{w} Estelle guides you to your seat. You smile at her."
+    "Marianne nods. You return the gesture gratefully."
+    hide estelle normal
+    "You never noticed before, but the servants look at Dorian differently from the rest of you. It makes sense. He killed a girl."
+    show dorian normal at left
+    "Dorian meets your eyes as you look up from the tablecloth. You flinch away.{w} He’s been looking at you like that ever since you arrived here.{w} But what's stranger is Florence’s calm gaze. She tucks her hair behind her ear, then looks away."
+    hide dorian
+    show marianne serious at right
+    "Marianne clears her throat." 
+    m "You may eat now."
+    hide marianne
+    "You make sure to use the right cutlery this time. But as you looked at your food, another image appears in your mind.{w} Gideon’s face. You dig your fork hard into the veal."
+    $ glossary_dict["The Gathering"] = "The esteemed event where side families have the chance to send their children to the main line."
+    "Estelle had told you earlier that only side families can visit the main estate before {a=glossary:The Gathering}🔻 the Gathering{/a}.{w} Meanwhile, Gideon claims that nobody outside of Velmonta knows your existence yet."
+    "There's no way Rydell wouldn’t receive word of an offshoot’s visit, bordering Velmonta - and no such family had visited, the estate being empty upon your arrival.{w} So they knew where the carriage was from." 
+    "But they saw you, a dirty orphan with no business in a noble house, through the carriage windows.{w} Even went the extra mile to halt you as you tried to pass through. Rydell certainly knows of my existence."
+    "And Rydell's the most hostile side family of all, no? Yet not a stir."
+    "Your cheeks burn. Had Gideon really believed that your wouldn’t see past his nonsense?{w} No, it's too soon to let your pride get the better of you. You have to clear your mind."
+    "As you chew the tough meat, you meet Dorian’s stare head-on.{w} Are you amusing to him? Is he trying to provoke you?{w} You can't see past the wide grin on his face. It's like an ironically expressive mask."
+    "You smile back at him, tilting your head to the side, eyes blank and stupid.{w} There; the perfect fool."
+    "Cassian’s voice rings out." 
+    c "Veruna. How are you adjusting to life here?"
+    "Your eyes widen and you break the deadlock with the boy opposite you."
+    mc "I- I’m doing well. It’s comfortable. Thank you."
+    "The patriarch's voice is warm as he responds."
+    c "That is fortunate to hear. Feel free to express any future troubles you may encounter, be it over family meals or in private."
+    "You blush." 
+    mc "Thank you."
+    "Marianne nods." 
+    m "It is good that you are adjusting quickly, child."
+    mc "T-thank you, again."
+    "Florence’s eyes are upon you once more.{w} You watch her too, from the periphery of your vision. She twists back in her chair to whisper something to the ash-haired maid behind her.{w} After the maid’s response, Florence’s gaze moves up, landing on Tess behind you."
+    "You maintain the subtle shake in your hands until the rest of the family - aside from Dorian - loses interest in your fragility."
