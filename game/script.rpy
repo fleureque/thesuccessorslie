@@ -62,7 +62,18 @@ default conclusions = {
     "suspicious_maid" : {
         "display" : "The maid was checking inside your room. For what reason?",
         "meet_reqs" : ["says_wrong_room", "maid_has_keys"],
-        "logic_display" : ["The maid had the keys to the room she intended to enter, yet still knocked.", "She must have lied."],
+        "logic_display" : ["The maid had the keys to the room she intended to enter, yet still knocked.", 
+        "She must have lied."],
+        "unlocked" : False
+    }
+    "the_truth" : {
+        "display" : "Someone must be lying.",
+        "meet_reqs" : ["rydell_seen", "inconsistency"],
+        "logic_display" : ["Between Tess, Cassian, and Gideon, something doesn't match up.", 
+        "Everyone says that you're safe 'for now'.", 
+        "Sure, Tess could be genuinely unaware.", 
+        "But what are Cassian and Gideon trying to trick you into believing?"
+        ],
         "unlocked" : False
     }
 }
@@ -321,6 +332,8 @@ label ch1_3_carriage_ride:
     mc "Are we here?"
     g "No. Don't move. Stay in the carriage."
     "Stirring, you see Gideon stepping out briskly with his brow furrowed. He slams the door with a clang, muttering darkly under his breath, “Should've chosen a better route.”" with vpunch
+    "Gideon throws a hand up in the air while exclaiming something loudly."
+    "All the guards turn to look at you, sitting there in the carriage."
     "Your grogginess is now subsiding. You can't fall back asleep even if you want to."
     "...And besides, it's not the right time of day."
     hide gideon
@@ -334,7 +347,8 @@ label ch1_3_carriage_ride:
     show gideon normal
     "The carriage door swings open again." with vpunch
     mc "What happened?"
-    g "Damn petty Rydells tried to refuse us passage." 
+    g "Damn petty Rydells tried to refuse us passage.{w} Dammit! I told them it was important.{w} After all, we need to get you there quickly." 
+    $ add_observation({"title": "rydell_seen", "description": "The Rydells saw you. Gideon even pointed out your existence to them."})
     "He brushes his hand against his shoulder where he'd been shoved, grimacing."
     mc "Rydells?"
     g "A side family to Velmonta." 
@@ -908,7 +922,70 @@ label ch4_1a_confront:
     "You walk out of the bathroom and cast your gaze towards Lin’s rags."
     "Had you really been considering slicing them into strips?" 
     "Your face twitches into a half-smile.{w} A wistful one."
+    "You should go catch up with Gideon.{w} All this suspicion is driving you crazy."
+    "You can trust him to give you a straight answer, too."
     play sound open_door
     "You leave your room."
     "Despite being aware that this is a corridor, the absence of sunlight makes you uneasy.{w} You wrinkle your nose as you walk by Dorian’s room.{w} There isn't a single remnant of blood. It looks and smells of artificial cleanliness."
     "Your neck tingles. Hand on pocket, you make it through the passage, down the stairs, rushing until the courtyard.{w} You stop to breathe, nose burning in the strange mixture of fresh air and crackling fire."
+    jump ch4_2_gideon
+
+label ch4_2_gideon:
+    show gideon normal
+    "Gideon looks at you languidly. His hair is like rust and the sweat on his face its catalyst."
+    show gideon smiling
+    g "[name]. Or is it Miss [noble_name] now?{w} You’re cleaner than ME now. How delightful."
+    "You feel up your smooth wrist." 
+    mc "Suppose so. Not sure how happy I’m meant to be ‘bout it though."
+    "Your gaze falls onto his sword, lying on the same hay-pile as him." 
+    mc "Interrupting your trainin’?"
+    show gideon normal
+    g "No.{w} But it seems you’ve already forgotten the message I repeated for you before."
+    "His eyes are unsmiling as he stares at you."
+    mc "Message? Oh!"
+    "You tap your finger against your forehead." 
+    mc "That round-‘bout advice? You coulda been more straightforward."
+    g "Was it really that hard to understand?{w} You weren’t meant to come and find me until you were safe." 
+    "He taps his foot up and down."
+    g "Well, what’s done has been done."
+    "Again. He's trying to warn you of danger, protect you from Velmonta’s ‘hidden enemies’.{w} But is he really acting in your best interests?"
+    "You spit at the ground." 
+    mc "Me?{w} Safe?{w} I watched a maid die right after getting ‘ere.{w} Pierced by the boy she was try’na kill. What sorta safety’s anyone givin’ me?{w} Protection? A tad bit o’ consolation? Explanations, at least?{w} No, nothing.{w} So when d’you think I’ll ever be safe?"
+    "You let your hands shake as you clutch them to your chest."
+    show gideon smiling
+    "He pinches his brow." 
+    g "It seems I’ve been rather harsh on you. I apologise."
+    mc "Sorry."
+    "You run your hands through your groomed hair."
+    show gideon normal
+    mc "I’m just… I need to understand.{w} Something, anything. What d’you mean by danger?{w} I know I’m dyin’ soon. But you speak like there’s something else I’ve gotta be scared of."
+    "Information, even manipulative or coercive, is something you need right now.{w} You can't just stay meek waiting for the end."
+    "He drums his fingers on the steel of his sword." 
+    g "You’re lucky you chose to find me so early." 
+    "His eyes pierce yours." 
+    g "Have you seen the documentation yet?"
+    "You shake your head." 
+    mc "Father told me a bit ‘bout the succession though."
+    "Did he inform you that maximum four children roam Velmonta’s halls at a time?{w} As imposed by the Emperor?"
+    "He stares towards the outer wall."
+    mc "No?"
+    "The matriarch, Madame Marianne, accepted Miss Florence into the main line.{w} And then the side families discovered they could plant their own inside these castle walls."
+    mc "So it’s the side families targetin’ us?"
+    g "Now that the seats are full, yes."
+    mc "Okay…{w} what d’you mean by lucky? By comin’ so early, I mean."
+    show gideon smiling
+    "The side families likely haven’t discovered your adoption into Velmonta yet.{w} Hence, you are, I suppose, safe for now."
+    $ add_observation({"title": "inconsistency", "description": "Gideon said the side families don't know you're here, knowing that Rydell's aware of your existence."})
+    "Well, that matches up with what Tess told you earlier. To some extent."
+    "But Gideon's lying through his teeth, isn't he?"
+    "You hold in a frown." 
+    mc "Alright. But what’s that got to do with comin’ to find you?"
+    g "That’s exactly it. Don’t come again.{w} Or at least, not until the side families no longer track your every movement."
+    "He stands. You follow suit, sensing that the conversation's wrapping up now." 
+    mc "Was nice talkin’, Gideon." 
+    "You keep your tone light and airy."
+    g "It would be best to stay unnoticed on the way back."
+    "He sits back on his hay, picking his sword up."
+    mc "Alright."
+    "Your spine crawls as you leave the barracks."
+    jump temp_end_message
