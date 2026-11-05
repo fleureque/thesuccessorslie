@@ -65,7 +65,7 @@ default conclusions = {
         "logic_display" : ["The maid had the keys to the room she intended to enter, yet still knocked.", 
         "She must have lied."],
         "unlocked" : False
-    }
+    },
     "the_truth" : {
         "display" : "Someone must be lying.",
         "meet_reqs" : ["rydell_seen", "inconsistency"],
@@ -75,7 +75,7 @@ default conclusions = {
         "But what are Cassian and Gideon trying to trick you into believing?"
         ],
         "unlocked" : False
-    }
+    },
 }
 
 default glossary_dict = {
@@ -663,6 +663,7 @@ label ch2_5_murder:
     jump ch3_1_stigma
 
 label ch3_1_stigma:
+    play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
     $ part = "1"
     $ chapter = "3: Stigma"
     "You'd eventually drifted to sleep despite your worries.{w} Estelle now awakens you.{w} Outside is not yet bright, but it seems that nobles had a different routine, waking up unnaturally early."
@@ -699,7 +700,7 @@ label ch3_2_breakfast:
     "The Morning Room is bright and well lit, the large white table laid with matching tableware and cloth.{w} At the end of the table sits the matriarch, Marianne, and patriarch, Cassian, whom you recognise from his portrait."
     show dorian normal at right
     "Opposite you is Dorian; next to him is Florence.{w} On your side, separating you from the heads is Silvian.{w} The atmosphere in the room is heavy, in contrast to the lithe light from the sprawling chandelier."
-    "Cassian fidgeted slightly, then cleared his throat."
+    "Cassian fidgets slightly, then clears his throat."
     c "Your name was [name]. Is that correct?"
     mc "Y-yes, sir. I mean, Dad. No! Father. I apologise."
     "He nods tersely before turning to Marianne, whispering something in her ear while frowning.{w} She nods at him slowly after meeting his words with her own." 
@@ -715,7 +716,7 @@ label ch3_2_breakfast:
                 valid_name = True
             else:
                 alert("Your new name cannot be the same as your old one. Try again.")
-    c "From now on, it shall be [noble_name].{w} Observe it well: [noble_name] Velmonta’."
+    c "From now on, it shall be [noble_name].{w} Observe it well: '[noble_name] Velmonta'."
     "You fidget with your collar, then bow your head."
     "Of course, you need a new, fancier name, don't you?{w} What, to mark your new life?"  
     "What, is your old one too common?"
@@ -752,6 +753,7 @@ label ch3_2_breakfast:
     "You glance at his book cover. It's a vivid red.{w} You smile diffidently back."
     c "Dear, Marianne - have you anything to add?"
     "Cassian turns to the matriarch, picking at his decorated sleeves."
+    show marianne hesitant
     "She waits, thinking. Then she begins to speak evenly."
     m "Are you aware of the successorship, [noble_name]?"
     "Florence, diagonal to you, grows pale.{w} Her fingers flit to her sleeved arm, flinching as she moves her fingers over the fabric." with vpunch
@@ -762,6 +764,7 @@ label ch3_2_breakfast:
     "You tilt your head down in defeat, cheeks flushing."
     "Marianne coughs quietly." 
     m "No, no, it’s fine. Your father will talk to you later."
+    show marianne serious
     "You stare into her eyes that betray no hint of remembrance over last night’s occurrences.{w} Are these people crazy?{w} Or - are you?"
     "Cassian’s eyes widen as he looks at his wife in… betrayal?{w} He reaches for his wine, but spills some onto the tablecloth."
     c "Ah - forgive me."
@@ -775,6 +778,8 @@ label ch3_2_breakfast:
 
 
 label ch3_3_room:
+    hide marianne 
+    hide dorian
     $ part = "3"
     "You sit, looking out towards the crackling fires in the courtyard.{w} Your hands push lightly against the window."
     "Glass is such a wonderful invention. No wonder it's everywhere."
@@ -783,12 +788,10 @@ label ch3_3_room:
     "You now have some free time.{w} You can choose either to rest or {a=glossary:About Thinking}🔻 analyse{/a} the situation a bit more."
     menu:
         "*Think about the situation*":
-            if saw_murder:
-                "Why did Marianne choose to bring you here before such an attack?{w} Did they truly have no knowledge beforehand?{w} Was it premeditated?{w} If so, by whom?{w} Or are you overthinking things?"
-                if asked_estelle:
-                    "Estelle told you that such attacks aren't common. Is that simply consolation? Otherwise, isn't it too on the nose for an attempt to happen immediately after coming here?"
-                "Your plan to make yourself less of a ['target' if choice=='calm' else 'threat'] is succeeding so far."
-                "Clearly the mealtime successfully established you as a ['strong character' if choice=='calm' else 'fool']."
+            "Why did Marianne choose to bring you here before such an attack?{w} Did they truly have no knowledge beforehand?{w} Was it premeditated?{w} If so, by whom?{w} Or are you overthinking things?"
+            "Estelle told you that such attacks aren't common.{w} Is that simply consolation? Otherwise, isn't it too on the nose for an attempt to happen immediately after coming here?"
+            "Your plan to make yourself less of a target is succeeding so far."
+            "Clearly the mealtime successfully established you as a fool."
         "*Rest for a while*":
             "You choose to rest. After all, being too stressed can't possibly be good."
     play sound knocking_urgent loop fadein 0.5 fadeout 0.5
@@ -858,12 +861,12 @@ label ch3_5a_confront:
     c "Though it is hard, since the assassin is now deceased."
     mc "Anything happ’ning next?"
     c "Next? We shall file paperwork and identify, if possible, where the woman’s allegiances lay."
-    mc "You can take lives?? Just like that? All you gotta do is paperwork?":
+    mc "You can take lives?? Just like that? All you gotta do is paperwork?"
     "You swallow.{w} Blinking, he tilts his head."
     c "Sorry?"
     mc "Why’d they try to kill Dorian yesterday?"
     c "[noble_name]."
-    mc "“Am I in danger too? Tell me! I can’t…"
+    mc "Am I in danger too? Tell me! I can’t…"
     "A sob slips from your lips."
     "He pats your shoulder, staring you in the eyes calmly."
     c "It doesn’t happen often.{w} You’ll learn how to deal with these situations as you spend more time here."
@@ -927,7 +930,7 @@ label ch4_1a_confront:
     mc "So what’m I meant to do ‘till then?{w} Do I just stay here?{w} Wait here with death loomin’ over me?"
     "He blinks."
     t "Miss Florence spends her time in the Summertide Chapel.{w} Master Silvian either reads or studies.{w} Master Dorian does… things."
-    mc "That’s too lax of them."
+    mc "That’s too lax of them." with vpunch
     t "I don’t quite understand, Miss."
     "You stare at him.{w} His expression remains dumb."
     mc "Alright then, Tess. You can go now." 
@@ -935,10 +938,10 @@ label ch4_1a_confront:
     $ glossary_dict["Myllith Dagger"] = "A ceremonial dagger. It is not frowned upon to use it outside of prayer. After all, Myllith thrives on bloodshed."
     "The {a=glossary:Myllith Dagger}🔻 Myllith dagger{/a} in the drawer. From when you were exploring your room."
     "You've never gripped one like this before, only seen them paraded around by the Church.{w} This one’s velvet scabbard is engraved with Velmonta’s sigil."  
-    "Who is your enemy? Whose observation do you have to avoid?{w} Paranoia has saved me too many times to count; it won't hurt now.{w} You slip the dagger into your dress pocket.{w} Before the bathroom mirror, you're assured that the fabric falls smoothly over the pocket, as if there were nothing there."
+    "Who is your enemy? Whose observation do you have to avoid?{w} Paranoia has saved you too many times to count; it won't hurt now.{w} You slip the dagger into your dress pocket."
+    "Before the bathroom mirror, you're assured that the fabric falls smoothly over the pocket, as if there's nothing there."
     "You walk out of the bathroom and cast your gaze towards Lin’s rags."
-    "Had you really been considering slicing them into strips?" 
-    "Your face twitches into a half-smile.{w} A wistful one."
+    "Had you really been considering slicing them into strips?{w} Your face twitches into a half-smile. A wistful one."
     "You should go catch up with Gideon.{w} All this suspicion is driving you crazy."
     "You can trust him to give you a straight answer, too."
     play sound open_door
@@ -984,10 +987,10 @@ label ch4_2_gideon:
     g "Have you seen the documentation yet?"
     "You shake your head." 
     mc "Father told me a bit ‘bout the succession though."
-    "Did he inform you that maximum four children roam Velmonta’s halls at a time?{w} As imposed by the Emperor?"
+    g "Did he inform you that maximum four children roam Velmonta’s halls at a time?{w} As imposed by the Emperor?"
     "He stares towards the outer wall."
     mc "No?"
-    "The matriarch, Madame Marianne, accepted Miss Florence into the main line.{w} And then the side families discovered they could plant their own inside these castle walls."
+    g "The matriarch, Madame Marianne, accepted Miss Florence into the main line.{w} And then the side families discovered they could plant their own inside these castle walls."
     mc "So it’s the side families targetin’ us?"
     g "Now that the seats are full, yes."
     mc "Okay…{w} what d’you mean by lucky? By comin’ so early, I mean."
