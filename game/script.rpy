@@ -569,6 +569,7 @@ label ch2_3_alone:
     "The knocking starts again. But you're not sure who's outside anymore."
     "Looking at the door, you notice a glass hole offering vantage to the outside.{w} With aching arms, you drag the chair over.{w} You climb up to stand and peer through the hole."
     stop sound fadeout 1.0
+    show killermaid
     "A woman dressed in clothes identical to Estelle’s garb stands outside. A maid, then."
     jump ch2_4_maid
 
@@ -588,6 +589,7 @@ label ch2_4_maid:
     npc "I’ll… I’ll go now."
     mc "Okay?" 
     "You watch her retreat down the hallway, her hair whipping wildly as she looks around."
+    hide killermaid
     "You shut the door but keep listening. Her footsteps pause close to your door - the room next to yours?{w} The jingling of keys resounds."
     $ add_observation({"title": "maid_has_keys", "description": "The maid had keys to the room she was planning on entering."})
     "Why’d she knocked instead of just unlocking your door then? After all, she has the keys to the room that she wanted to access."
@@ -606,6 +608,7 @@ label ch2_5_murder:
     "Opening the door, you're careful not to make a large noise."
     "You freeze."
     "That maid is lying flat on the floor. Blood spills from a large gash in her neck. In her hand is... a dagger."
+    show dorian dazed
     "Standing above her is a boy with dark hair, dirtied sword in hand.{w} He's frozen, seemingly shocked by what's just happened."
     "The crowd shifts, obscuring your vision. It's composed of servants."
     "Such a large gaggle of visibly shocked, passive onlookers is likely safe to approach."
