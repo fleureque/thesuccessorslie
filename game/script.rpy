@@ -608,7 +608,7 @@ label ch2_5_murder:
     "Opening the door, you're careful not to make a large noise."
     "You freeze."
     "That maid is lying flat on the floor. Blood spills from a large gash in her neck. In her hand is... a dagger."
-    show dorian dazed
+    show dorian dazed at left
     "Standing above her is a boy with dark hair, dirtied sword in hand.{w} He's frozen, seemingly shocked by what's just happened."
     "The crowd shifts, obscuring your vision. It's composed of servants."
     "Such a large gaggle of visibly shocked, passive onlookers is likely safe to approach."
