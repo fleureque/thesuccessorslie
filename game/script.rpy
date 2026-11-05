@@ -76,6 +76,7 @@ default glossary_dict = {
 "Velmonta": "A prestigious and incredibly well-known noble house, even in Scab City.",
 "Velmonta's Reputation": "Known as a 'bastion of light' against darkness. The phrase is common knowledge.",
 "Velmonta's Origin": "Granted nobility in reward for epic conquest.",
+"Myllithism": "The Empire's only official religion with a history that stretches on since the Empire's founding."
 }
 
 
@@ -370,7 +371,7 @@ label ch1_4_arrival:
     "The carriage draws close to wrought iron gates embedded into a towering wall of grey stone. Upon the wall, flaming torches illuminate its perimeter."
     "It looks incredibly expensive to maintain. You hide a grimace."
     "Gideon nods at you. He exits the carriage, leaving the door open this time.{w} You shudder at the sudden blast of warmth.{w} It originates from the flames that lick wildly at the impervious stone."
-    "Feudal territory is full of fiery brilliance, it seems.{w} It occurs to you that Velmonta’s reputation as a bastion of light may be more than symbolic."
+    "Feudal brilliance is full of fiery brilliance, it seems. It suddenly occurs to you that {a=glossary:Velmonta's Reputation}🔻 Velmonta's reputation{/a} may be more than symbolic."
     show gideon normal at left
     show sprite cloaked at right
     "Tearing your eyes away, you look back at Gideon.{w} He hands an official-looking document to the guard for inspection."
@@ -425,7 +426,207 @@ label ch1_4_arrival:
     "You approach the softly lit chateau.{w} It has spires that stretch into the sky, and flags painting deep blue streaks in the air.{w} The stairs stop before a pair of heavy-set double-oak doors."
     play sound knocking_urgent
     "She knocks five times in a meaningful rhythm, and the doors creak open to reveal the unsmiling footmen who drew them open."
+    play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
     "The floor is lined with marble, so polished that the light cascading from the chandelier reflects back in dazzling shades.{w} The foyer stretches out endlessly before you, spectacular and impossible. Your heart beats faster.{w} Velmonta is beautiful." 
     "Beautiful, but devoid of life."
 
-label ch2_
+label ch2_1_first_blood:
+    $ chapter = "2: First Blood"
+    "You pull your cloak a bit tighter around yourself and look down at your slippers, snug against your feet."
+    "Sensing your overwhelm, Estelle squeezes your shoulder lightly in encouragement."
+    "A shudder runs through you, looking at her painted expression. But you quickly bow your head, then gaze around."
+    "Estelle joins you in your admiring, then coughs."
+    e "It’s only empty because we were expecting you today!"
+    menu:
+        "*Evaluate her excuse*":
+            "You blink up, smiling. Meanwhile, your head spins."
+            "The adoption was premeditated then? Or did a message travel faster than the carriage?"
+            "Or perhaps he sent a courrier right after Lin fell to rest..."
+            "Why would the whole estate need to be empty just for you?"
+            "Her answer is giving you more questions. You shake them out of your head."
+        "Ah! That's so consid'rate of you!":
+            e "Don't mention it, Miss!"
+    e "Let’s move on for now. After I take you to your room, you can wash up and get fed, alright?"
+    "She rushes you through countless salons and drawing rooms, then into a long gallery."
+    "Carved wax candles line the wall murals.{w} They depict complex battlefields.{w} The candlelight dances in holsters to animate the scenes"
+    "Deep blue flags wave, dark against the blood-orange skies.{w} Flags with the crest that you recognise as Velmonta’s." 
+    "So {a=glossary:Velmonta's Origin}🔻 Velmonta's origins{/a} are just like the other houses' then."
+    "As the hallway continues, the murals are gradually replaced by framed portraits of ancestral family heads."
+    "They don't appear biologically related.{w} Rudeus Velmonta has a high-set nose and washed-out eyes, while his predecessor, Harrick, has a large beard and heavy features instead."
+    "Adoption isn't a recent trend, then."
+    "Estelle strokes your shoulder."
+    "You meet the tired eyes of a holy-looking man.{w} His portrait is placed close to the end of the hall.{w} For a reason you can't identify, some part of you resonates with his weary piety - even though you are not well-versed in {a=glossary:Myllithism}🔻 Myllithism{/a}."
+    "The last portrait in the hallway is that of Cassian Velmonta, the reigning patriarch. He has a stern expression."
+    "Something about his painting is starkly different from the preceding ones, but you can't quite clock what it is yet."
+    e "That is your father, Miss [name]."
+    menu:
+        "An honour...":
+            pass
+    "You feel a strange repulsion, but know not at what."
+    "The gallery ends. Estelle hurriedly wraps a shawl around you, guiding you across the lengthy courtyard."
+    "You reach a mansion no less impressive than the main chateau.{w} However, its outer edifice has polished wood in the place of carved stone."
+    e "This is the private residential."
+    "You walk into the mansion, after being given the accede from the footmen flanking its heavy doors."
+    "The residential building is tall and looming; however, you only march up one floor - “the successor’s floor” - before stopping outside a door next to a statue of a knight, cuirass and sword decorating his stone body."
+    "Estelle speaks while drawing keys from her pocket."
+    e "Your bath was drawn as soon as we saw the carriage. We do aim to be quick."
+    menu:
+        "Bath? What's that?":
+            "Estelle looks up and down your grimy figure. A hint of sympathy?"
+            "Whatever it is in her expression, you bristle at it."
+            "Estelle explains how to use a bath."
+        "What happens after I bathe?":
+            e "My, well you'll have dinner, Miss."
+    "She swings the door open, handing you a pile of fresh clothes and a towel."
+    hide estelle with dissolve
+    "And finally, you're alone with the flowery fragrance of bathwater."
+    jump ch2_2_wash
+
+label ch2_2_wash:
+    "An unpleasant tingling instantly attacks you as you dip your feet into the swirling liquid.{w} You hiss.{w} It isn't unreasonably warm, but blood rushes into your limbs, bringing with it an intense itching."
+    "Then comes the pain."
+    menu:
+        "*Pick at your skin to detract from the pain*.":
+            "It gradually fades into the back of your mind, though you remain tense."
+        "*Inspect your hand*":
+            "Raising your hand up against the gleaming chandelier, you see your clean wrist for the first time - something beyond your imagination.{w} The colour of your skin - the true one - beneath all that grime.{w} You let your hand fall again."
+    "Today's passed by in a daze.{w} Too much to think about, too much to take in, too much to see.{w} Even the light was - no, is - dizzying."
+    "Your mind suddenly flashes to Lin.{w} What would her hand look like?"
+    "Is it wrong that you feel glad, rather than guilty, for being taken here?{w} Leaving her behind?"
+    menu:
+        "*Take deep breaths*":
+            "You grab the rim of the bathtub to pull yourself up."
+            "Nobody will care that you're overwhelmed. In fact, expressing it would only hurt you."
+            "You have to suck it up."
+    "You climb out of the bathtub."
+    $ glossary_dict["Myllith Sigil"] = "A sign of the Goddess, used to entice Her Blessings. These can be anything, but are traditionally for loyalty to the Crown, improved social harmony and success in military conquest."
+    "A huge {a=glossary:Myllith Sigil}🔻 Myllith sigil{/a} hangs over the mirror, partly obscuring its surface.{w} You frown, wondering why someone would choose such an impractical placement."
+    "You shake the water off and step out.{w} The nightdress is soft – too soft against your worn skin. Nevertheless, you shrug it on."
+    "You push the hanging metal aside."
+    menu:
+        "*Stare at your face*":
+            "Expressionless eyes peer back at you, penetrating and deep."
+            "You bring a hand up to your face and slowly morph it into a smile."
+            "There."
+            "Your face is a good tool."
+        "*Stare at your body*":
+            "An emaciated and gaunt body meets you."
+            "It's as clean as a noble's now."
+            "You don't know how to feel about it."
+            "Being here will certainly change you.{w} You try to memorise the image before you.{w} After all, even your body will eventually transform."
+    play sound open_door
+    "After lingering before the mirror for slightly too long, you swallow and push the ornament back in place.{w} Then you don a shy expression and pull open the door."
+    show estelle normal
+    "Estelle greets you with a... professional... sunny expression."
+    e "Don't you look a wonder, miss?"
+    mc "I-I… You’re pretty too, Estelle.":
+    "The words slip out smoothly, despite tasting strange on your tongue."
+    e "I'm just a maid, dear. Oh - here; your dinner’s already prepared."
+    "She sets a ‘small’ meal before you – a dazzling spectacle of strange meats, salads, and fruits."
+    "She closes the door for you to ‘enjoy the meal in private.’"
+    "Awe. Disgust. This mixture of emotions grapples with you as you stare at the food."
+    "It's more than you and Lin have even laid eyes on this whole winter, let alone come close to eating."
+    jump ch2_3_alone
+
+label ch2_3_alone:
+    "Sighing, you lean back in your seat and have a few bites.{w} The butters and fats melt away on your tongue, leaving behind a sweet aftertaste.{w} Having never eaten for pure pleasure before, you now understood why so many people fall prey to gluttony."
+    "It's delicious, but at the same time, terrible."
+    "The intense flavour makes your head ring.{w} It's terribly different from the washed-out, flavourless potatoes and grain you've been forced to salvage."
+    "Besides, you're sure your stomach would explode from having more."
+    "Velmonta's crest is everywhere, golden against the greenish blue coating the walls."
+    "A metal statue stands on a low-hanging shelf.{w} It depicts a woman, standing firm with a greatsword in her gloved hands: Myllith of Moon.{w} In all her beauty."
+    "As you kneel down to examine the statue, your eyes fall on the plaque before it."
+    "“A gift from Rosalind Marchetti.”"
+    "An empress that you've never heard of."
+    "How recent was her rule? Is Velmonta still close to the royal family?"
+    "And if so, is that to be a good thing?"
+    "Shaking your head, you tear yourself away from the statue, sitting on the bed. You feel as if you're sinking."
+    "You frown, looking around the room once more. Where would be a good place for hiding documents?{w} Under the statue?{w} No, would they lift that?"
+    "This room is filled with religious imagery.{w} Statues and rosaries.{w} Even that dagger in the drawer beneath the table.{w} Who had this room belonged to before? You run your fingers through the blanket. It's impossibly soft."
+    "Even more than Lin’s embrace."
+    $ add_observation({"title": "royalty_ties", "description": "Rosalind Marchetti had ties to Velmonta, close enough to send a gift."})
+    "Before the window is a heavy desk. A dip pen and ink lies next to a blank notebook and sparse parchments."
+    "You relax into the chair's soft fabric. It has barely any resistance; you sink into it."
+    "It's swallowing you whole."
+    "Shaking your head, you stare out into the courtyard, leaning on the desk. The flames are everywhere.{w} The sky is slowly growing darker."
+    "As Gideon had said, the fire really does stand out in the night.{w} But it can't possibly be practical to maintain.{w} Even your room is lit with candles and burning wax."
+    "You look at the contraption on the side of your desk: a clock. From it comes an ever-present ticking."
+    "You rest for a while."
+    play sound knocking_urgent loop fadein 1.0 fadeout 1.0
+    "A harsh knocking sound forces you to your feet." with vpunch
+    stop sound fadeout 1.0
+    "You need to hide your documents."
+    "You quickly bury the documents, taken from Lin's rags, between the mattress and wooden planks."
+    play sound open_door
+    "Then you open the door."
+    "Nobody's there."
+    play sound open_door
+    "Your hairs raise. You shut the door and race to draw the curtains down."
+    play sound knocking_urgent loop fadein 1.0 fadeout 1.0
+    "The knocking starts again. But you're not sure who's outside anymore."
+    "Looking at the door, you notice a glass hole offering vantage to the outside.{w} With aching arms, you drag the chair over.{w} You climb up to stand and peer through the hole."
+    stop sound fadeout 1.0
+    "A woman dressed in clothes identical to Estelle’s garb stands outside. A maid, then."
+    jump ch2_4_maid
+
+label ch2_4_maid:
+    "You move the chair aside and open the door." 
+    mc "You scared me the first time ‘round! Outside was empty!" 
+    "You tilt your head.{w} Why isn't she responding?"
+    "She shakes her head vigorously."
+    npc "I- I apologise, Miss. It seems I have identified the wrong room."
+    $ add_observation({"title" : "says_wrong_room", "description" : "Maid claimed to have the wrong room."})
+    "You watch her eyes wandering past you, into your room.{w} As much as you wait, she doesn't seem to plan on leaving.{w} You shift uncomfortably as she continues to linger at the doorway."
+    mc "Need anythin’?"
+    "She continues staring, her expression blank." 
+    "Where's Trusty Stick when you need it?"
+    "She finally shakes her head."
+    npc "I’ll… I’ll go now."
+    mc "Okay?" 
+    "You watch her retreat down the hallway, her hair whipping wildly as she looks around."
+    "You shut the door but keep listening. Her footsteps pause close to your door - the room next to yours?{w} The jingling of keys resounds."
+    $ add_observation({"title": "maid_has_keys", "description": "The maid had keys to the room she was planning on entering."})
+    "Why’d she knocked instead of just unlocking your door then? After all, she has the keys to the room that she wanted to access."
+    jump ch2_5_murder
+
+label ch2_5_murder:
+    play sound footsteps loop fadein 1.0 fadeout 1.0
+    "You hear more footsteps and quickly scramble onto the stool again, just in time to see a shadow slip past."
+    play sound scary_sound
+    stop music
+    "And then a scream." with vpunch
+    play sound stampede loop fadein 0.2
+    "More footsteps. Hurrying towards the scene. You jump off the chair. Multiple voices are now outside. So quickly?"
+    stop sound
+    play ambiance crowd loop fadein 1.0 fadeout 1.0
+    "Opening the door, you're careful not to make a large noise."
+    "You freeze."
+    "That maid is lying flat on the floor. Blood spills from a large gash in her neck. In her hand is... a dagger."
+    "Standing above her is a boy with dark hair, dirtied sword in hand.{w} He's frozen, seemingly shocked by what's just happened."
+    "The crowd shifts, obscuring your vision. It's composed of servants."
+    "Such a large gaggle of visibly shocked, passive onlookers is likely safe to approach."
+    "You step out tentatively and walk towards the clamour, fingers unconsciously tracing your neck."
+    mc "What… happened here?"
+    $ npc = "Brunette Valet"
+    $ npc_color["label"] = "#a68250"
+    "The valet's face is pale as he responds."
+    npc "Someon-"
+    "He stares behind you. You turn to see what he's so shocked by."
+    show marianne serious
+    "Marianne Velmonta, the matriarch.{w} She's the picture of perfection plastered on posters around Scab City."
+    "But her mouth is thin and her gait hurried. Rushing over, she calls what appears to be the boy’s name."
+    show marianne hesitant
+    m "Dorian!" with vpunch
+    "The boy slowly turns to her, eyes wide and unfocused.{w} With a stormy expression, she turns to the rest of us while grabbing his wrist protectively."
+    stop ambiance fadeout 2.0
+    show marianne serious
+    m "Please, give us some time alone."
+    "Her eyes fall on you."
+    m "Ah - are you [name]?"
+    "Nausea beginning to wash over you, you nod quietly."
+    show marianne hesitant
+    m "You too, please. I.. no. Yes, go back to your room. This will be explained to you. But not now."
+    "She turns back to Dorian, giving you no further thought."
+    "The sight of death is nothing new. But death in this fashion? In this mansion?" 
+    "You glance one last time at Dorian, and hurry into your room. What had the valet been about to tell you?"
+    jump stigma
