@@ -110,7 +110,7 @@ define d = Character("Dorian", color="#d07ecf", what_color="#d7afdc", ctc="ctc",
 define f = Character("Florence", color="#91ebff", what_color="#b4f1f9", ctc="ctc", ctc_position="fixed")
 define c = Character("Cassian", color="#fafc91", what_color="#f7fed0", ctc="ctc", ctc_position="fixed")
 define s = Character("Silvian", color="#f5f1f1", what_color="#d4d6d1", ctc="ctc", ctc_position="fixed")
-define t = Character("Tess", color="#34c29a", what_color="#96eadf", ctc="ctc", ctc_position="fixed")
+define t = Character("Tess", color="#c5a056", what_color="#b9b28c", ctc="ctc", ctc_position="fixed")
 define npc = Character("[npc]", ctc="ctc", ctc_position="fixed")
 default chapter = "1: Fading Light"
 define gui.text_font = "fonts/garamond.ttf"
@@ -611,11 +611,10 @@ label ch2_5_murder:
     "Such a large gaggle of visibly shocked, passive onlookers is likely safe to approach."
     "You step out tentatively and walk towards the clamour, fingers unconsciously tracing your neck."
     mc "What… happened here?"
-    $ npc = "Brunette Valet"
-    $ npc_color["label"] = "#a68250"
+    $ alter_npc("Brunette Valet", "#c5a056", "#b9b28c")
     "The valet's face is pale as he responds."
     npc "Someon-"
-    "He stares behind you. You turn to see what he's so shocked by."
+    "He stares behind you.{w} You turn to see what he's so shocked by."
     show marianne serious
     "Marianne Velmonta, the matriarch.{w} She's the picture of perfection plastered on posters around Scab City."
     "But her mouth is thin and her gait hurried. Rushing over, she calls what appears to be the boy’s name."
@@ -629,8 +628,39 @@ label ch2_5_murder:
     m "Ah - are you [name]?"
     "Nausea beginning to wash over you, you nod quietly."
     show marianne hesitant
-    m "You too, please. I.. no. Yes, go back to your room. This will be explained to you. But not now."
-    "She turns back to Dorian, giving you no further thought."
+    m "You too, please. I..{w} no.{w} Yes,{w} go back to your room.{w} This will be explained to you.{w} But not now."
+    $ glossary_dict["Dorian"] = "Marianne called the boy with the sword by that name. Didn't she?"
+    "She turns back to {a=glossary:Dorian}🔻 Dorian{/a}, giving you no further thought."
     "The sight of death is nothing new. But death in this fashion? In this mansion?" 
+    hide marianne
     "You glance one last time at Dorian, and hurry into your room. What had the valet been about to tell you?"
-    jump stigma
+    jump ch3_1_stigma
+
+label ch3_1_stigma:
+    $ chapter = "3: Stigma"
+    "You'd eventually drifted to sleep despite your worries.{w} Estelle now awakens you.{w} Outside is not yet bright, but it seems that nobles had a different routine, waking up unnaturally early."
+    show estelle normal at right
+    "Tentatively,you gaze up at her."
+    mc "Miss Estelle?"
+    e "Oh - there’s no need to call me ‘Miss’. But you have a question?"
+    mc "Why’d a maid try to attack Dorian last night?"
+    "She blinks, then tucks her hair behind her ear." 
+    e "It doesn’t happen often."
+    mc "But why?"
+    "You swallow and sheepishly stare at the floor after receiving a sharp look from her." 
+    "She sighs."
+    e "I’m sorry, Miss Runa. It’s just… I’m not entirely sure yet."
+    "Rubbing your eyes, you watch as she turns to the closet to pick out clothes."
+    e "These might not fit you yet, but they won’t be small; we got large ones just in case.{w} You’ll be fitted sometime."
+    "She shoots you a cheery grin."
+    "As she explains the function of each clothing piece, its materials, and how to wear it, you nod along."
+    "Her gaze is calm and measured as she speaks, despite her eager attitude.{w} Meanwhile, the fine lines and countless calluses on her hands betray her years of experience."
+    e "I’ll be taking you to the Morning Parlour for breakfast." 
+    "She corrects your posture gently with her hands."
+    e "Last night was a bit different. Usually meals are had with family."
+    mc "There are other successors, right?"
+    e "Successors? Technically, mayhaps. It's better to call them your brethren though."
+    mc "Um. How many siblings do I have?"
+    "She finishes adjusting the dress."
+    e "Three total. Young Masters Silvian and Dorian,{w} and Young Lady Florence.{w} Shall we go now?"
+    "You commit their names to memory. And you're glad she's willing to answer your questions..."
