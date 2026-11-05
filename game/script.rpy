@@ -47,7 +47,10 @@ init python:
                 if conditions_met:
                     alert(messages["Condition met"])
                     conclusions[conclusion]["unlocked"] = True
-
+    
+    def alter_npc(name, namecard_color, speech_color):
+        global npc
+        npc = Character(name, color=namecard_color, what_color=speech_color, ctc="ctc", ctc_position="fixed")
 
     def deduction_display():
         pass
@@ -76,7 +79,7 @@ default glossary_dict = {
 "Velmonta": "A prestigious and incredibly well-known noble house, even in Scab City.",
 "Velmonta's Reputation": "Known as a 'bastion of light' against darkness. The phrase is common knowledge.",
 "Velmonta's Origin": "Granted nobility in reward for epic conquest.",
-"Myllithism": "The Empire's only official religion with a history that stretches on since the Empire's founding."
+"Myllithism": "The Empire's only official religion. Its history stretches on from the Empire's founding."
 }
 
 
@@ -99,7 +102,7 @@ image ctc:
 #variable initialisation
 $ npc_color = {"label": "#747474", "speech": "#c8c4c1"}
 define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed", voice_tag = "lin")
-define g = Character("[gideon]", color="#a9522a", what_color="#c7a691", ctc="ctc", ctc_position="fixed")
+define g = Character("[gideon]", color="#a9522a", what_color="#e18569", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
 define e = Character("Estelle", color="#7dd94f", what_color="#d7ffcc", ctc="ctc", ctc_position="fixed")
 define m = Character("Marianne", color="#c32131", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
@@ -133,7 +136,7 @@ label start:
     
     play audio transition
 
-    define mc = Character("[name + ' (You)']", color="#4af5e4", what_color="#a0e8ed", ctc="ctc", ctc_position="fixed")
+    define mc = Character("[name + ' (You)']", color="#cecd95", what_color="#f0edbc", ctc="ctc", ctc_position="fixed")
 
     python:
         name = renpy.input("Enter your name: (max 20 chars)", length=20, default="Runa")
@@ -220,7 +223,7 @@ label ch1_1_shed:
     "The {a=glossary:Revvers}🔻 Revvers{/a} must be patrolling already. You press yourself against the wall, as time seems to stretch on and on..."
     "...They have been patrolling much more frequently lately. Political unrest and such."
     "...How much time do you have left to clean the shed?"
-    jump ch1_con1_gideon
+    jump ch1_2_gideon
 
 label ch1_2_gideon:
     "The shed's now cleaner than it has ever been before, thanks to your handiwork.{w} It protected you and Lin to the very end - both from the cold and strange hagglers."
@@ -254,40 +257,40 @@ label ch1_2_gideon:
     "You pull your lips into a sneer as his approach drives you back."
     stop sound fadeout 1.0
     g "You're going to freeze."
-    mc "Look. I'll let you in on somethin'. Outsiders ain't welcome in these alleys.":
+    mc "Look. I'll let you in on somethin'. Outsiders ain't welcome in these alleys."
     g "You'll freeze tomorrow. Do you even have any other clothes? Those rags on your back aren't all you have, are they?"
     "You tense watching him swing his sword, then tut. He's doing it subconsciously."
     "A sour smile forms on your face. Your hand tightens around Trusty Stick."
-    mc "You dare run your mouth blabberin' like this, noble?":
+    mc "You dare run your mouth blabberin' like this, noble?"
     g "Your voice is shaking, child."
     "An emphasis on the last word. You flush."
     mc "What's it to you?"
-    mc "Even the church done forsaken this place. Whatever laws you're used to don't apply 'ere.":
+    mc "Even the church done forsaken this place. Whatever laws you're used to don't apply 'ere."
     show sprite cloaked
     "He peels his hood down, eyes locking into yours."
     g "Come with me and you'll be safe."
     "You catch yourself softening and steel up again."
-    mc "This sorta kidnappin' happens all the time. Kids don't come back after they get taken.":
+    mc "This sorta kidnappin' happens all the time. Kids don't come back after they get taken."
     g "Kidnapped? Not saved?"
     "You plant your feet in place, adamant."
-    "[gideon] points at the emblem on his cloak."
+    "[gideon.capitalize()] points at the emblem on his cloak."
     g "Do you really not recognise this crest?"
     "You find yourself at a loss for words."
     g "I'm a knight of {a=glossary:Velmonta}🔻 Velmonta{/a} - Gideon. Do you know what that means?"
     $ gideon = "Gideon"
-    mc "Think I'm stupid? Your blue cloak and crest ain't enough to prove noth'-!":
+    mc "Think I'm stupid? Your blue cloak and crest ain't enough to prove noth'-!"
     "You get interrupted halfway through as he pulls out official-looking documents, as if having anticipated your reaction."
     "You grab them, hold them close, and examine them."
     "...At last, you hand them back and lower your stick."
-    mc "Well… what's someone from that lofty house doin' all the way out here?":
+    mc "Well… what's someone from that lofty house doin' all the way out here?"
     g "You have been chosen for adoption by {a=glossary:Matriarch Marianne}🔻 Madame Marianne{/a} herself."
-    mc "Matriarch Marianne? I… oh, lord!":
+    mc "Matriarch Marianne? I… oh, lord!"
     "Trusty Stick falls from your hands as your mouth hangs agape. You don't even hear it clatter on the ground." with vpunch
     "Gideon chuckles."
     g "Once again: come with me and you'll be safe."
-    mc "The orphanage? This is too sudden. I...":
+    mc "The orphanage? This is too sudden. I..."
     g "Not to the orphanage."
-    ch1_con1_carriage_ride
+    jump ch1_3_carriage_ride
 
 label ch1_3_carriage_ride:
     show inside_carriage with dissolve
@@ -323,21 +326,22 @@ label ch1_3_carriage_ride:
     "...And besides, it's not the right time of day."
     hide gideon
     "Somewhere along the journey, the filth outside became polished stone and shrubbery. You've never left Scab City before, but you can tell: you're beyond the forest already."
-    "*Look at what Gideon's doing*":
-        "You bring your face closer against the window. There isn't any physical altercation, despite the people below being armed. The opposition is clad in the same deep blue as Gideon - but their crests are slightly different."
-        "No matter how much you strain your ears, the carriage muffles the sound, rendering it incomprehensible."
-        "With nothing left to do, you drum your fingers on the window impatiently, reading their expressions. After all, you doubt that Gideon can hold them off alone."
-        "A man shoves Gideon on the shoulder. You look away, distracting yourself."
+    menu:
+        "*Look at what Gideon's doing*":
+            "You bring your face closer against the window. There isn't any physical altercation, despite the people below being armed. The opposition is clad in the same deep blue as Gideon - but their crests are slightly different."
+            "No matter how much you strain your ears, the carriage muffles the sound, rendering it incomprehensible."
+            "With nothing left to do, you drum your fingers on the window impatiently, reading their expressions. After all, you doubt that Gideon can hold them off alone."
+            "A man shoves Gideon on the shoulder. You look away, distracting yourself."
     show gideon normal
     "The carriage door swings open again." with vpunch
     mc "What happened?"
     g "Damn petty Rydells tried to refuse us passage." 
     "He brushes his hand against his shoulder where he'd been shoved, grimacing."
-    mc "Rydells?":
-        g "A side family to Velmonta." 
-        "His hand falls onto his lap."
-        "Side… family?" 
-        "You blink a few times, then sigh." 
+    mc "Rydells?"
+    g "A side family to Velmonta." 
+    "His hand falls onto his lap."
+    "Side… family?" 
+    "You blink a few times, then sigh." 
     menu:
         "How far're we from the estate?":
             g "We’ll get there after passing through the rest of the territory."
@@ -376,13 +380,14 @@ label ch1_4_arrival:
     show sprite cloaked at right
     "Tearing your eyes away, you look back at Gideon.{w} He hands an official-looking document to the guard for inspection."
     "Clearing his throat, the guard hands the document back after skimming over it."
+    $ alter_npc("Guard", "#4a64d7", "#98aaf0")
     npc "Welcome to Velmonta. You may return to your carriage now."
     "Two people clad in deep blue liveries, with some effort, draw the doors open. The horses are spurred into movement again."
     hide sprite with dissolve
     show gideon normal at center
     "Gideon turns to you."
     g "Don’t approach me until you’re safe."
-    "His hand tracres around his sword scabbard."
+    "His hand traces around his sword scabbard."
     g "Truly safe. Not just fooled by the appearance of safety."
     mc "Oh… okay."
     "You linger on his advice, then look out the window again."
@@ -401,9 +406,10 @@ label ch1_4_arrival:
     g "The flames look even better over the backdrop of night."
     "His expression is... conflicted, but you don't press further."
     "The road wraps around a fountain spewing crystal-like water.{w} The carriage rattles through, grinding to a halt."
-    "A footman walked around, opening the door. He extends a hand."
+    "A footman walks around, opening the door. He extends a hand."
+    $ alter_npc("Footman", "#f671e4", "#f8d8f9")
     npc "Welcome, Young Lady [name]."
-    "Thank y-you, sir," you stammer.
+    mc "Thank y-you, sir."
     play sound footsteps
     show gideon normal at left
     show estelle normal at right
@@ -412,18 +418,12 @@ label ch1_4_arrival:
     "Bending down, she slips the footwear onto your feet. It's strangely sleek against your filthy skin, but not an unwelcome sensation."
     menu:
         "Bye, Gideon!":
-            if gideon_alliance:
-                "Gideon looks disappointed that you've already forgotten his advice."
-                "Below his expression, too, he looks slightly worried."
-            else:
-                "Gideon nods and waves back."
+            "Gideon looks disappointed that you've already forgotten his advice."
+            "Below his expression, too, he looks slightly worried."
         "*Don't bid Gideon farewell*":
-            if gideon_alliance:
-                "You decide it's better to follow his advice immediately."
-            else:
-                "You're not close with him anyways."
+            "You decide it's better to follow his advice immediately."
     hide gideon
-    "You approach the softly lit chateau.{w} It has spires that stretch into the sky, and flags painting deep blue streaks in the air.{w} The stairs stop before a pair of heavy-set double-oak doors."
+    "You and Estelle approach the softly lit chateau.{w} It has spires that stretch into the sky, and flags painting deep blue streaks in the air.{w} The stairs stop before a pair of heavy-set double-oak doors."
     play sound knocking_urgent
     "She knocks five times in a meaningful rhythm, and the doors creak open to reveal the unsmiling footmen who drew them open."
     play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
@@ -448,7 +448,7 @@ label ch2_1_first_blood:
             e "Don't mention it, Miss!"
     e "Let’s move on for now. After I take you to your room, you can wash up and get fed, alright?"
     "She rushes you through countless salons and drawing rooms, then into a long gallery."
-    "Carved wax candles line the wall murals.{w} They depict complex battlefields.{w} The candlelight dances in holsters to animate the scenes"
+    "Carved wax candles line the wall murals.{w} They depict complex battlefields.{w} The candlelight dances in holsters to animate the scenes."
     "Deep blue flags wave, dark against the blood-orange skies.{w} Flags with the crest that you recognise as Velmonta’s." 
     "So {a=glossary:Velmonta's Origin}🔻 Velmonta's origins{/a} are just like the other houses' then."
     "As the hallway continues, the murals are gradually replaced by framed portraits of ancestral family heads."
@@ -499,7 +499,7 @@ label ch2_2_wash:
             "Nobody will care that you're overwhelmed. In fact, expressing it would only hurt you."
             "You have to suck it up."
     "You climb out of the bathtub."
-    $ glossary_dict["Myllith Sigil"] = "A sign of the Goddess, used to entice Her Blessings. These can be anything, but are traditionally for loyalty to the Crown, improved social harmony and success in military conquest."
+    $ glossary_dict["Myllith Sigil"] = "A sign of the Goddess, used to entice Her Blessings. Blessings traditionally grant loyalty to the Crown, improved social harmony and success in military conquest."
     "A huge {a=glossary:Myllith Sigil}🔻 Myllith sigil{/a} hangs over the mirror, partly obscuring its surface.{w} You frown, wondering why someone would choose such an impractical placement."
     "You shake the water off and step out.{w} The nightdress is soft – too soft against your worn skin. Nevertheless, you shrug it on."
     "You push the hanging metal aside."
@@ -519,10 +519,12 @@ label ch2_2_wash:
     show estelle normal
     "Estelle greets you with a... professional... sunny expression."
     e "Don't you look a wonder, miss?"
-    mc "I-I… You’re pretty too, Estelle.":
+    mc "I-I… You’re pretty too, Estelle."
     "The words slip out smoothly, despite tasting strange on your tongue."
     e "I'm just a maid, dear. Oh - here; your dinner’s already prepared."
     "She sets a ‘small’ meal before you – a dazzling spectacle of strange meats, salads, and fruits."
+    hide estelle 
+    play sound open_door
     "She closes the door for you to ‘enjoy the meal in private.’"
     "Awe. Disgust. This mixture of emotions grapples with you as you stare at the food."
     "It's more than you and Lin have even laid eyes on this whole winter, let alone come close to eating."
@@ -543,23 +545,24 @@ label ch2_3_alone:
     "Shaking your head, you tear yourself away from the statue, sitting on the bed. You feel as if you're sinking."
     "You frown, looking around the room once more. Where would be a good place for hiding documents?{w} Under the statue?{w} No, would they lift that?"
     "This room is filled with religious imagery.{w} Statues and rosaries.{w} Even that dagger in the drawer beneath the table.{w} Who had this room belonged to before? You run your fingers through the blanket. It's impossibly soft."
-    "Even more than Lin’s embrace."
+    "{size=50}Even more than Lin’s embrace.{/size}"
     $ add_observation({"title": "royalty_ties", "description": "Rosalind Marchetti had ties to Velmonta, close enough to send a gift."})
     "Before the window is a heavy desk. A dip pen and ink lies next to a blank notebook and sparse parchments."
     "You relax into the chair's soft fabric. It has barely any resistance; you sink into it."
     "It's swallowing you whole."
     "Shaking your head, you stare out into the courtyard, leaning on the desk. The flames are everywhere.{w} The sky is slowly growing darker."
     "As Gideon had said, the fire really does stand out in the night.{w} But it can't possibly be practical to maintain.{w} Even your room is lit with candles and burning wax."
-    "You look at the contraption on the side of your desk: a clock. From it comes an ever-present ticking."
+    $ glossary_dict["About Clocks"] = "The only clock you've ever seen is the giant one attached to the Myllith Church's abandoned building."
+    "You look at the contraption on the side of your desk: a {a=glossary:About Clocks}🔻 clock{/a}. From it comes an ever-present ticking."
     "You rest for a while."
     play sound knocking_urgent loop fadein 1.0 fadeout 1.0
     "A harsh knocking sound forces you to your feet." with vpunch
     stop sound fadeout 1.0
-    "You need to hide your documents."
+    "{size=40}You need to hide your documents.{/size}"
     "You quickly bury the documents, taken from Lin's rags, between the mattress and wooden planks."
     play sound open_door
     "Then you open the door."
-    "Nobody's there."
+    "{size=70}Nobody's there.{/size}"
     play sound open_door
     "Your hairs raise. You shut the door and race to draw the curtains down."
     play sound knocking_urgent loop fadein 1.0 fadeout 1.0
@@ -574,6 +577,7 @@ label ch2_4_maid:
     mc "You scared me the first time ‘round! Outside was empty!" 
     "You tilt your head.{w} Why isn't she responding?"
     "She shakes her head vigorously."
+    $ alter_npc("Unknown Maid", "#ff3103", "#f8574c")
     npc "I- I apologise, Miss. It seems I have identified the wrong room."
     $ add_observation({"title" : "says_wrong_room", "description" : "Maid claimed to have the wrong room."})
     "You watch her eyes wandering past you, into your room.{w} As much as you wait, she doesn't seem to plan on leaving.{w} You shift uncomfortably as she continues to linger at the doorway."
