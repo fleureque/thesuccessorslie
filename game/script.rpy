@@ -48,7 +48,7 @@ init python:
                     alert(messages["Condition met"])
                     conclusions[conclusion]["unlocked"] = True
     
-    def alter_npc(name, namecard_color, speech_color):
+    def alter_npc(name, namecard_color="#747474", speech_color="#c8c4c1"):
         global npc
         npc = Character(name, color=namecard_color, what_color=speech_color, ctc="ctc", ctc_position="fixed")
 
@@ -100,7 +100,6 @@ image ctc:
 
 
 #variable initialisation
-$ npc_color = {"label": "#747474", "speech": "#c8c4c1"}
 define l = Character("Lin", color="#8f6464", what_color="#d7cdba", ctc="ctc", ctc_position="fixed", voice_tag = "lin")
 define g = Character("[gideon]", color="#a9522a", what_color="#e18569", ctc="ctc", ctc_position="fixed")
 define narrator = Character(what_italic = True, ctc="ctc", ctc_position="fixed")
@@ -618,7 +617,7 @@ label ch2_5_murder:
     "The valet's face is pale as he responds."
     npc "Someon-"
     "He stares behind you.{w} You turn to see what he's so shocked by."
-    show marianne serious
+    show marianne serious at right
     "Marianne Velmonta, the matriarch.{w} She's the picture of perfection plastered on posters around Scab City."
     "But her mouth is thin and her gait hurried. Rushing over, she calls what appears to be the boy’s name."
     show marianne hesitant
@@ -636,6 +635,7 @@ label ch2_5_murder:
     "She turns back to {a=glossary:Dorian}🔻 Dorian{/a}, giving you no further thought."
     "The sight of death is nothing new. But death in this fashion? In this mansion?" 
     hide marianne
+    hide dorian
     "You glance one last time at Dorian, and hurry into your room. What had the valet been about to tell you?"
     jump ch3_1_stigma
 
@@ -667,3 +667,190 @@ label ch3_1_stigma:
     "She finishes adjusting the dress."
     e "Three total. Young Masters Silvian and Dorian,{w} and Young Lady Florence.{w} Shall we go now?"
     "You commit their names to memory. And you're glad she's willing to answer your questions..."
+    hide estelle
+
+label ch3_2_breakfast:
+    show marianne serious
+    "The Morning Room is bright and well lit, the large white table laid with matching tableware and cloth.{w} At the end of the table sits the matriarch, Marianne, and patriarch, Cassian, whom you recognise from his portrait."
+    show dorian normal at right
+    "Opposite you is Dorian; next to him is Florence.{w} On your side, separating you from the heads is Silvian.{w} The atmosphere in the room is heavy, in contrast to the lithe light from the sprawling chandelier."
+    "Cassian fidgeted slightly, then cleared his throat."
+    c "Your name was [name]. Is that correct?"
+    mc "Y-yes, sir. I mean, Dad. No! Father. I apologise."
+    "He nods tersely before turning to Marianne, whispering something in her ear while frowning.{w} She nods at him slowly after meeting his words with her own." 
+    "Gathering himself, he speaks again." 
+    python:
+        valid_name = False
+        while not valid_name:
+            noble_name = renpy.input("Enter your noble name: (max 20 chars)", length=20, default="Veruna")
+            noble_name = noble_name.strip().title()
+            if not noble_name:
+                noble_name = "Veruna"
+            if not noble_name == name:
+                valid_name = True
+            else:
+                alert("Your new name cannot be the same as your old one. Try again.")
+    c "From now on, it shall be [noble_name].{w} Observe it well: [noble_name] Velmonta’."
+    "You fidget with your collar, then bow your head."
+    "Of course, you need a new, fancier name, don't you?{w} What, to mark your new life?"  
+    "What, is your old one too common?"
+    "Tightening around your fork, your hand betrays a slight tremor. You've barely touched the food before you, and you don't plan to do so anytime soon." 
+    "The patriarch sighs."
+    c "Dear, allow me to introduce you to your new siblings."
+    "He rises, with everyone at the table following suit."
+    "He begins walking –"
+    c "This is Florence,"
+    "– naming each child in turn –"
+    c "Dorian,"
+    "– and announcing the last –"
+    c "And lovely Silvian."
+    "– as he passes him by."
+    "…You already know their names from Estelle's words."
+    "Having completed a full circuit, Cassian sits, satisfied, with everyone mirroring him.{w} Dorian turns to lock gazes with you, an amused glint in his eyes."
+    "You quickly avert your gaze, taken aback.{w} Is murdering people so common here that he can smile like this the day after?"
+    "Had you not seen him take that maid’s life, you wouldn’t have guessed anything amiss."
+    "You bow your head."
+    mc "Nice to… meet you all.{w} I’m –{w} oh, never mind,{w} you already… know."
+    "You laugh, hands fidgeting under the table."
+    "Florence curves her lips up, unenthused."
+    f "It is a pleasure, sister.{w} Fate has ordained our meeting, it seems."
+    "Such flowery language!" 
+    "You beam at her."
+    mc "Yes, our meetin’ is a miracle."
+    $ glossary_dict["Morllith"] = "An accessory used for guided prayer. It is considered outdated but remains a staple for the truly devout. Very rare in Scab City."
+    "Your eyes wander down. Chained to her neck is a {a=glossary:Morllith}🔻 morllith{/a}, with Myllith’s sigil encased within the prayer strands."
+    d "Name’s Dorian. Welcome to Velmonta."
+    "You swallow, then nod."
+    mc "A-ah, hi!"
+    "The blonde boy calmly pushes his book aside."
+    s "Silvian. It’s nice to meet you too, sister [noble_name]."
+    "You glance at his book cover. It's a vivid red.{w} You smile diffidently back."
+    c "Dear, Marianne - have you anything to add?"
+    "Cassian turns to the matriarch, picking at his decorated sleeves."
+    "She waits, thinking. Then she begins to speak evenly."
+    m "Are you aware of the successorship, [noble_name]?"
+    "Florence, diagonal to you, grows pale.{w} Her fingers flit to her sleeved arm, flinching as she moves her fingers over the fabric."
+    "The boy next to you - Silvian - tenses inconspicuously."
+    "Dorian grins, eyes widening. You can hear his leg jerking up and down opposite you."
+    "You clear your throat." 
+    mc "N-no, Ma’am. I mean Miss. I! Mother."
+    "You tilt your head down in defeat, cheeks flushing."
+    "Marianne coughs quietly." 
+    m "No, no, it’s fine. Your father will talk to you later."
+    "You stare into her eyes that betray no hint of remembrance over last night’s occurrences.{w} Are these people crazy?{w} Or - are you?"
+    "Cassian’s eyes widen as he looks at his wife in… betrayal?{w} He reaches for his wine, but spills some onto the tablecloth."
+    c "Ah - forgive me."
+    "At their avoidance, you blink a few times, then turn back to the meal before you."
+    "Dorian’s eyes are still digging deep into your soul.{w} But so are the matriarch’s.{w} She's staring at your hand in what seems to be faint disapproval.{w} You follow her gaze down, tilting your head in confusion."
+    "…You're holding the wrong fork, huh."
+    "The breakfast continues, but nobody seems willing to address last night’s event."
+    "You successors lived on the same floor, do you not? Hazarding a guess - especially due to the proximity of Dorian’s room from yours - everyone was close enough to have heard the disturbance."
+    "Yet nobody moves to address it."
+    jump ch3_3_room
+
+label ch3_3_room:
+    "You sit, looking out towards the crackling fires in the courtyard.{w} Your hands push lightly against the window."
+    "Glass is such a wonderful invention. No wonder it's everywhere."
+    "Everywhere except Scab City."
+    $ glossary_dict["About Thinking"] = "Thinking can help you orient yourself and inform your future decisions. But beware, as too much paranoia isn't healthy!"
+    "You now have some free time.{w} You can choose either to rest or {a=glossary:About Thinking}🔻 analyse{/a} the situation a bit more."
+    menu:
+        "*Think about the situation*":
+            if saw_murder:
+                "Why did Marianne choose to bring you here before such an attack?{w} Did they truly have no knowledge beforehand?{w} Was it premeditated?{w} If so, by whom?{w} Or are you overthinking things?"
+                if asked_estelle:
+                    "Estelle told you that such attacks aren't common. Is that simply consolation? Otherwise, isn't it too on the nose for an attempt to happen immediately after coming here?"
+                "Your plan to make yourself less of a ['target' if choice=='calm' else 'threat'] is succeeding so far."
+                "Clearly the mealtime successfully established you as a ['strong character' if choice=='calm' else 'fool']."
+        "*Rest for a while*":
+            "You choose to rest. After all, being too stressed can't possibly be good."
+    play sound knocking_urgent loop fadein 0.5 fadeout 0.5
+    "A knock rings out. You bring your hand to your chest.{w} Who is it?"
+    "Dragging the chair towards the door, you wonder how you managed to do so last night.{w} It feels much heavier today."
+    stop sound
+    mc "Scab, it's taking a while…"
+    "The jingling of keys sounds outside."
+    $ alter_npc("Unknown Male Voice")
+    npc "I’m coming in, Miss."
+    play sound open_door
+    "Before you move the chair even halfway, the door slowly creaks open. A flash of brown hair precedes a round face."
+    "You blink."
+    mc "Ah - you?"
+    "It's the brunette you asked yesterday about the murder."
+    "His eyes flicker in recognition."
+    t "Oh! Yes. I’m Tess, your valet. It seems we meet again."
+    mc "Ah! I’m - no, you already know. Sorry."
+    "You notice ink stains on his fingertips as you tilt your head down."
+    mc "Is it just you ‘nd Estelle?"
+    "He blinks."
+    t "Yes. You can appeal to your parents if you need more help…"
+    mc "No, no. More’s too many."
+    "You chuckle."
+    mc "Oh - where’s Estelle?"
+    t "She's sorting your clothes."
+    "Smacking his hand against his head, he looks at you apologetically."
+    t "I forgot, I came here to deliver a message.{w} The patriarch would like to meet you in his private study."
+    "He rubs his neck."
+    t "Do you want to go now?"
+    "You look at him, taken aback for a moment."
+    mc "Alright."
+    jump ch3_4_mandate
+    
+
+label ch3_4_mandate:
+    c "Sit, [noble_name]."
+    "Cassian pulls a chair out, watching you closely as you acquiesce."
+    c "I’m required by mandate, you see, to inform you about the successorship."
+    mc "A-ah, yes, Father."
+    "You stammer, watching as he sits himself down in front of you."
+    "The study smells of ash – there are no windows, and the only source of light comes from holstered candles pinned to the walls.{w} It's an oddly threatening room."
+    c "You are eligible to be selected as Velmonta’s successor." 
+    "He stares into your eyes."
+    "Is this it? Is this why everyone had such averse reactions to its mention then?"
+    "You jerk your head up, bringing your hand to your chest."
+    mc "I couldn’t dream o-"
+    c "Perhaps there will come a time when you wish to vie for the position. And you will have the opportunity, [noble_name]."
+    "You gape, then check yourself and nod quietly."
+    c "Good."
+    "He smiles."
+    menu:
+        "*Confront him about the murder*":
+            jump ch3_5a_confront
+
+label ch3_5a_confront:
+    mc "One more thing, Father. If… if you would."
+    "He pauses." 
+    c "Yes, [noble_name]?"
+    mc "Dorian yesterday. What happened? With the…"
+    c "Ah." 
+    "His smile falls."
+    c "We are trying to find the house that sent the attacker."
+    "He looks to his right."
+    c "Though it is hard, since the assassin is now deceased."
+    mc "Anything happ’ning next?"
+    c "Next? We shall file paperwork and identify, if possible, where the woman’s allegiances lay."
+    mc "You can take lives?? Just like that? All you gotta do is paperwork?":
+    "You swallow.{w} Blinking, he tilts his head."
+    c "Sorry?"
+    mc "Why’d they try to kill Dorian yesterday?"
+    c "[noble_name]."
+    mc "“Am I in danger too? Tell me! I can’t…"
+    "A sob slips from your lips."
+    "He pats your shoulder, staring you in the eyes calmly."
+    c "It doesn’t happen often.{w} You’ll learn how to deal with these situations as you spend more time here."
+    $ add_observation({"title" : "murder_rare", "description" : "Cassian claimed that murders are rare and that you'll adapt."})
+    "Learn to deal with these situations?{w} How?{w} You stare at the ground unmoving.{w} He closes his eyes."
+    c "[noble_name]."
+    mc "DON'T CALL ME THAT!"
+    "His eyes widen."
+    "You freeze, then grit your teeth."
+    mc "Sorry. I’m bein’ unreasonable."
+    jump ch3_6_lunch
+
+label ch3_6_lunch
+    c "Let us head to luncheon."
+    "Cassian slowly rises."
+    "He looks away from you; is he mad?{w} Disappointed?{w} Understanding?"
+    "You follow him out quietly, glancing to Tess who joins you at your side." 
+    "He's glancing back at you, worried, measuring how you're handling the revelation."
+    "You train your eyes on Cassian’s figure.{w} Eventually they wander back to the valet’s darkened fingertips."
