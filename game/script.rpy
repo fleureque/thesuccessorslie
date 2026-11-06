@@ -1059,3 +1059,33 @@ label ch4_3_dinner:
     mc "T-thank you, again."
     "Florence’s eyes are upon you once more.{w} You watch her too, from the periphery of your vision. She twists back in her chair to whisper something to the ash-haired maid behind her.{w} After the maid’s response, Florence’s gaze moves up, landing on Tess behind you."
     "You maintain the subtle shake in your hands until the rest of the family - aside from Dorian - loses interest in your fragility."
+    jump ch4_4_night
+
+label ch4_4_night:
+    $ part = "4"
+    "Night. It's your second night without Lin by your side. Your second night without biting cold numbing your fingers.{w} The blankets warm you. Your room itself is a bastion of warmth. "
+    "What are you to do now? There are clear answers: prepare before they learn of your existence, learn to fend assailants off, gather information on this house. But something still doesn't sit right with you."
+    "Who do people report to in this household? Estelle, Gideon, Tess; even the patriarch and matriarch. They each have their own motives for acting. You can sense it. The most immediate reasoning that you need to challenge is Gideon’s."
+    "Why had he lied to you?"
+    "Either he had lied about Rydell being unaware of your existence, or he had lied about the changes in legislation."
+    "And now, his motive for creating this juxtaposition."
+    "Them being unaware - is it to console you on your way back? No, that's too optimistic.{w} Still, he had created a false sense of security around you. Tess had said the same thing. Is he lying to you too?{w} But Tess had implicitly confirmed that you would be murdered if they knew about you. Similar to Gideon’s narrative."
+    "You stare up at the ceiling, clutching your duvet to your chest."
+    "Were Tess and Gideon aligned under the same motive to lie to you? Whatever it is, it doesn't seem like they're telling you the truth. It's certainly possible; you need to watch out for that.{w} If so, though, why? To create a sense of incoming danger? Convince you, using your witness to the maid’s death, that you're under threat too?"
+    "What a clever plan, to use such reasoning: ‘you’re under danger. Don’t look in the right direction, stay paranoid. The only reason you’re not being attacked right now, the one thing we cannot influence, is because they don’t know you exist.’"
+    "That would make sense, but then what would the greater danger be? Or do they have another motive? An overreach. The worst possible scenario you can think of. But it'll kill you if you ignore it too much."
+    "There are other possibilities too. Lying about the Marchetti to his face would be the riskier option of the two lies."
+    "Come to think of it, why did he believe that you wouldn't not catch him out in his lie? Because you know no-one here to ask? Your insides boil hot in anger; you fan yourself down."
+    "If he had lied about their reason to murder you, that would be more interesting than anything." 
+    "Or was his lie even more primal? What if he spun a lie about why the maid had died, based on what he knows you know?{w} If he and Tess were collaborating, then the valet would’ve overheard Cassian painting the maid’s death as an intended assassination. But what if it wasn’t, and Cassian was only presenting it in a different light to hide something? You can't trust noble houses to be truthful, after all."
+    "A sharp jolt of pain in your head. You bite the inside of your mouth."
+    "There are endless more possibilities you can consider right now. So many that it's almost useless to ponder over each one.{w} You need more information to guide you in the right direction.{w} But there's nobody to ask, and nobody you're confident would give the truth or even related gossip that you could ‘conveniently’ overhear."
+    "Your stomach drops as the next thought comes.{w} What if you're not safe after all?{w} That maid had access to at least one room. Who's stopping anyone from coming in tonight? You have the dagger by your bedside, but it doesn't guarantee safety. Not in any way."
+    "You've watched too many people die from knife fights. Too many to believe you'll get out of one easily alive, let alone unscathed."
+    "But you have to survive somehow."
+    "For Lin, your dear sister."
+
+label ch5_1_fools_parade:
+    $ chapter = "5: A Fool's Parade"
+    $ part = "1"
+    
