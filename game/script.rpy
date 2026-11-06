@@ -121,6 +121,7 @@ define f = Character("Florence", color="#91ebff", what_color="#b4f1f9", ctc="ctc
 define c = Character("Cassian", color="#fafc91", what_color="#f7fed0", ctc="ctc", ctc_position="fixed")
 define s = Character("Silvian", color="#f5f1f1", what_color="#d4d6d1", ctc="ctc", ctc_position="fixed")
 define t = Character("Tess", color="#c5a056", what_color="#b9b28c", ctc="ctc", ctc_position="fixed")
+define r = Character("Rosette", color="#ce4070", what_color="#e193c0", ctc="ctc", ctc_position="fixed")
 define npc = Character("[npc]", ctc="ctc", ctc_position="fixed")
 default chapter = "1: Fading Light"
 define gui.text_font = "fonts/garamond.ttf"
@@ -141,6 +142,7 @@ label temp_end_message:
 '''label main_menu:
     show scene "gui/main_menu.png"
     return'''
+
 
 label start:
     
@@ -236,6 +238,7 @@ label ch1_1_shed:
     "...How much time do you have left to clean the shed?"
     jump ch1_2_gideon
 
+
 label ch1_2_gideon:
     $ part = "2"
     "The shed's now cleaner than it has ever been before, thanks to your handiwork.{w} It protected you and Lin to the very end - both from the cold and strange hagglers."
@@ -304,6 +307,7 @@ label ch1_2_gideon:
     g "Not to the orphanage."
     jump ch1_3_carriage_ride
 
+
 label ch1_3_carriage_ride:
     $ part = "3"
     show inside_carriage with dissolve
@@ -366,6 +370,7 @@ label ch1_3_carriage_ride:
                     jump ch1_4_arrival
         "Anything I need to know before we get there?":
             jump ch1_4_arrival
+
 
 label ch1_4_arrival:
     $ part = "4"
@@ -447,6 +452,7 @@ label ch1_4_arrival:
     "The floor is lined with marble, so polished that the light cascading from the chandelier reflects back in dazzling shades.{w} The foyer stretches out endlessly before you, spectacular and impossible. Your heart beats faster.{w} Velmonta is beautiful." 
     "Beautiful, but devoid of life."
 
+
 label ch2_1_first_blood:
     $ part = "1"
     $ chapter = "2: First Blood"
@@ -500,6 +506,7 @@ label ch2_1_first_blood:
     "And finally, you're alone with the flowery fragrance of bathwater."
     jump ch2_2_wash
 
+
 label ch2_2_wash:
     $ part = "2"
     "An unpleasant tingling instantly attacks you as you dip your feet into the swirling liquid.{w} You hiss.{w} It isn't unreasonably warm, but blood rushes into your limbs, bringing with it an intense itching."
@@ -549,6 +556,7 @@ label ch2_2_wash:
     "It's more than you and Lin have even laid eyes on this whole winter, let alone come close to eating."
     jump ch2_3_alone
 
+
 label ch2_3_alone:
     $ part = "3"
     "Sighing, you lean back in your seat and have a few bites.{w} The butters and fats melt away on your tongue, leaving behind a sweet aftertaste.{w} Having never eaten for pure pleasure before, you now understood why so many people fall prey to gluttony."
@@ -593,6 +601,7 @@ label ch2_3_alone:
     "A woman dressed in clothes identical to Estelle’s garb stands outside. A maid, then."
     jump ch2_4_maid
 
+
 label ch2_4_maid:
     $ part = "4"
     "You move the chair aside and open the door." 
@@ -615,6 +624,7 @@ label ch2_4_maid:
     $ add_observation({"title": "maid_has_keys", "description": "The maid had keys to the room she was planning on entering."})
     "Why’d she knocked instead of just unlocking your door then? After all, she has the keys to the room that she wanted to access."
     jump ch2_5_murder
+
 
 label ch2_5_murder:
     $ part = "5"
@@ -662,6 +672,7 @@ label ch2_5_murder:
     "You glance one last time at Dorian, and hurry into your room. What had the valet been about to tell you?"
     jump ch3_1_stigma
 
+
 label ch3_1_stigma:
     play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
     $ part = "1"
@@ -693,6 +704,7 @@ label ch3_1_stigma:
     e "Three total. Young Masters Silvian and Dorian,{w} and Young Lady Florence.{w} Shall we go now?"
     "You commit their names to memory. And you're glad she's willing to answer your questions..."
     hide estelle
+
 
 label ch3_2_breakfast:
     $ part = "2"
@@ -879,6 +891,7 @@ label ch3_5a_confront:
     mc "Sorry. I’m bein’ unreasonable."
     jump ch3_6_lunch
 
+
 label ch3_6_lunch:
     $ part = "6"
     c "Let us head to luncheon."
@@ -900,6 +913,7 @@ label ch4_1_mutual_benefit:
     menu:
         "*Ask Tess about the murder*":
             jump ch4_1a_confront
+
 
 label ch4_1a_confront:
     mc "You were there. You saw it."
@@ -949,6 +963,7 @@ label ch4_1a_confront:
     "Despite being aware that this is a corridor, the absence of sunlight makes you uneasy.{w} You wrinkle your nose as you walk by Dorian’s room.{w} There isn't a single remnant of blood. It looks and smells of artificial cleanliness."
     "Your neck tingles. Hand on pocket, you make it through the passage, down the stairs, rushing until the courtyard.{w} You stop to breathe, nose burning in the strange mixture of fresh air and crackling fire."
     jump ch4_2_gideon
+
 
 label ch4_2_gideon:
     $ part = "2"
@@ -1012,6 +1027,7 @@ label ch4_2_gideon:
     "Your spine crawls as you leave the barracks."
     jump temp_end_message
 
+
 label ch4_3_dinner:
     $ part = "3"
     "Velmonta is no longer as empty as it was when you first arrived.{w} You now see maids and servants walking around with pails of water and mops in hand. A woman with a different livery hauling firewood.{w} But still, no nobility from other houses. Everyone here is from the main line."
@@ -1061,6 +1077,7 @@ label ch4_3_dinner:
     "You maintain the subtle shake in your hands until the rest of the family - aside from Dorian - loses interest in your fragility."
     jump ch4_4_night
 
+
 label ch4_4_night:
     $ part = "4"
     "Night. It's your second night without Lin by your side. Your second night without biting cold numbing your fingers.{w} The blankets warm you. Your room itself is a bastion of warmth. "
@@ -1085,7 +1102,34 @@ label ch4_4_night:
     "But you have to survive somehow."
     "For Lin, your dear sister."
 
+
 label ch5_1_fools_parade:
     $ chapter = "5: A Fool's Parade"
     $ part = "1"
-    
+    "After waking, you committed to breaking out of my paralysis. You're going to get information, and you'll start with the one place that can't avoid you for certain.{w} Even if it lies to you, it lies to everyone equally."
+    $ glossary_dict["About Wealth"] = "No wonder the rich only get richer. They have so, so many more resources than you from the very beginning."
+    "The {a=glossary:About Wealth}🔻 library{/a} is huge and daunting. Closing the door behind you quietly, you walk around, simply taking in the sight of such boundless knowledge."
+    "You begin looking around for books. But not long into the expedition, a woman approaches from behind." 
+    "You great her, stammering, as your heartbeat slowly settles down once more."
+    $ alter_npc("Librarian", "#ce4070", "#e193c0")
+    npc "Are you searching for something?{w} Oh – Miss [noble_name]! How can I help you? What topic would you like to learn about?"
+    "You swallow, taking a step back as she barrages you with questions." 
+    npc "Empire’s history."
+    "She thinks for a few seconds, then begins walking." 
+    r "Is there any particular author you’re trying to find, miss?"
+    npc "Well, I don’t know an-{w} I mean, I’d just like somethin’ related to noble houses."
+    "She purses her lips. Why?"
+    npc "Is there a date you’d like it from?"
+    "You reply, voice hoarse."
+    mc "Recent years?"
+    "She whispers numbers under her breath, then registers something.{w} Her eyes widen, and she hesitates before regaining her smile."
+    npc "Oh, uh – Young Miss, I’ll… find some specific books, just to get you started."
+    mc "Amazin’. Thank you."
+    npc "Pleasure." 
+    "She rubs her nose, then sets the completed pile before you."
+    npc "Study’s over there, Miss [noble_name]. And you’re welcome to take the books back to your room."
+    "Thanks again.{w} And how’m I meant to address you?"
+    r "Rosette, Miss."
+    "You glance down at the pile. You want to ask her why she hadn’t reached for any books on the previous century.{w} But you have another goal. Well, there was nothing to do other than swallow my pride."
+    "A short bow in acknowledgement. The bell struck. I was late for lunch."
+
