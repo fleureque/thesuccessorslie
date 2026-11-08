@@ -991,7 +991,8 @@ label ch4_1_mutual_benefit:
     menu:
         "*Ask Tess about the murder*":
             jump ch4_1a_confront
-
+        "*Avoid mentioning the murder*":
+            jump ch4_1b_silence
 
 label ch4_1a_confront:
     mc "You were there. You saw it."
@@ -1048,7 +1049,26 @@ label ch4_1a_confront:
     jump ch4_2_gideon
 
 
-label ch4_2_gideon:
+label ch4_1b_silence:
+    "You avoid looking at Tess."
+    "After all, doing so simply brings back memories of... well, that."
+    "The courtyard fires are still crackling on and on at this time of day."
+    "Fire. Fire and warmth. They feel stifling here."
+    "It's slightly awkward with you and Tess not speaking."
+    mc "Um. Is Estelle... going to come back?"
+    t "Yes, Miss. Why? Is my service unsatisfactory?"
+    mc "Oh! No, I didn't mean that at all. I was just curious."
+    "Another awkward silence."
+    "Tess quickly excuses himself and leaves. You're all alone."
+    "You stare up at the ceiling, tired."
+    "May as well have a little nap."
+    "Before long, you wake up again."
+    "What time is it? You turn to the clock."
+    "Ten minutes until dinner. May as well set out."
+    jump ch4_3_dinner
+
+
+label ch4_2a_gideon:
     $ bearings = "The Barracks."
     $ time = "Day 4. Late afternoon."
     $ part = "2"
@@ -1110,10 +1130,6 @@ label ch4_2_gideon:
     mc "Alright."
     hide gideon with dissolve
     "Your spine crawls as you leave the barracks."
-    jump temp_end_message
-
-
-label ch4_3_dinner:
     $ time = "Day 4. Early evening."
     $ bearings = "Gallery."
     $ part = "3"
@@ -1127,6 +1143,10 @@ label ch4_3_dinner:
     "Most of the staff threw you some glances; aside from that, you don't attract attention as you walk through the salons to the gallery."
     $ glossary_dict["Myllith's Salute"] = "A curved salute resembling the moon. It is thought to both demonstrate loyalty to the Crown (scumlord) and bring Her Blessings upon the recipient."
     "You can't help but pause as you pass the tired man’s portrait again in the gallery. Weary dedication and effortless piety still radiate from his kind face.{w} You perform {a=glossary:Myllith's Salute}🔻 the curved salute{/a} in acknowledgement of his faith."
+    jump ch4_3_dinner
+
+
+label ch4_3_dinner:
     $ bearings = "Dining Hall."
     "Entering the dining hall, you glance around. A valet and a maid for each successor;{w} two lady’s maids for Marianne; two valets for Cassian at the head of the table;{w} a butler and kitchen staff scattered through the room, setting the table."
     show estelle normal
@@ -1141,13 +1161,18 @@ label ch4_3_dinner:
     "Marianne clears her throat." 
     m "You may eat now."
     hide marianne
-    "You make sure to use the right cutlery this time. But as you look at your food, another image appears in your mind.{w} Gideon’s face. You dig your fork hard into the veal."
-    $ glossary_dict["The Gathering"] = "The esteemed event where side families have the chance to send their children to the main line."
-    "Estelle had told you earlier that only side families can visit the main estate before {a=glossary:The Gathering}🔻 the Gathering{/a}.{w} Meanwhile, Gideon claims that nobody outside of Velmonta knows your existence yet."
-    "There's no way Rydell wouldn’t receive word of an offshoot’s visit, bordering Velmonta - and no such family had visited, the estate being empty upon your arrival.{w} So they knew where the carriage was from." 
-    "But they saw you, a dirty orphan with no business in a noble house, through the carriage windows.{w} Even went the extra mile to halt you as you tried to pass through. Rydell certainly knows of my existence."
-    "And Rydell's the most hostile side family of all, no? Yet not a stir."
-    "Your cheeks burn. Had Gideon really believed that your wouldn’t see past his nonsense?{w} No, it's too soon to let your pride get the better of you. You have to clear your mind."
+    "You make sure to use the right cutlery this time." 
+    if conclusions["the_truth"]["unlocked"]:
+        "But as you look at your food, another image appears in your mind.{w} Gideon’s face. You dig your fork hard into the veal."
+        $ glossary_dict["The Gathering"] = "The esteemed event where side families have the chance to send their children to the main line."
+        "Estelle had told you earlier that only side families can visit the main estate before {a=glossary:The Gathering}🔻 the Gathering{/a}.{w} Meanwhile, Gideon claims that nobody outside of Velmonta knows your existence yet."
+        "There's no way Rydell wouldn’t receive word of an offshoot’s visit, bordering Velmonta - and no such family had visited, the estate being empty upon your arrival.{w} So they knew where the carriage was from." 
+        "But they saw you, a dirty orphan with no business in a noble house, through the carriage windows.{w} Even went the extra mile to halt you as you tried to pass through. Rydell certainly knows of my existence."
+        "And Rydell's the most hostile side family of all, no? Yet not a stir."
+        "Your cheeks burn. Had Gideon really believed that your wouldn’t see past his nonsense?{w} No, it's too soon to let your pride get the better of you. You have to clear your mind."
+    else:
+        "You feel awkward and mechanical."
+        "You're still not used to all this..."
     "As you chew the tough meat, you meet Dorian’s stare head-on.{w} Are you amusing to him? Is he trying to provoke you?{w} You can't see past the wide grin on his face. It's like an ironically expressive mask."
     "You smile back at him, tilting your head to the side, eyes blank and stupid.{w} There; the perfect fool."
     "Cassian’s voice rings out." 
@@ -1172,7 +1197,17 @@ label ch4_4_night:
     $ part = "4"
     "Night. It's your second night without Lin by your side. Your second night without biting cold numbing your fingers.{w} The blankets warm you. Your room itself is a bastion of warmth. "
     "What are you to do now? There are clear answers: prepare before they learn of your existence, learn to fend assailants off, gather information on this house. But something still doesn't sit right with you."
-    "Who do people report to in this household? Estelle, Gideon, Tess; even the patriarch and matriarch. They each have their own motives for acting. You can sense it. The most immediate reasoning that you need to challenge is Gideon’s."
+    "Who do people report to in this household? Estelle, Gideon, Tess; even the patriarch and matriarch. They each have their own motives for acting. You can sense it." 
+    if conclusions["the_truth"]["unlocked"]:
+        jump ch4_4a_think
+    else:
+        "You easily drift off to sleep. Something about doesn't feel right, but you can't place what it is."
+        "Maybe you should have asked Tess earlier about it."
+        "No, it was better that you didn't. You don't know who he reports back to."
+    jump ch5_1_fools_parade
+
+label ch4_4a_think:
+    "The most immediate reasoning that you need to challenge is Gideon’s."
     "Why had he lied to you?"
     "Either he had lied about Rydell being unaware of your existence, or he had lied about the changes in legislation."
     "And now, his motive for creating this juxtaposition."
@@ -1191,6 +1226,7 @@ label ch4_4_night:
     "You've watched too many people die from knife fights. Too many to believe you'll get out of one easily alive, let alone unscathed."
     "But you have to survive somehow."
     "For Lin, your dear sister."
+    jump ch5_1_fools_parade
 
 
 label ch5_1_fools_parade:
