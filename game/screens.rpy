@@ -1295,7 +1295,7 @@ screen notify(message):
 transform notify_appear:
     on show:
         alpha 0
-        linear .25 alpha 1.0
+        linear .50 alpha 1.0
     on hide:
         linear .5 alpha 0.0
 
@@ -1304,7 +1304,8 @@ style notify_frame is empty
 style notify_text is gui_text
 
 style notify_frame:
-    ypos gui.notify_ypos
+    ypos gui.notify_ypos - 10
+    xalign 0.93
 
     background Frame("gui/notify.png", gui.notify_frame_borders, tile=gui.frame_tile)
     padding gui.notify_frame_borders.padding

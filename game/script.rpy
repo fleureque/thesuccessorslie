@@ -129,7 +129,7 @@ define e = Character("Estelle", color="#7dd94f", what_color="#d7ffcc", ctc="ctc"
 define m = Character("Marianne", color="#c32131", what_color="#ea969e", ctc="ctc", ctc_position="fixed")
 define d = Character("Dorian", color="#d07ecf", what_color="#d7afdc", ctc="ctc", ctc_position="fixed")
 define f = Character("Florence", color="#91ebff", what_color="#b4f1f9", ctc="ctc", ctc_position="fixed")
-define c = Character("Cassian", color="#fafc91", what_color="#f7fed0", ctc="ctc", ctc_position="fixed")
+define c = Character("Cassian", color="#5e77a4", what_color="#d0eafe", ctc="ctc", ctc_position="fixed")
 define s = Character("Silvian", color="#f5f1f1", what_color="#d4d6d1", ctc="ctc", ctc_position="fixed")
 define t = Character("Tess", color="#c5a056", what_color="#b9b28c", ctc="ctc", ctc_position="fixed")
 define r = Character("Rosette", color="#ce4070", what_color="#e193c0", ctc="ctc", ctc_position="fixed")
@@ -172,6 +172,7 @@ label start:
 
 
 label ch1_1_shed:
+    $ renpy.notify("hey")
     $ time = "Day 1, Afternoon."
     $ bearings = "Scab City. Your shed."
     $ part = "1"
@@ -233,7 +234,7 @@ label ch1_1_shed:
         "Why's the plague flaring up again??":
             pass
     "And then a sudden rush of stillness."
-    play music last_moments loop fadein 1.0
+    play music lone_house loop fadein 1.0
     "Looking up aimlessly, you sense it."
     hide lin with dissolve
     "She's gone, isn't she?"
@@ -456,7 +457,7 @@ label ch1_4_arrival:
     show gideon normal at left
     show estelle normal at right
     "The gate to the inner wall opens. A woman runs through, holding a pair of slippers."
-    e "Hello, Miss Runa. I’m Estelle. It’s great to meet you."
+    e "Hello, Miss [name]. I’m Estelle. It’s great to meet you."
     "Bending down, she slips the footwear onto your feet. It's strangely sleek against your filthy skin, but not an unwelcome sensation."
     menu:
         "Bye, Gideon!":
@@ -468,7 +469,7 @@ label ch1_4_arrival:
     "You and Estelle approach the softly lit chateau.{w} It has spires that stretch into the sky, and flags painting deep blue streaks in the air.{w} The stairs stop before a pair of heavy-set double-oak doors."
     play sound knocking_urgent
     "She knocks five times in a meaningful rhythm, and the doors creak open to reveal the unsmiling footmen who drew them open."
-    play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
+    play music [shimmering_wind, flaming_decadence, twelfth_yearning] loop fadein 1.0 fadeout 1.0
     "The floor is lined with marble, so polished that the light cascading from the chandelier reflects back in dazzling shades.{w} The foyer stretches out endlessly before you, spectacular and impossible. Your heart beats faster.{w} Velmonta is beautiful." 
     "Beautiful, but devoid of life."
 
@@ -669,9 +670,11 @@ label ch2_5_murder:
     "You step out tentatively and walk towards the clamour, fingers unconsciously tracing your neck."
     mc "What… happened here?"
     $ alter_npc("Brunette Valet", "#c5a056", "#b9b28c")
+    show tess worried
     "The valet's face is pale as he responds."
     npc "Someon-"
     "He stares behind you.{w} You turn to see what he's so shocked by."
+    hide tess
     show marianne serious at right
     "Marianne Velmonta, the matriarch.{w} She's the picture of perfection plastered on posters around Scab City."
     "But her mouth is thin and her gait hurried. Rushing over, she calls what appears to be the boy’s name."
@@ -698,7 +701,7 @@ label ch2_5_murder:
 label ch3_1_stigma:
     $ time = "Day 3. Early morning."
     $ bearings = "Velmonta's Main Estate. Your quarters."
-    play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
+    play music [shimmering_wind, flaming_decadence, twelfth_yearning] loop fadein 1.0 fadeout 1.0
     $ part = "1"
     $ chapter = "3: Stigma"
     "You'd eventually drifted to sleep despite your worries.{w} Estelle now awakens you.{w} Outside is not yet bright, but it seems that nobles had a different routine, waking up unnaturally early."
@@ -712,7 +715,7 @@ label ch3_1_stigma:
     mc "But why?"
     "You swallow and sheepishly stare at the floor after receiving a sharp look from her." 
     "She sighs."
-    e "I’m sorry, Miss Runa. It’s just… I’m not entirely sure yet."
+    e "I’m sorry, Miss [name]. It’s just… I’m not entirely sure yet."
     "Rubbing your eyes, you watch as she turns to the closet to pick out clothes."
     e "These might not fit you yet, but they won’t be small; we got large ones just in case.{w} You’ll be fitted sometime."
     "She shoots you a cheery grin."
@@ -734,11 +737,19 @@ label ch3_2_breakfast:
     $ time = "Day 3. Morning."
     $ bearings = "Velmonta's Main Estate. The Morning Room."
     $ part = "2"
-    show marianne serious
-    show cassian normal
+    show marianne serious at right
+    show cassian normal at left
     "The Morning Room is bright and well lit, the large white table laid with matching tableware and cloth.{w} At the end of the table sits the matriarch, Marianne, and patriarch, Cassian, whom you recognise from his portrait."
-    show dorian normal at right
+    hide cassian
+    hide marianne
+    show dorian normal
+    show florence normal at right
+    show silvian normal at left
     "Opposite you is Dorian; next to him is Florence.{w} On your side, separating you from the heads is Silvian.{w} The atmosphere in the room is heavy, in contrast to the lithe light from the sprawling chandelier."
+    hide dorian
+    hide florence
+    hide silvian
+    show cassian normal
     "Cassian fidgets slightly, then clears his throat."
     c "Your name was [name]. Is that correct?"
     mc "Y-yes, sir. I mean, Dad. No! Father. I apologise."
@@ -773,6 +784,7 @@ label ch3_2_breakfast:
     show dorian normal
     c "Dorian,"
     "– and announcing the last –"
+    show silvian normal at right
     c "And lovely Silvian."
     "– as he passes him by."
     "…You already know their names from Estelle's words."
@@ -782,6 +794,8 @@ label ch3_2_breakfast:
     "You bow your head."
     mc "Nice to… meet you all.{w} I’m –{w} oh, never mind,{w} you already… know."
     "You laugh, hands fidgeting under the table."
+    hide dorian
+    hide silvian
     "Florence curves her lips up, unenthused."
     f "It is a pleasure, sister.{w} Fate has ordained our meeting, it seems."
     "Such flowery language!" 
@@ -789,27 +803,42 @@ label ch3_2_breakfast:
     mc "Yes, our meetin’ is a miracle."
     $ glossary_dict["Morllith"] = "An accessory used for guided prayer. It is considered outdated but remains a staple for the truly devout. Very rare in Scab City."
     "Your eyes wander down. Chained to her neck is a {a=glossary:Morllith}🔻 morllith{/a}, with Myllith’s sigil encased within the prayer strands."
+    show dorian normal
+    hide florence
     d "Name’s Dorian. Welcome to Velmonta."
     "You swallow, then nod."
     mc "A-ah, hi!"
-    "The blonde boy calmly pushes his book aside."
+    show silvian normal at right
+    hide dorian
+    "The silver-blonde boy calmly pushes his book aside."
     s "Silvian. It’s nice to meet you too, sister [noble_name]."
     "You glance at his book cover. It's a vivid red.{w} You smile diffidently back."
+    hide silvian
+    show cassian normal at right
     c "Dear, Marianne - have you anything to add?"
     "Cassian turns to the matriarch, picking at his decorated sleeves."
-    show marianne hesitant
+    show marianne hesitant at left
     "She waits, thinking. Then she begins to speak evenly."
+    hide cassian
     m "Are you aware of the successorship, [noble_name]?"
+    hide marianne
+    show florence normal at right
     "Florence, diagonal to you, grows pale.{w} Her fingers flit to her sleeved arm, flinching as she moves her fingers over the fabric." with vpunch
+    show silvian normal
     "The boy next to you - Silvian - tenses inconspicuously."
+    show dorian normal at left
     "Dorian grins, eyes widening. You can hear his leg jerking up and down opposite you."
     "You clear your throat." 
     mc "N-no, Ma’am. I mean Miss. I! Mother."
     "You tilt your head down in defeat, cheeks flushing."
+    hide silvian
+    show marianne hesitant
     "Marianne coughs quietly." 
     m "No, no, it’s fine. Your father will talk to you later."
     show marianne serious
     "You stare into her eyes that betray no hint of remembrance over last night’s occurrences.{w} Are these people crazy?{w} Or - are you?"
+    hide dorian
+    show cassian normal at left
     "Cassian’s eyes widen as he looks at his wife in… betrayal?{w} He reaches for his wine, but spills some onto the tablecloth."
     c "Ah - forgive me."
     "At their avoidance, you blink a few times, then turn back to the meal before you."
@@ -818,6 +847,9 @@ label ch3_2_breakfast:
     "The breakfast continues, but nobody seems willing to address last night’s event."
     "You successors live on the same floor, do you not? Hazarding a guess - especially due to the proximity of Dorian’s room from yours - everyone was close enough to have heard the disturbance."
     "Yet nobody moves to address it."
+    hide marianne hesitant
+    hide cassian
+    hide florence
     jump ch3_3_room
 
 
@@ -850,6 +882,7 @@ label ch3_3_room:
     npc "I’m coming in, Miss."
     play sound open_door
     "Before you move the chair even halfway, the door slowly creaks open. A flash of brown hair precedes a round face."
+    show tess normal
     "You blink."
     mc "Ah - you?"
     "It's the brunette you asked yesterday about the murder."
@@ -870,6 +903,7 @@ label ch3_3_room:
     t "Do you want to go now?"
     "You look at him, taken aback for a moment."
     mc "Alright."
+    hide tess
     jump ch3_4_mandate
     
 
@@ -877,6 +911,7 @@ label ch3_4_mandate:
     $ bearings = "Cassian's Study."
     $ time = "Day 3. Late morning."
     $ part = "4"
+    show cassian normal
     c "Sit, [noble_name]."
     "Cassian pulls a chair out, watching you closely as you acquiesce."
     c "I’m required by mandate, you see, to inform you about the successorship."
@@ -934,9 +969,12 @@ label ch3_6_lunch:
     c "Let us head to luncheon."
     "Cassian slowly rises."
     "He looks away from you; is he mad?{w} Disappointed?{w} Understanding?"
+    show tess worried at right
     "You follow him out quietly, glancing to Tess who joins you at your side." 
     "He's glancing back at you, worried, measuring how you're handling the revelation."
     "You train your eyes on Cassian’s figure.{w} Eventually they wander back to the valet’s darkened fingertips."
+    hide tess
+    hide cassian
 
 
 label ch4_1_mutual_benefit:
@@ -944,6 +982,7 @@ label ch4_1_mutual_benefit:
     $ bearings = "Your quarters."
     $ part = "1"
     $ chapter = "4: For Mutual Benefit"
+    show tess normal
     "You haven't been able to get the thought of the dead maid out of your mind."
     "And certainly haven't been able to forget how close of a shave you had with death."
     "On your first day, at that."
@@ -967,6 +1006,7 @@ label ch4_1a_confront:
     t "In danger…" 
     "He rubs his neck with an innocent expression.{w} You reach for the teacup, but it's searing hot.{w} Your hand jerks away. He doesn't seem to notice.{w} You thank Myllith for saving you from embarrassment."
     "Finally, he notices your stare." 
+    show tess worried
     t "I’m not really in a place to say, Miss."
     mc "I’m serious, Tess." 
     "You wave your hand over the cup, judging its temperature.{w} Still too hot."
@@ -976,6 +1016,7 @@ label ch4_1a_confront:
     mc "But that maid still got here."
     t "Not only movements." 
     "He picks the teapot up again." 
+    show tess normal
     t "Information is monitored as well.{w} Nobody outside of here should know about you yet.{w} And certainly not enough to pinpoint you as a target."
     t "Do you know just how rare such an attack is?{w} It takes a miracle for someone to even get that close to a successor.{w} Suffice to say, you're safe."
     "So the attacks come from outside; that makes sense."
@@ -984,9 +1025,11 @@ label ch4_1a_confront:
     "He blinks."
     t "Miss Florence spends her time in the Summertide Chapel.{w} Master Silvian either reads or studies.{w} Master Dorian does… things."
     mc "That’s too lax of them." with vpunch
+    show tess worried
     t "I don’t quite understand, Miss."
     "You stare at him.{w} His expression remains dumb."
     mc "Alright then, Tess. You can go now." 
+    hide tess
     "You wave your hand. He bows and leaves. You turn to the ticking clock. How long will it be until the next attack?"
     $ glossary_dict["Myllith Dagger"] = "A ceremonial dagger. It is not frowned upon to use it outside of prayer. After all, Myllith thrives on bloodshed."
     "The {a=glossary:Myllith Dagger}🔻 Myllith dagger{/a} in the drawer. From when you were exploring your room."
@@ -1188,15 +1231,18 @@ label ch5_2_challenge:
     $ bearings = "Lunch Hall."
     "The light slants through the tall windows, casting brightness all around the hall. You stab at your poached egg, watching the yolk bleed across the plate.{w} Your head is ringing again, like it's been for the past few days.{w} You try to hide it."
     $ glossary_dict["Her Stare"] = "People do that when they're about to attack, no?"
+    show florence normal
     "Florence is still staring at you. Her gaze is hungry. You stare her dead in the eye.{w} For a moment, her {a=glossary:Her Stare}🔻 eyes widen{/a}. You pause your fork in the air."
     "Setting her cutlery down with a deliberate clink, she dabs at her mouth with a handkerchief, then sets her hands down in reluctant virtue." 
     f "Father. Mother."
     "She tilts her head in concerned grace."
     f "I feel that I have a duty to report something that has… lately been… troubling my conscience."
+    show marianne serious at right
     "Marianne looks up from her newspaper.{w} Cassian's hand tightens around his cufflinks."
     m "And what matter would that be?"
     "Florence’s eyes dart to you, then look away."
     f "It concerns my dear sister’s… conduct… with the servants."
+    hide marianne
     "The table goes silent.{w} You set your fork down and look towards Tess and Estelle, confused. Dorian’s knife stops mid-air."
     "Her voice dripping with sympathy, she clasps her hands."
     f "It has come to my attention that she has… had some charged exchanges with her servant, Tess."
@@ -1238,13 +1284,16 @@ label ch5_3_fool:
     "You turn to Tess next."
     mc "Tess? C’mon, help me out here, eh?"
     "His lips are drawn as he stares ahead, ignoring you. You pause.{w} What? Is he on Florence’s side?{w} Damn, your pride. You feel it flying away already."
+    show dorian normal at right
     "Dorian snorts. It's a small, strangled sound. But it's deafening in the dead silence.{w} Raising a hand to his mouth, shoulders shaking, he tries to calm down."
     d "I… forgive me, I just…"
     "Florence can't help but smile despite herself too. Cassian stares at the two, as if about to apprehend them.{w} But Marianne puts her palm down on the table."
     m "That’s enough. This conversation ends here."
+    hide dorian
     "The breakfast continues as if nothing had happened."
     "Florence stares at you. She brings her hand to her mouth, shaking."
     f "Sorry – if I may, I’d like to excuse myself.{w} You see, I have a slight headache."
+    hide florence
     "You don't quite understand.{w} Aren't there larger enemies to fight? Why play for reputation? Or is that her scheme?{w} Oh, you'll be sure to hold this grudge."
     "You would’ve burned in shame had you not been trying to paint yourself as shameless.{w} The rest of the meal is silent."
     "As you trudge back to your room, the servants avoid you; great.{w} This is fine. There wasn’t a better solution, right? And you'd done well."
@@ -1310,7 +1359,7 @@ label ch5_5_marianne:
     show marianne serious
     m "Be not afraid. Lift your head."
     "She moves the candle closer, illuminating both your faces.{w} You gaze up at her, smoothing the crease between your brows while maintaining the tension in your face."
-    m "It is because you are not yet prepared, Veruna."
+    m "It is because you are not yet prepared, [noble_name]."
     mc "Sorry?" 
     m "If I remember correctly, that night I told you that, at some point, you would learn about the reason for the murder.{w} And why someone attempted to assassinate Dorian."
     mc "And I'm ‘bout to find out now?"
