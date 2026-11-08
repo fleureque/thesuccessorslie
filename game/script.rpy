@@ -1253,6 +1253,8 @@ label ch5_3_fool:
     jump ch5_4_aftermath
 
 label ch5_4_aftermath:
+    $ time = "Day 5. Late afternoon."
+    $ bearings = "Your quarters."
     "Nobody responds when you ring the bell. Neither Tess nor Estelle.{w} You sigh. At least surveillance is looser now, after all that stir. You have time to gather your thoughts.{w} But being too much of a non-threat puts a target on your back too, as someone easy to kill." 
     "You bite your lip and turn back to the book." 
     "Shivers run down your spine, recalling the time Lin had been beaten – nearly to death – just to relieve a blacksmith’s fury. The main empire was thriving and the Emperor had played a little game of information control."
@@ -1269,3 +1271,74 @@ label ch5_4_aftermath:
     "You're cautious around Rosette when returning the book. She seems shifty when you glance at the bookshelf. You tell her you can't read, that you struggled with my letters, and that's your reason for giving the book back so soon.{w} That sudden lie seems to calm her, but why? You assumed it's because of my newfound reputation, somehow."
     "So many mysteries."
     "Well, if the answers won't come to you, it looks like you'll have to go to them yourself."
+    menu:
+        "*Talk to Cassian*":
+            $ choice = "Cassian"
+        "*Talk to Marianne*":
+            $ choice = "Marianne"
+    $ bearings = "The gallery"
+    "Just earlier this morning, you'd been feeling at home among the masses in the halls. Being able to do your own thing.{w} That's just the way you like it.{w} In the direct aftermath of the confrontation, they’d been silent. But now their gazes change. Eyes and quiet chatter follows each step you take."
+    "Before, you'd been a new novelty in the household, not special enough to latch onto. Now they see you as an absolute fool."
+    "At least the fool persona isn't too meek to retaliate, and they knew that.{w} You're stupid, but not stupid enough to back down.{w} The dissatisfaction follows you around regardless, but at least it's not confrontational.{w} You mentally curse Florence as you shoot a sunny smile at a valet. He blinks, then smiles back, before turning to the boy next to him. That'll keep them happy, won't it? A new piece of gossip?"
+    "In some ways, nobles and slum kids are the same.{w} Always looking for something to gloat over; even better if it's a person."
+    jump ch5_5_marianne
+
+
+label ch5_5_marianne:
+    $ time = "Day 5. Early evening."
+    play sound knocking_urgent
+    "You stop before Marianne’s study. You've never been inside.{w} Well, there are always firsts, aren't there? You knock thrice, hearing no voices through the door. Estelle taught you the different knocks and when to use them." 
+    m "Yes?" 
+    mc "Mother, it’s [noble_name]. May I speak to you?"
+    m "A moment."
+    "You look around the gallery in the meantime. Her public study is closer to the salons than Cassian’s.{w} Does that mean she takes the onus for receiving guests? Or is that a stretch?{w} You shake your head. Yes, it's probably a stretch. This room's probably been here for decades. How long has Velmonta been around?"
+    m "Come in."
+    "You oblige."
+    play sound open_door
+    $ bearings = "Marianne's Study."
+    "Her study is warmer than Cassian’s. Strange, because Marianne herself is colder. It maintains a delicate balance. The bright blue of the windows gives the room an airy quality."
+    $ glossary_dict["Chair"] = "It's not a wooden one; it's one of those sinking chairs, the type that swallows you into the earth."
+    show marianne serious
+    "She pulls out a {a=glossary:The Plague}🔻 chair{/a} for you.  You sit into its embrace only reluctantly."
+    m "Why have you sought me for a meeting, [noble_name]?" 
+    "You don't know whether to meet her hazelnut eyes or avoid them.{w} Lord, she's beautiful. You aren't usually a connoisseur for faces, but there's nobody else more suitable to represent Velmonta.{w} Her skin glows from underneath, radiant from within. Her eyes are piercing and shadowed, but hesitant, caring.{w} You clear your throat."
+    mc "I’m mighty sorry for today."
+    show marianne hesitant
+    m "You need not be."
+    mc "Really, since the death, I’ve been scared out my wits ‘round here." 
+    "You let a sob slip from your lips, before quickly covering your mouth, turning your head down, and letting your hair fall over your face."
+    show marianne serious
+    m "Be not afraid. Lift your head."
+    "She moves the candle closer, illuminating both your faces.{w} You gaze up at her, smoothing the crease between your brows while maintaining the tension in your face."
+    m "It is because you are not yet prepared, Veruna."
+    mc "Sorry?" 
+    m "If I remember correctly, that night I told you that, at some point, you would learn about the reason for the murder.{w} And why someone attempted to assassinate Dorian."
+    mc "And I'm ‘bout to find out now?"
+    "She turns to look at the portraits on the wall."
+    m "A good question. Do I tell you? Or do I keep you in the dark?{w} Would you be able to bear the truth?"
+    "I’ll try. I will."
+    "You bite your lip, daring to look her in the eye.{w} Mouth slightly open, she stares at you."
+    m "It does not benefit anyone for you grasp at shadows. I would have informed you either way.{w} But it is good to hear your conviction spoken of."
+    "She traces her hands over her necklace and smiles. Benefit no-one for you to be kept in the shadows?"
+    "Are you to trust her or not? She seems so confident and assured."
+    $ glossary_dict["The Lower District"] = "The sanitised name for 'Scab City.' The name itself is counterfactual; the city's topologically higher than any other, and embedded in the middle of the Marchetti Empire. It's only 'lower' in status. But of course, that's all that matters, huh?"
+    "You hail from the {a=glossary:The Lower District}🔻 Lower District{/a}.{w} So you would have seen the ‘gangs’ fighting. Over food, water, shelter - anything scarce."
+    "You nod, mouth dry." 
+    mc "Revvers protected me."
+    "She pays no heed, seemingly lost in thought."
+    mc "That’s why they’re tryin’ to kill us?"
+    "She adjusts her hair, though beautiful either way. Her eyes curve upwards."
+    m "How direct.{w} But yes."
+    mc "So why’m I not being protected?{w} Why’re none of us gettin’ help?"
+    show marianne hesitant
+    "Marianne freezes, then looks away."
+    mc "Mother?"    
+    m "It is time for dinner, child."
+    mc "When’re we continuing this?"
+    "She walks towards the door."
+    show marianne serious
+    "Stand, [noble_name]."
+    mc "Mother, I need a sword at lea-"
+    m "-let there be no more qualms. You are sufficiently learned now."
+    "She stops waiting and walks out."
+
