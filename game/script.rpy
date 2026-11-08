@@ -1263,6 +1263,7 @@ label ch5_1_fools_parade:
     jump ch5_2_challenge
 
 label ch5_2_challenge:
+    $ part = "2"
     $ time = "Day 5. Noon."
     $ bearings = "Lunch Hall."
     "The light slants through the tall windows, casting brightness all around the hall. You stab at your poached egg, watching the yolk bleed across the plate.{w} Your head is ringing again, like it's been for the past few days.{w} You try to hide it."
@@ -1294,6 +1295,7 @@ label ch5_2_challenge:
             
 
 label ch5_3_fool:
+    $ part = "3"
     "You laugh, the sound ringing through the room.{w} Florence blinks."
     f "Sister [noble_name]?"
     mc "Brother Dorian!" 
@@ -1338,6 +1340,7 @@ label ch5_3_fool:
     jump ch5_4_aftermath
 
 label ch5_4_aftermath:
+    $ part = "4"
     $ time = "Day 5. Late afternoon."
     $ bearings = "Your quarters."
     "Nobody responds when you ring the bell. Neither Tess nor Estelle.{w} You sigh. At least surveillance is looser now, after all that stir. You have time to gather your thoughts.{w} But being too much of a non-threat puts a target on your back too, as someone easy to kill." 
@@ -1370,6 +1373,7 @@ label ch5_4_aftermath:
 
 
 label ch5_5_marianne:
+    $ part = "5"
     $ time = "Day 5. Early evening."
     play sound knocking_urgent
     "You stop before Marianne’s study. You've never been inside.{w} Well, there are always firsts, aren't there? You knock thrice, hearing no voices through the door. Estelle taught you the different knocks and when to use them." 
