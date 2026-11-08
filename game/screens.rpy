@@ -591,6 +591,15 @@ style about_text is gui_text
 style about_label_text:
     size gui.label_text_size
 
+screen stat_display():
+    hbox:
+        spacing 100
+        text "Reputation: " size 30
+        text "> Fool: [reputation['fool']]" size 30
+        text "> Sharp: [reputation['sharp']]" size 30
+        yalign 0.975
+        xalign 0.35
+
 
 ## Load and Save screens #######################################################
 ##

@@ -152,7 +152,10 @@ label temp_end_message:
 
 
 label start:
-    
+    $ reputation = {
+        "fool": 0,
+        "sharp": 0,
+    }
     play audio transition
     define mc = Character("[name + ' (You)']", color="#cecd95", what_color="#f0edbc", ctc="ctc", ctc_position="fixed")
 
@@ -167,10 +170,10 @@ label start:
 
 
 label ch1_1_shed:
-    $ renpy.notify("hey")
     $ time = "Day 1, Afternoon."
     $ bearings = "Scab City. Your shed."
     $ part = "1"
+    show screen stat_display() zorder 100
     show screen info_display()
     play music her_sickness loop fadein 1.0 fadeout 1.0 
     show old shed with dissolve
@@ -436,6 +439,7 @@ label ch1_4_arrival:
         "Beautiful.":
             "Internally, you think the opposite. But nobody needs to know."
         "Disgusting.":
+            $ reputation['sharp'] += 2
             "Gideon stares at you evenly for a second."
             menu:
                 "Um, I mean disgustingly beautiful.":
@@ -456,9 +460,11 @@ label ch1_4_arrival:
     "Bending down, she slips the footwear onto your feet. It's strangely sleek against your filthy skin, but not an unwelcome sensation."
     menu:
         "Bye, Gideon!":
+            $ reputation['fool'] += 2
             "Gideon looks disappointed that you've already forgotten his advice."
             "Below his expression, too, he looks slightly worried."
         "*Don't bid Gideon farewell*":
+            $ reputation['sharp'] += 2
             "You decide it's better to follow his advice immediately."
     hide gideon
     "You and Estelle approach the softly lit chateau.{w} It has spires that stretch into the sky, and flags painting deep blue streaks in the air.{w} The stairs stop before a pair of heavy-set double-oak doors."
@@ -503,6 +509,7 @@ label ch2_1_first_blood:
         "An honour...":
             pass
         "Disgusting.":
+            $ reputation['sharp'] += 5
             "Estelle looks at you."
             "...You messed up. She's definitely reporting this back."
     "You feel a strange repulsion, but know not at what."
@@ -515,6 +522,7 @@ label ch2_1_first_blood:
     e "Your bath was drawn as soon as we saw the carriage. We do aim to be quick."
     menu:
         "Bath? What's that?":
+            $ reputation['fool'] += 2
             "Estelle looks up and down your grimy figure. A hint of sympathy?"
             "Whatever it is in her expression, you bristle at it."
             "Estelle explains how to use a bath."
@@ -552,6 +560,7 @@ label ch2_2_wash:
             "Estelle looks at the tears streaming from your face."
             e "Alright, we'll fill it hotter."
             "You crawl back in after the water's refilled and scream in pain."
+            $ reputation['fool'] += 1000000
             $ alert("Ending unlocked: Early Death!")
             "You feel like you're exploding."
             "Your consciousness begins fading."
@@ -580,9 +589,14 @@ label ch2_2_wash:
     show estelle normal
     "Estelle greets you with a... professional... sunny expression."
     e "Don't you look a wonder, miss?"
-    mc "I-I… You’re pretty too, Estelle."
-    "The words slip out smoothly, despite tasting strange on your tongue."
-    e "I'm just a maid, dear. Oh - here; your dinner’s already prepared."
+    menu:
+        "I-I… You’re pretty too, Estelle.":
+            "The words slip out smoothly, despite tasting strange on your tongue."
+            e "I'm just a maid, dear. Oh - here; your dinner’s already prepared."
+        "Of course I do. I just had a bath. What, are you stupid?":
+            $ reputation['sharp'] += 9
+            "Estelle's mouth hangs agape for a moment before restoring its prior position."
+            e "Ahem. You're right.{w} Here's your dinner."
     "She sets a ‘small’ meal before you – a dazzling spectacle of strange meats, salads, and fruits."
     hide estelle 
     play sound open_door
@@ -1299,10 +1313,10 @@ label ch5_1a_library:
     $ alter_npc("Librarian", "#ce4070", "#e193c0")
     npc "Are you searching for something?{w} Oh – Miss [noble_name]! How can I help you? What topic would you like to learn about?"
     "You swallow, taking a step back as she barrages you with questions." 
-    npc "Empire’s history."
+    mc "Empire’s history."
     "She thinks for a few seconds, then begins walking." 
-    r "Is there any particular author you’re trying to find, miss?"
-    npc "Well, I don’t know an-{w} I mean, I’d just like somethin’ related to noble houses."
+    npc "Is there any particular author you’re trying to find, miss?"
+    mc "Well, I don’t know an-{w} I mean, I’d just like somethin’ related to noble houses."
     "She purses her lips. Why?"
     npc "Is there a date you’d like it from?"
     "You reply, voice hoarse."
@@ -1313,10 +1327,10 @@ label ch5_1a_library:
     npc "Pleasure." 
     "She rubs her nose, then sets the completed pile before you."
     npc "Study’s over there, Miss [noble_name]. And you’re welcome to take the books back to your room."
-    "Thanks again.{w} And how’m I meant to address you?"
+    mc "Thanks again.{w} And how’m I meant to address you?"
     r "Rosette, Miss."
-    "You glance down at the pile. You want to ask her why she hadn’t reached for any books on the previous century.{w} But you have another goal. Well, there's nothing to do other than swallow your pride."
-    "A short bow in acknowledgement. The bell struck. I was late for lunch."
+    "You glance down at the pile. You want to ask her why she didn't reach for any books on the previous century.{w} But you have another goal. Well, there's nothing to do other than swallow your pride."
+    "A short bow in acknowledgement. The bell strikes. You're late for lunch."
     jump ch5_2_challenge
 
 
@@ -1356,17 +1370,23 @@ label ch5_2_challenge:
     "Setting her cutlery down with a deliberate clink, she dabs at her mouth with a handkerchief, then sets her hands down in reluctant virtue." 
     f "Father. Mother."
     "She tilts her head in concerned grace."
-    f "I feel that I have a duty to report something that has… lately been… troubling my conscience."
+    f "I feel that I have a duty to report something that has…{w} lately been… troubling my conscience."
     show marianne serious at right
     "Marianne looks up from her newspaper.{w} Cassian's hand tightens around his cufflinks."
     m "And what matter would that be?"
     "Florence’s eyes dart to you, then look away."
     f "It concerns my dear sister’s… conduct… with the servants."
     hide marianne
+    show tess worried at right
+    show estelle normal at left
     "The table goes silent.{w} You set your fork down and look towards Tess and Estelle, confused. Dorian’s knife stops mid-air."
+    hide tess
+    hide estelle
     "Her voice dripping with sympathy, she clasps her hands."
     f "It has come to my attention that she has… had some charged exchanges with her servant, Tess."
+    show silvian normal at right
     "Silvian’s brow furrows."
+    hide silvian
     "With a quick sob, she puts her hand to her mouth." 
     f "I was walking in the courtyard and looked up – and I… I…"
     "What? How are you meant to respond to this?{w} A claim of impropriety. Its purpose… right, to plant a seed of doubt.{w} Even if nobody believes it, your reputation'll be stained.{w} And why wouldn’t they believe holy Florence, admired by all?"
@@ -1381,39 +1401,54 @@ label ch5_3_fool:
     $ part = "3"
     "You laugh, the sound ringing through the room.{w} Florence blinks."
     f "Sister [noble_name]?"
+    show dorian normal at right
     mc "Brother Dorian!" 
     "You turn to him, beaming." 
     mc "You heard that?" 
     "You wipe a tear from your eye, dissolving into further laughter."
     "He stares at you, lost. The usual glint in his eye is marred with confusion."
+    hide dorian
     "Turning back to Florence, you stop laughing."
-    f "Sister. I am aware of why you are saying this."
+    mc "Sister. I am aware of why you are saying this."
     "Her hand flies to her morllith."
     f "And…{w} why might that be?"
     "You grin. You internally cackle at your own shamelessness.{w} However, you continue. You puff your chest out and meet her with a question of your own."
-    mc "Is it ‘cause you’ve seen how nice he is? How he escorts me ‘round? How he talks with such a kind voice?"
+    mc "Is it ‘cause you’ve seen how nice he is?{w} How he escorts me ‘round?{w} How he talks with such a kind voice?"
+    show tess worried at left
     "Her nose wrinkles. You watch Tess pale visibly in the corner of your eye.{w} Conspiratorially, you lean in."
+    hide tess
     mc "I’m disappointed, sister. If you wanted Tess all to yourself, you coulda just asked, ‘kay?"
     "And with that, you resume eating, donning a prideful expression."
+    show cassian normal at right
     "Cassian coughs."
     c "Dear [noble_name], what evidence do you have to support your sister’s…"
     "He doesn't finish."
+    hide cassian
     "Bringing your finger to your chin, you twist your mouth into a pout."
     mc "I…{w} I feel it. But my feelings ain't never wrong.{w} Right, Estelle?"
+    show estelle normal at left
     "In brief distaste, Estelle clears her throat."
     e "Yes, Miss [noble_name]. You’re the very picture of intelligent thought."
+    hide estelle
+    show tess worried at right
     "You turn to Tess next."
     mc "Tess? C’mon, help me out here, eh?"
     "His lips are drawn as he stares ahead, ignoring you. You pause.{w} What? Is he on Florence’s side?{w} Damn, your pride. You feel it flying away already."
-    show dorian normal at right
+    hide tess
+    show dorian normal at left
     "Dorian snorts. It's a small, strangled sound. But it's deafening in the dead silence.{w} Raising a hand to his mouth, shoulders shaking, he tries to calm down."
     d "I… forgive me, I just…"
+    show cassian normal at right
     "Florence can't help but smile despite herself too. Cassian stares at the two, as if about to apprehend them.{w} But Marianne puts her palm down on the table."
+    hide cassian 
+    show marianne serious at right
     m "That’s enough. This conversation ends here."
     hide dorian
-    "The breakfast continues as if nothing had happened."
+    hide cassian
+    "The breakfast continues as if nothing happened."
     "Florence stares at you. She brings her hand to her mouth, shaking."
     f "Sorry – if I may, I’d like to excuse myself.{w} You see, I have a slight headache."
+    hide marianne
     hide florence
     "You don't quite understand.{w} Aren't there larger enemies to fight? Why play for reputation? Or is that her scheme?{w} Oh, you'll be sure to hold this grudge."
     "You would’ve burned in shame had you not been trying to paint yourself as shameless.{w} The rest of the meal is silent."
@@ -1429,16 +1464,17 @@ label ch5_4_aftermath:
     "Nobody responds when you ring the bell. Neither Tess nor Estelle.{w} You sigh. At least surveillance is looser now, after all that stir. You have time to gather your thoughts.{w} But being too much of a non-threat puts a target on your back too, as someone easy to kill." 
     "You bite your lip and turn back to the book." 
     "Shivers run down your spine, recalling the time Lin had been beaten – nearly to death – just to relieve a blacksmith’s fury. The main empire was thriving and the Emperor had played a little game of information control."
-    "And what did it cause? A period of massive protests and anger in Scab City. Nobody liked the nobility in the first place, but the Marchetti Campaign was the last straw.{w} Too bad reaching the district was a one-way thing."
-    "The only blood spilled was of the same origins as the protesters. The blood of Scab City. The blood of people like you and Lin, powerless before the swarm."
+    "And what did it cause? A period of massive protests and anger in Scab City.{w} Nobody liked the nobility in the first place, but the Marchetti Campaign was the last straw.{w} Too bad reaching the district was a one-way thing."
+    "The only blood spilled was of the same origins as the protesters. The blood of Scab City.{w} The blood of people like you and Lin, powerless before the swarm."
     "Those nobles had simply waited it out while you were threatened with death."
     "You don't doubt that half Scab City's outrage was from bruised pride. You didn't have time to care about historical preservation, or whatnot. But he’d looked down on your intelligence.{w} And now he even dares to look down on the nobility? You check for the author. Blank."
     "You run your hands over the cover.{w} You want to know why Rosette chose this book for you."
     "You have half a mind to throw it across the room."
-    "Since when have you been this violent and rash-headed? Without Lin here to ground you, perhaps this was inevitable. But it's a sore self-realisation."
+    "Since when have you been this violent and rash-headed?{w} Without Lin here to ground you, perhaps this was inevitable. But it's a sore self-realisation."
     "If only Lin was here with you.{w} If only she was able to read.{w} If only she was ruthless enough, paranoid enough, rational enough to hold her own here."
-    "But you're grateful at the same time. She didn’t think enough. She would’ve brashly done whatever she’d have thought right without a second thought. We’d always agreed that you were the calmer one."
-    "You reach for the bell again, then decide against it. No point in proving your isolation again. If anything, this has proved that the servants don't answer to you. Any loyalty you've felt from them was loyalty to Velmonta."
+    "But you're grateful at the same time. She didn’t think enough.{w} She would’ve brashly done whatever she’d have thought right without a second thought.{w} You'd always agreed that you were the calmer one."
+    "You reach for the bell again, then decide against it. No point in proving your isolation again.{w} If anything, this has proved that the servants don't answer to you. Any loyalty you've felt from them was loyalty to Velmonta."
+    $ bearings = "Library."
     "You're cautious around Rosette when returning the book. She seems shifty when you glance at the bookshelf. You tell her you can't read, that you struggled with my letters, and that's your reason for giving the book back so soon.{w} That sudden lie seems to calm her, but why? You assumed it's because of my newfound reputation, somehow."
     "So many mysteries."
     "Well, if the answers won't come to you, it looks like you'll have to go to them yourself."
