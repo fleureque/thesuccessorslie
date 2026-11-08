@@ -578,10 +578,11 @@ screen about():
 
 screen info_display():
     vbox:
-        text "Chapter [chapter]"
+        text "Chapter [chapter], Part [part]"
         xalign 0.02
         yalign 0.02
-        text "Part [part]"
+        text "Bearings: [bearings]" size 25
+        text "Time: [time]" size 25
 
 style about_label is gui_label
 style about_label_text is gui_label_text
@@ -1687,17 +1688,34 @@ screen deduction_log():
         #style_prefix "about"
 
         vbox:
+            spacing 10
 
             text "Observations:" color "#fdcbb7e6" size 50
             text "By making certain observations, you may fulfil the conditions for coming to relevant conclusions. These conclusions may influence your future choices/inform your actions. Beware that not all conclusions may be correct." size 30
-            
-            
 
-
-
-            
-            
-            
-            
-
-
+            for id, entry in conclusions.items():
+                if entry["unlocked"]:
+                    if entry["chosen_choice"]:
+                        textbutton ("| " if entry["expanded"] else "> ") + entry["display"]:
+                            text_size 32
+                            action [Function(change_expanded, id)]
+                        if entry["expanded"]:
+                            vbox:
+                                text "Your observations:" size 32
+                                for req in entry["meet_reqs"]:
+                                    if req in observation_log:
+                                        text "  • " + observation_log[req] size 28
+                            text "Logic:" size 32
+                            for line in entry["logic_display"]:
+                                text "  – " + line size 28
+                            text "Your conclusion: " + entry["chosen_choice"] color "#ec4329" size 32
+                        
+                    else:
+                        text "> New conclusion available" color "#dec26d"
+                        $ num_reqs = sum(1 for r in entry["meet_reqs"])
+                        text "Fulfilled [num_reqs]/[num_reqs] conditions. Choose a conclusion below." size 28
+                        
+                        for choice in entry["choices"]:
+                            textbutton choice:
+                                text_size 28
+                                action Function(choose_conclusion, id, choice)

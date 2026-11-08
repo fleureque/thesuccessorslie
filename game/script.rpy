@@ -52,8 +52,11 @@ init python:
         global npc
         npc = Character(name, color=namecard_color, what_color=speech_color, ctc="ctc", ctc_position="fixed")
 
-    def deduction_display():
-        pass
+    def change_expanded(id):
+        conclusions[id]["expanded"] = not conclusions[id]["expanded"]
+
+    def choose_conclusion(id, choice):
+        conclusions[id]["chosen_choice"] = choice
 
 
 default observation_log = {}
@@ -64,7 +67,10 @@ default conclusions = {
         "meet_reqs" : ["says_wrong_room", "maid_has_keys"],
         "logic_display" : ["The maid had the keys to the room she intended to enter, yet still knocked.", 
         "She must have lied."],
-        "unlocked" : False
+        "unlocked" : False,
+        "choices": ["She was looking for something in your room.", "She was scouting the room for someone else."],
+        "chosen_choice": "",
+        "expanded": False
     },
     "the_truth" : {
         "display" : "Someone must be lying.",
@@ -74,7 +80,12 @@ default conclusions = {
         "Sure, Tess could be genuinely unaware.", 
         "But what are Cassian and Gideon trying to trick you into believing?"
         ],
-        "unlocked" : False
+        "unlocked" : False,
+        "choices": ["He wants to keep you passive and dependent.", 
+        "Gideon's helping the house by keeping you calm.",
+        "He's testing you with the 'appearance of safety'."],
+        "chosen_choice": "",
+        "expanded": True
     },
 }
 
@@ -161,6 +172,8 @@ label start:
 
 
 label ch1_1_shed:
+    $ time = "Day 1, Afternoon."
+    $ bearings = "Scab City. Your shed."
     $ part = "1"
     show screen info_display()
     play music her_sickness loop fadein 1.0 fadeout 1.0 
@@ -240,6 +253,7 @@ label ch1_1_shed:
 
 
 label ch1_2_gideon:
+    $ time = "Day 2. Afternoon."
     $ part = "2"
     "The shed's now cleaner than it has ever been before, thanks to your handiwork.{w} It protected you and Lin to the very end - both from the cold and strange hagglers."
     "And all that remains now is the blanket. It's done little to keep you warm, but you were lucky to have even that."
@@ -281,7 +295,8 @@ label ch1_2_gideon:
     "An emphasis on the last word. You flush."
     mc "What's it to you?"
     mc "Even the church done forsaken this place. Whatever laws you're used to don't apply 'ere."
-    show sprite cloaked
+    hide sprite
+    show gideon cloaked 
     "He peels his hood down, eyes locking into yours."
     g "Come with me and you'll be safe."
     "You catch yourself softening and steel up again."
@@ -309,6 +324,8 @@ label ch1_2_gideon:
 
 
 label ch1_3_carriage_ride:
+    $ time = "Day 2. Early evening."
+    $ bearings = "The Carriage."
     $ part = "3"
     show inside_carriage with dissolve
     "Resting your head on your hand, you look through the carriage window. Emaciated children shiver as you pass them by.{w} Is it awe?{w} Or are they too lost to care at this point?"
@@ -373,6 +390,8 @@ label ch1_3_carriage_ride:
 
 
 label ch1_4_arrival:
+    $ time = "Day 2. Late evening."
+    $ bearings = "Near Velmonta."
     $ part = "4"
     "His hand flies to his chin, a finger hovering over his mouth."
     g "Don’t let yourself believe you’re safe simply given the way things will seem."
@@ -403,6 +422,7 @@ label ch1_4_arrival:
     "Tearing your eyes away, you look back at Gideon.{w} He hands an official-looking document to the guard for inspection."
     "Clearing his throat, the guard hands the document back after skimming over it."
     $ alter_npc("Guard", "#4a64d7", "#98aaf0")
+    $ bearings = "Velmonta's Main Estate."
     npc "Welcome to Velmonta. You may return to your carriage now."
     "Two people clad in deep blue liveries, with some effort, draw the doors open. The horses are spurred into movement again."
     hide sprite with dissolve
@@ -503,6 +523,7 @@ label ch2_1_first_blood:
             e "My, well you'll have dinner, Miss."
     "She swings the door open, handing you a pile of fresh clothes and a towel."
     hide estelle with dissolve
+    $ bearings = "Velmonta's Main Estate. Your quarters."
     "And finally, you're alone with the flowery fragrance of bathwater."
     jump ch2_2_wash
 
@@ -627,6 +648,7 @@ label ch2_4_maid:
 
 
 label ch2_5_murder:
+    $ bearings = "Velmonta's Main Estate. The Successors' corridor."
     $ part = "5"
     play sound footsteps loop fadein 1.0 fadeout 1.0
     "You hear more footsteps and quickly scramble onto the stool again, just in time to see a shadow slip past."
@@ -674,6 +696,8 @@ label ch2_5_murder:
 
 
 label ch3_1_stigma:
+    $ time = "Day 3. Early morning."
+    $ bearings = "Velmonta's Main Estate. Your quarters."
     play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
     $ part = "1"
     $ chapter = "3: Stigma"
@@ -707,8 +731,11 @@ label ch3_1_stigma:
 
 
 label ch3_2_breakfast:
+    $ time = "Day 3. Morning."
+    $ bearings = "Velmonta's Main Estate. The Morning Room."
     $ part = "2"
     show marianne serious
+    show cassian normal
     "The Morning Room is bright and well lit, the large white table laid with matching tableware and cloth.{w} At the end of the table sits the matriarch, Marianne, and patriarch, Cassian, whom you recognise from his portrait."
     show dorian normal at right
     "Opposite you is Dorian; next to him is Florence.{w} On your side, separating you from the heads is Silvian.{w} The atmosphere in the room is heavy, in contrast to the lithe light from the sprawling chandelier."
@@ -737,8 +764,13 @@ label ch3_2_breakfast:
     c "Dear, allow me to introduce you to your new siblings."
     "He rises, with everyone at the table following suit."
     "He begins walking –"
+    hide cassian
+    hide marianne hesitant
+    hide dorian
+    show florence normal at left
     c "This is Florence,"
     "– naming each child in turn –"
+    show dorian normal
     c "Dorian,"
     "– and announcing the last –"
     c "And lovely Silvian."
@@ -790,6 +822,8 @@ label ch3_2_breakfast:
 
 
 label ch3_3_room:
+    $ bearings = "Velmonta's Main Estate. Your quarters."
+    $ time = "Day 3. Morning."
     hide marianne 
     hide dorian
     $ part = "3"
@@ -840,6 +874,8 @@ label ch3_3_room:
     
 
 label ch3_4_mandate:
+    $ bearings = "Cassian's Study."
+    $ time = "Day 3. Late morning."
     $ part = "4"
     c "Sit, [noble_name]."
     "Cassian pulls a chair out, watching you closely as you acquiesce."
@@ -893,6 +929,7 @@ label ch3_5a_confront:
 
 
 label ch3_6_lunch:
+    $ time = "Day 3. Noon."
     $ part = "6"
     c "Let us head to luncheon."
     "Cassian slowly rises."
@@ -903,6 +940,8 @@ label ch3_6_lunch:
 
 
 label ch4_1_mutual_benefit:
+    $ time = "Day 4. Afternoon."
+    $ bearings = "Your quarters."
     $ part = "1"
     $ chapter = "4: For Mutual Benefit"
     "You haven't been able to get the thought of the dead maid out of your mind."
@@ -959,6 +998,7 @@ label ch4_1a_confront:
     "You should go catch up with Gideon.{w} All this suspicion is driving you crazy."
     "You can trust him to give you a straight answer, too."
     play sound open_door
+    $ bearings = "Outside your room."
     "You leave your room."
     "Despite being aware that this is a corridor, the absence of sunlight makes you uneasy.{w} You wrinkle your nose as you walk by Dorian’s room.{w} There isn't a single remnant of blood. It looks and smells of artificial cleanliness."
     "Your neck tingles. Hand on pocket, you make it through the passage, down the stairs, rushing until the courtyard.{w} You stop to breathe, nose burning in the strange mixture of fresh air and crackling fire."
@@ -966,6 +1006,8 @@ label ch4_1a_confront:
 
 
 label ch4_2_gideon:
+    $ bearings = "The Barracks."
+    $ time = "Day 4. Late afternoon."
     $ part = "2"
     show gideon normal
     "Gideon looks at you languidly. His hair is like rust and the sweat on his face its catalyst."
@@ -1029,6 +1071,8 @@ label ch4_2_gideon:
 
 
 label ch4_3_dinner:
+    $ time = "Day 4. Early evening."
+    $ bearings = "Gallery."
     $ part = "3"
     "Velmonta is no longer as empty as it was when you first arrived.{w} You now see maids and servants walking around with pails of water and mops in hand. A woman with a different livery hauling firewood.{w} But still, no nobility from other houses. Everyone here is from the main line."
     "So had Estelle been right? Was it empty yesterday only due to your arrival? But if so, why?{w} To avoid commotion? If anything, it would only stir up more suspicion from the other houses."
@@ -1040,6 +1084,7 @@ label ch4_3_dinner:
     "Most of the staff threw you some glances; aside from that, you don't attract attention as you walk through the salons to the gallery."
     $ glossary_dict["Myllith's Salute"] = "A curved salute resembling the moon. It is thought to both demonstrate loyalty to the Crown (scumlord) and bring Her Blessings upon the recipient."
     "You can't help but pause as you pass the tired man’s portrait again in the gallery. Weary dedication and effortless piety still radiate from his kind face.{w} You perform {a=glossary:Myllith's Salute}🔻 the curved salute{/a} in acknowledgement of his faith."
+    $ bearings = "Dining Hall."
     "Entering the dining hall, you glance around. A valet and a maid for each successor;{w} two lady’s maids for Marianne; two valets for Cassian at the head of the table;{w} a butler and kitchen staff scattered through the room, setting the table."
     show estelle normal
     "Tess and Estelle are already there. The other valets and maids are conversing in a subdued manner, while yours were silent and taciturn.{w} Estelle guides you to your seat. You smile at her."
@@ -1053,7 +1098,7 @@ label ch4_3_dinner:
     "Marianne clears her throat." 
     m "You may eat now."
     hide marianne
-    "You make sure to use the right cutlery this time. But as you looked at your food, another image appears in your mind.{w} Gideon’s face. You dig your fork hard into the veal."
+    "You make sure to use the right cutlery this time. But as you look at your food, another image appears in your mind.{w} Gideon’s face. You dig your fork hard into the veal."
     $ glossary_dict["The Gathering"] = "The esteemed event where side families have the chance to send their children to the main line."
     "Estelle had told you earlier that only side families can visit the main estate before {a=glossary:The Gathering}🔻 the Gathering{/a}.{w} Meanwhile, Gideon claims that nobody outside of Velmonta knows your existence yet."
     "There's no way Rydell wouldn’t receive word of an offshoot’s visit, bordering Velmonta - and no such family had visited, the estate being empty upon your arrival.{w} So they knew where the carriage was from." 
@@ -1079,6 +1124,8 @@ label ch4_3_dinner:
 
 
 label ch4_4_night:
+    $ bearings = "Private quarters."
+    $ time = "Day 4. Night."
     $ part = "4"
     "Night. It's your second night without Lin by your side. Your second night without biting cold numbing your fingers.{w} The blankets warm you. Your room itself is a bastion of warmth. "
     "What are you to do now? There are clear answers: prepare before they learn of your existence, learn to fend assailants off, gather information on this house. But something still doesn't sit right with you."
@@ -1090,8 +1137,8 @@ label ch4_4_night:
     "You stare up at the ceiling, clutching your duvet to your chest."
     "Were Tess and Gideon aligned under the same motive to lie to you? Whatever it is, it doesn't seem like they're telling you the truth. It's certainly possible; you need to watch out for that.{w} If so, though, why? To create a sense of incoming danger? Convince you, using your witness to the maid’s death, that you're under threat too?"
     "What a clever plan, to use such reasoning: ‘you’re under danger. Don’t look in the right direction, stay paranoid. The only reason you’re not being attacked right now, the one thing we cannot influence, is because they don’t know you exist.’"
-    "That would make sense, but then what would the greater danger be? Or do they have another motive? An overreach. The worst possible scenario you can think of. But it'll kill you if you ignore it too much."
-    "There are other possibilities too. Lying about the Marchetti to his face would be the riskier option of the two lies."
+    "That would make sense, but then what would the greater danger be? Or do they have another motive?{w} No, that's overreaching. The worst possible scenario you can think of. But it'll kill you if you ignore it too much."
+    "There are other possibilities too."
     "Come to think of it, why did he believe that you wouldn't not catch him out in his lie? Because you know no-one here to ask? Your insides boil hot in anger; you fan yourself down."
     "If he had lied about their reason to murder you, that would be more interesting than anything." 
     "Or was his lie even more primal? What if he spun a lie about why the maid had died, based on what he knows you know?{w} If he and Tess were collaborating, then the valet would’ve overheard Cassian painting the maid’s death as an intended assassination. But what if it wasn’t, and Cassian was only presenting it in a different light to hide something? You can't trust noble houses to be truthful, after all."
@@ -1104,9 +1151,11 @@ label ch4_4_night:
 
 
 label ch5_1_fools_parade:
+    $ bearings = "Library."
+    $ time = "Day 5. Late morning."
     $ chapter = "5: A Fool's Parade"
     $ part = "1"
-    "After waking, you committed to breaking out of my paralysis. You're going to get information, and you'll start with the one place that can't avoid you for certain.{w} Even if it lies to you, it lies to everyone equally."
+    "After waking, you committed to breaking out of your paralysis. You're going to get information, and you'll start with the one place that can't avoid you for certain.{w} Even if it lies to you, it lies to everyone equally."
     $ glossary_dict["About Wealth"] = "No wonder the rich only get richer. They have so, so many more resources than you from the very beginning."
     "The {a=glossary:About Wealth}🔻 library{/a} is huge and daunting. Closing the door behind you quietly, you walk around, simply taking in the sight of such boundless knowledge."
     "You begin looking around for books. But not long into the expedition, a woman approaches from behind." 
@@ -1135,6 +1184,8 @@ label ch5_1_fools_parade:
     jump ch5_2_challenge
 
 label ch5_2_challenge:
+    $ time = "Day 5. Noon."
+    $ bearings = "Lunch Hall."
     "The light slants through the tall windows, casting brightness all around the hall. You stab at your poached egg, watching the yolk bleed across the plate.{w} Your head is ringing again, like it's been for the past few days.{w} You try to hide it."
     $ glossary_dict["Her Stare"] = "People do that when they're about to attack, no?"
     "Florence is still staring at you. Her gaze is hungry. You stare her dead in the eye.{w} For a moment, her {a=glossary:Her Stare}🔻 eyes widen{/a}. You pause your fork in the air."
@@ -1199,3 +1250,22 @@ label ch5_3_fool:
     "As you trudge back to your room, the servants avoid you; great.{w} This is fine. There wasn’t a better solution, right? And you'd done well."
     "Yes, you'd planned on being a fool from the start."
     "But wow."
+    jump ch5_4_aftermath
+
+label ch5_4_aftermath:
+    "Nobody responds when you ring the bell. Neither Tess nor Estelle.{w} You sigh. At least surveillance is looser now, after all that stir. You have time to gather your thoughts.{w} But being too much of a non-threat puts a target on your back too, as someone easy to kill." 
+    "You bite your lip and turn back to the book." 
+    "Shivers run down your spine, recalling the time Lin had been beaten – nearly to death – just to relieve a blacksmith’s fury. The main empire was thriving and the Emperor had played a little game of information control."
+    "And what did it cause? A period of massive protests and anger in Scab City. Nobody liked the nobility in the first place, but the Marchetti Campaign was the last straw.{w} Too bad reaching the district was a one-way thing."
+    "The only blood spilled was of the same origins as the protesters. The blood of Scab City. The blood of people like you and Lin, powerless before the swarm."
+    "Those nobles had simply waited it out while you were threatened with death."
+    "You don't doubt that half Scab City's outrage was from bruised pride. You didn't have time to care about historical preservation, or whatnot. But he’d looked down on your intelligence.{w} And now he even dares to look down on the nobility? You check for the author. Blank."
+    "You run your hands over the cover.{w} You want to know why Rosette chose this book for you."
+    "You have half a mind to throw it across the room."
+    "Since when have you been this violent and rash-headed? Without Lin here to ground you, perhaps this was inevitable. But it's a sore self-realisation."
+    "If only Lin was here with you.{w} If only she was able to read.{w} If only she was ruthless enough, paranoid enough, rational enough to hold her own here."
+    "But you're grateful at the same time. She didn’t think enough. She would’ve brashly done whatever she’d have thought right without a second thought. We’d always agreed that you were the calmer one."
+    "You reach for the bell again, then decide against it. No point in proving your isolation again. If anything, this has proved that the servants don't answer to you. Any loyalty you've felt from them was loyalty to Velmonta."
+    "You're cautious around Rosette when returning the book. She seems shifty when you glance at the bookshelf. You tell her you can't read, that you struggled with my letters, and that's your reason for giving the book back so soon.{w} That sudden lie seems to calm her, but why? You assumed it's because of my newfound reputation, somehow."
+    "So many mysteries."
+    "Well, if the answers won't come to you, it looks like you'll have to go to them yourself."
