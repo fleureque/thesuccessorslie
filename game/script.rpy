@@ -1459,7 +1459,7 @@ label ch5_3a_fool:
     "As you trudge back to your room, the servants avoid you; great.{w} This is fine. There wasn’t a better solution, right? And you'd done well."
     "Yes, you'd planned on being a fool from the start."
     "But wow."
-    jump ch5_4_aftermath
+    jump ch5_4a_aftermath
 
 label ch5_3b_defensive:
     $ reputation["sharp"] += 5
@@ -1507,9 +1507,9 @@ label ch5_3b_defensive:
     hide silvian
     show cassian normal at left
     c "If there is a repeat incident of this manner, Tess will be transferred elsewhere."
-    jump ch5_4_aftermath
+    jump ch5_4b_aftermath
 
-label ch5_4_aftermath:
+label ch5_4a_aftermath:
     $ part = "4"
     $ time = "Day 5. Late afternoon."
     $ bearings = "Your quarters."
@@ -1527,7 +1527,7 @@ label ch5_4_aftermath:
     "But you're grateful at the same time. She didn’t think enough.{w} She would’ve brashly done whatever she’d have thought right without a second thought.{w} You'd always agreed that you were the calmer one."
     "You reach for the bell again, then decide against it. No point in proving your isolation again.{w} If anything, this has proved that the servants don't answer to you. Any loyalty you've felt from them was loyalty to Velmonta."
     $ bearings = "Library."
-    "You're cautious around Rosette when returning the book. She seems shifty when you glance at the bookshelf. You tell her you can't read, that you struggled with my letters, and that's your reason for giving the book back so soon.{w} That sudden lie seems to calm her, but why? You assumed it's because of my newfound reputation, somehow."
+    "You're cautious around Rosette when returning the book. She seems shifty when you glance at the bookshelf. You tell her you can't read, that you struggled with your letters, and that's your reason for giving the book back so soon.{w} That sudden lie seems to calm her, but why? You assumed it's because of my newfound reputation, somehow."
     "So many mysteries."
     "Well, if the answers won't come to you, it looks like you'll have to go to them yourself."
     menu:
@@ -1547,6 +1547,44 @@ label ch5_4_aftermath:
     else:
         jump ch5_5b_cassian
 
+label ch5_4b_aftermath:
+    $ part = "4"
+    $ time = "Day 5. Late afternoon."
+    $ bearings = "Your quarters."
+    "You feel rotten. Not in the mood to see anyone."
+    "You defended yourself the textbook way. It should have worked. Yet it didn't. Why?"
+    "That attack was out of the blue too!{w} You were underprepared."
+    "But was there any way out in the first place? You weren't wrong. The whole situation was." 
+    "How were you meant to fend off such a character assassination anyways?"
+    "You bite your lip and turn back to the book in front of you.." 
+    "Shivers run down your spine, recalling the time Lin had been beaten – nearly to death – just to relieve a blacksmith’s fury. The main empire was thriving and the Emperor had played a little game of information control."
+    "And what did it cause? A period of massive protests and anger in Scab City.{w} Nobody liked the nobility in the first place, but the Marchetti Campaign was the last straw.{w} Too bad reaching the district was a one-way thing."
+    "The only blood spilled was of the same origins as the protesters. The blood of Scab City.{w} The blood of people like you and Lin, powerless before the swarm."
+    "Those nobles had simply waited it out while you were threatened with death."
+    "You don't doubt that half Scab City's outrage was from bruised pride. You didn't have time to care about historical preservation, or whatnot. But he’d looked down on your intelligence.{w} And now he even dares to look down on the nobility? You check for the author. Blank."
+    "You run your hands over the cover.{w} Dammit! Why'd Rosette choose this book? Did she wake up and decide to hit a sore spot of yours?"
+    "You throw it across the room."
+    "Why hadn't Tess chosen to defend you??"
+    $ bearings = "Library."
+    "You're cautious around Rosette when returning the book. She seems shifty when you glance at the bookshelf. You tell her you can't read, that you struggled with your letters, and that's your reason for giving the book back so soon.{w} That sudden lie seems to calm her, but why? You assumed it's because of my newfound reputation, somehow."
+    "So many mysteries."
+    "Maybe it'll be best to make up with Marianne or Cassian. Defend yourself in private."
+    menu:
+        "*Talk to Cassian*":
+            $ choice = "Cassian"
+        "*Talk to Marianne*":
+            $ choice = "Marianne"
+    $ bearings = "The gallery"
+    "Just earlier this morning, you'd been feeling at home among the masses in the halls. Being able to do your own thing.{w} That's just the way you like it.{w} In the direct aftermath of the confrontation, they’d been apprehensive at worst. But now their gazes change. Quiet condescending and hostility follows each step you take."
+    "Before, you'd been a new novelty in the household, not special enough to latch onto. Now they see you as someone that attacked noble Florence, someone involved with a servant."
+    "Stupid! Stupid! Everything's stupid."
+    "In some ways, nobles and slum kids are the same.{w} Always looking for something to gloat over; even better if it's a person."
+    $ part = "5"
+    $ time = "Day 5. Early evening."
+    if choice == "Marianne":
+        jump ch5_5c_marianne
+    else:
+        jump ch5_5d_cassian
 
 label ch5_5a_marianne:
     play sound knocking_urgent
@@ -1568,6 +1606,9 @@ label ch5_5a_marianne:
     mc "I’m mighty sorry for today."
     show marianne hesitant
     m "You need not be."
+    jump ch5_6a_marianne
+
+label ch5_6a_marianne
     mc "Really, since the death, I’ve been scared out my wits ‘round here." 
     "You let a sob slip from your lips, before quickly covering your mouth, turning your head down, and letting your hair fall over your face."
     show marianne serious
@@ -1610,4 +1651,39 @@ label ch5_5a_marianne:
     jump temp_end_message
 
 label ch5_5b_cassian:
+    jump temp_end_message
+
+label ch5_5c_marianne:
+    "Right. Marianne seemed the most angered earlier. It's best to reconcile."
+    play sound knocking_urgent
+    mc "Mother? May I speak with you?"
+    "Her voice drifts out through the door. '[noble_name]?'"
+    mc "May I speak with you?"
+    "There's a few moments of silence. Then her voice comes, tinged with disapproval as she replies."
+    "Alright.{w} Come in."
+    play sound open_door
+    show marianne serious
+    $ bearings = "Marianne's Study."
+    "Her study feels hot and oppressive. Cassian's was different from this."
+    m "What do you want?"
+    menu:
+        "I really didn't consort with Tess.":
+            $ reputation["sharp"] += 3
+            "Marianne's face tightens."
+            m "[noble_name]. I advise you to mature quickly, if possible."
+            mc "Sorry?"
+            m "Learn to take responsibility and change your actions rather than denying them every chance you earn."
+            mc "I'm not-"
+            m "That's what I'm seeing from you.{w} If you thought coming here would make me sympathise with you, you were wrong."
+            mc "I-"
+            m "Please leave my study. Maybe self-reflection would be good for you."
+            "You're about to talk back, then see her steady gaze."
+            "You reluctantly walk out."
+            
+        "I just... I wanted to talk with you. If I may.":
+            $ reputation["sharp"] -= 8
+            jump ch5_6a_marianne
+
+
+label ch5_5d_cassian:
     jump temp_end_message
