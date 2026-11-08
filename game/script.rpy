@@ -1392,13 +1392,16 @@ label ch5_2_challenge:
     "What? How are you meant to respond to this?{w} A claim of impropriety. Its purpose… right, to plant a seed of doubt.{w} Even if nobody believes it, your reputation'll be stained.{w} And why wouldn’t they believe holy Florence, admired by all?"
     "If you respond angrily, defensively, guiltily, or with acceptance, Florence wins either way." 
     "Oh – Lin would’ve loved this place, wouldn’t she? Being in the centre of attention?{w} After all, everyone’s eyes are on you. What to do, what to do, what to-!"
+    $ part = "3"
     menu:
         "*Diffuse the situation at your own expense*":
-            jump ch5_3_fool
+            jump ch5_3a_fool
+        "*Defend your name sharply*":
+            jump ch5_3b_defensive
             
 
-label ch5_3_fool:
-    $ part = "3"
+label ch5_3a_fool:
+    $ reputation["fool"] += 5
     "You laugh, the sound ringing through the room.{w} Florence blinks."
     f "Sister [noble_name]?"
     show dorian normal at right
@@ -1415,6 +1418,7 @@ label ch5_3_fool:
     "You grin. You internally cackle at your own shamelessness.{w} However, you continue. You puff your chest out and meet her with a question of your own."
     mc "Is it ‘cause you’ve seen how nice he is?{w} How he escorts me ‘round?{w} How he talks with such a kind voice?"
     show tess worried at left
+    $ reputation["fool"] += 5
     "Her nose wrinkles. You watch Tess pale visibly in the corner of your eye.{w} Conspiratorially, you lean in."
     hide tess
     mc "I’m disappointed, sister. If you wanted Tess all to yourself, you coulda just asked, ‘kay?"
@@ -1455,6 +1459,54 @@ label ch5_3_fool:
     "As you trudge back to your room, the servants avoid you; great.{w} This is fine. There wasn’t a better solution, right? And you'd done well."
     "Yes, you'd planned on being a fool from the start."
     "But wow."
+    jump ch5_4_aftermath
+
+label ch5_3b_defensive:
+    $ reputation["sharp"] += 5
+    "You push your meal away slowly and set your fork down."
+    mc "Would you like to repeat what you said? I couldn't quite catch any real detail from that."
+    f "Surely, sister, you aren't asking me to name such... scandalous details?"
+    mc "Oh, but I am."
+    $ reputation["sharp"] += 2
+    "Florence's mouth twists sourly."
+    mc "I'll answer real charges. Not whatever this is."
+    "Florence looks at you coolly."
+    f "You left the window open, and I was in the courtyard. This was around last night."
+    f "Tess was in your quarters and I was coming back from the chapel."
+    f "You two were..."
+    mc "We were what?"
+    f "Improprietous."
+    mc "Be straight with me! Describe exactly what happened!"
+    show marianne hesitant at left
+    m "It would be better not to go into detail."
+    show cassian normal at right
+    c "Agreed."
+    f "Right... I simply believe that... well, this cannot be allowed to continue."
+    "You bite the inside of your lip, then breathe in calmly."
+    mc "If your conscience was troubled, why did you wait until the table was full?"
+    $ reputation["sharp"] += 3
+    "Florence frowns."
+    f "This is the standard procedure. I don't quite follow."
+    hide marianne
+    show silvian normal at left
+    s "Indeed. It is to preserve the safety of the witness."
+    mc "Tch! Safety of what? Safety to blindly accuse me?"
+    hide cassian
+    show marianne serious at right
+    m "Stop. Please do not insult Velmonta's traditions."
+    mc "I'm not trying to insult Velmonta's history. I'm pointing out that the cause, tradition, isn't mutually exclusive with consequence's incentive."
+    mc "And I'll not have Tess's name dragged through this. If there is proof, bring it to me."
+    f "This isn't about reputation, sister [noble_name]."
+    "She looks to the left, a tragic expression on her face."
+    f "When it comes to relationships between servant and master, there is always a power dynamic involved."
+    f "In fact, I am only bringing this to light in order to protect Tess's integrity."
+    mc "Hah! Tess's integrity?"
+    m "That is enough, [noble_name]. There is no need to defend yourself so heavy-handedly."
+    mc "Then there is no need to accuse me so casually."
+    "The room remains silent until Cassian speaks up."
+    hide silvian
+    show cassian normal at left
+    c "If there is a repeat incident of this manner, Tess will be transferred elsewhere."
     jump ch5_4_aftermath
 
 label ch5_4_aftermath:
