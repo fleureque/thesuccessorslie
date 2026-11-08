@@ -1140,7 +1140,7 @@ label ch4_2a_gideon:
     $ alter_npc("Friendly-Looking Maid")
     npc "Miss [noble_name]? The dining hall’s down that end."
     mc "‘Kay, thank you!"
-    "Most of the staff threw you some glances; aside from that, you don't attract attention as you walk through the salons to the gallery."
+    "Some of the staff throw you some glances; aside from that, you don't attract attention as you walk through the salons to the gallery."
     $ glossary_dict["Myllith's Salute"] = "A curved salute resembling the moon. It is thought to both demonstrate loyalty to the Crown (scumlord) and bring Her Blessings upon the recipient."
     "You can't help but pause as you pass the tired man’s portrait again in the gallery. Weary dedication and effortless piety still radiate from his kind face.{w} You perform {a=glossary:Myllith's Salute}🔻 the curved salute{/a} in acknowledgement of his faith."
     jump ch4_3_dinner
@@ -1151,13 +1151,15 @@ label ch4_3_dinner:
     "Entering the dining hall, you glance around. A valet and a maid for each successor;{w} two lady’s maids for Marianne; two valets for Cassian at the head of the table;{w} a butler and kitchen staff scattered through the room, setting the table."
     show estelle normal
     "Tess and Estelle are already there. The other valets and maids are conversing in a subdued manner, while yours were silent and taciturn.{w} Estelle guides you to your seat. You smile at her."
+    hide estelle 
+    show marianne serious
     "Marianne nods. You return the gesture gratefully."
-    hide estelle normal
-    "You never noticed before, but the servants look at Dorian differently from the rest of you. It makes sense. He killed a girl."
+    hide marianne
     show dorian normal at left
+    "You never noticed before, but the servants look at Dorian differently from the rest of you. It makes sense. He killed a girl."
+    show florence normal at right
     "Dorian meets your eyes as you look up from the tablecloth. You flinch away.{w} He’s been looking at you like that ever since you arrived here.{w} But what's stranger is Florence’s calm gaze. She tucks her hair behind her ear, then looks away."
-    hide dorian
-    show marianne serious at right
+    show marianne serious
     "Marianne clears her throat." 
     m "You may eat now."
     hide marianne
@@ -1167,27 +1169,33 @@ label ch4_3_dinner:
         $ glossary_dict["The Gathering"] = "The esteemed event where side families have the chance to send their children to the main line."
         "Estelle had told you earlier that only side families can visit the main estate before {a=glossary:The Gathering}🔻 the Gathering{/a}.{w} Meanwhile, Gideon claims that nobody outside of Velmonta knows your existence yet."
         "There's no way Rydell wouldn’t receive word of an offshoot’s visit, bordering Velmonta - and no such family had visited, the estate being empty upon your arrival.{w} So they knew where the carriage was from." 
-        "But they saw you, a dirty orphan with no business in a noble house, through the carriage windows.{w} Even went the extra mile to halt you as you tried to pass through. Rydell certainly knows of my existence."
+        "But they saw you, a dirty orphan with no business in a noble house, through the carriage windows.{w} Even went the extra mile to halt you as you tried to pass through. Rydell certainly knows of your existence."
         "And Rydell's the most hostile side family of all, no? Yet not a stir."
-        "Your cheeks burn. Had Gideon really believed that your wouldn’t see past his nonsense?{w} No, it's too soon to let your pride get the better of you. You have to clear your mind."
+        "Your cheeks burn. Had Gideon really believed that you wouldn’t see past his nonsense?{w} No, it's too soon to let your pride get the better of you. You have to clear your mind."
     else:
         "You feel awkward and mechanical."
         "You're still not used to all this..."
     "As you chew the tough meat, you meet Dorian’s stare head-on.{w} Are you amusing to him? Is he trying to provoke you?{w} You can't see past the wide grin on his face. It's like an ironically expressive mask."
     "You smile back at him, tilting your head to the side, eyes blank and stupid.{w} There; the perfect fool."
     "Cassian’s voice rings out." 
+    show cassian normal
     c "[noble_name]. How are you adjusting to life here?"
+    hide dorian
     "Your eyes widen and you break the deadlock with the boy opposite you."
     mc "I- I’m doing well. It’s comfortable. Thank you."
     "The patriarch's voice is warm as he responds."
     c "That is fortunate to hear. Feel free to express any future troubles you may encounter, be it over family meals or in private."
     "You blush." 
     mc "Thank you."
+    show marianne serious at left
     "Marianne nods." 
     m "It is good that you are adjusting quickly, child."
     mc "T-thank you, again."
     "Florence’s eyes are upon you once more.{w} You watch her too, from the periphery of your vision. She twists back in her chair to whisper something to the ash-haired maid behind her.{w} After the maid’s response, Florence’s gaze moves up, landing on Tess behind you."
     "You maintain the subtle shake in your hands until the rest of the family - aside from Dorian - loses interest in your fragility."
+    hide florence
+    hide marianne
+    hide cassian
     jump ch4_4_night
 
 
@@ -1211,17 +1219,21 @@ label ch4_4a_think:
     "Why had he lied to you?"
     "Either he had lied about Rydell being unaware of your existence, or he had lied about the changes in legislation."
     "And now, his motive for creating this juxtaposition."
-    "Them being unaware - is it to console you on your way back? No, that's too optimistic.{w} Still, he had created a false sense of security around you. Tess had said the same thing. Is he lying to you too?{w} But Tess had implicitly confirmed that you would be murdered if they knew about you. Similar to Gideon’s narrative."
+    "Them being unaware - is it to console you on your way back? No, that's too optimistic.{w} Still, he had created a false sense of security around you."
+    "Tess had said the same thing. Is he lying to you too?{w} But Tess had implicitly confirmed that you would be murdered if they knew about you. Similar to Gideon’s narrative."
     "You stare up at the ceiling, clutching your duvet to your chest."
-    "Were Tess and Gideon aligned under the same motive to lie to you? Whatever it is, it doesn't seem like they're telling you the truth. It's certainly possible; you need to watch out for that.{w} If so, though, why? To create a sense of incoming danger? Convince you, using your witness to the maid’s death, that you're under threat too?"
+    "Were Tess and Gideon aligned under the same motive to lie to you? Whatever it is, it doesn't seem like they're telling you the truth."
+    "It's certainly possible; you need to watch out for that.{w} If so, though, why? To create a sense of incoming danger? Convince you, using your witness to the maid’s death, that you're under threat too?"
     "What a clever plan, to use such reasoning: ‘you’re under danger. Don’t look in the right direction, stay paranoid. The only reason you’re not being attacked right now, the one thing we cannot influence, is because they don’t know you exist.’"
     "That would make sense, but then what would the greater danger be? Or do they have another motive?{w} No, that's overreaching. The worst possible scenario you can think of. But it'll kill you if you ignore it too much."
     "There are other possibilities too."
     "Come to think of it, why did he believe that you wouldn't not catch him out in his lie? Because you know no-one here to ask? Your insides boil hot in anger; you fan yourself down."
     "If he had lied about their reason to murder you, that would be more interesting than anything." 
-    "Or was his lie even more primal? What if he spun a lie about why the maid had died, based on what he knows you know?{w} If he and Tess were collaborating, then the valet would’ve overheard Cassian painting the maid’s death as an intended assassination. But what if it wasn’t, and Cassian was only presenting it in a different light to hide something? You can't trust noble houses to be truthful, after all."
+    "Or was his lie even more primal? What if he spun a lie about why the maid had died, based on what he knows you know?{w} If he and Tess were collaborating, then the valet would’ve overheard Cassian painting the maid’s death as an intended assassination."
+    "But what if it wasn’t, and Cassian was only presenting it in a different light to hide something? You can't trust noble houses to be truthful, after all."
     "A sharp jolt of pain in your head. You bite the inside of your mouth."
-    "There are endless more possibilities you can consider right now. So many that it's almost useless to ponder over each one.{w} You need more information to guide you in the right direction.{w} But there's nobody to ask, and nobody you're confident would give the truth or even related gossip that you could ‘conveniently’ overhear."
+    "There are endless more possibilities you can consider right now. So many that it's almost useless to ponder over each one.{w} You need more information to guide you in the right direction."
+    "But there's nobody to ask, and nobody you're confident would give the truth or even related gossip that you could ‘conveniently’ overhear."
     "Your stomach drops as the next thought comes.{w} What if you're not safe after all?{w} That maid had access to at least one room. Who's stopping anyone from coming in tonight? You have the dagger by your bedside, but it doesn't guarantee safety. Not in any way."
     "You've watched too many people die from knife fights. Too many to believe you'll get out of one easily alive, let alone unscathed."
     "But you have to survive somehow."
@@ -1230,10 +1242,18 @@ label ch4_4a_think:
 
 
 label ch5_1_fools_parade:
-    $ bearings = "Library."
     $ time = "Day 5. Late morning."
     $ chapter = "5: A Fool's Parade"
     $ part = "1"
+    "You're commited to breaking out of your paralysis."
+    menu:
+        "*Go to the library*":
+            jump ch5_1a_library
+        "*Go to the chapel*":
+            jump ch5_1b_chapel
+
+label ch5_1a_library:
+    $ bearings = "Library."
     "After waking, you committed to breaking out of your paralysis. You're going to get information, and you'll start with the one place that can't avoid you for certain.{w} Even if it lies to you, it lies to everyone equally."
     $ glossary_dict["About Wealth"] = "No wonder the rich only get richer. They have so, so many more resources than you from the very beginning."
     "The {a=glossary:About Wealth}🔻 library{/a} is huge and daunting. Closing the door behind you quietly, you walk around, simply taking in the sight of such boundless knowledge."
@@ -1260,6 +1280,32 @@ label ch5_1_fools_parade:
     r "Rosette, Miss."
     "You glance down at the pile. You want to ask her why she hadn’t reached for any books on the previous century.{w} But you have another goal. Well, there's nothing to do other than swallow your pride."
     "A short bow in acknowledgement. The bell struck. I was late for lunch."
+    jump ch5_2_challenge
+
+
+label ch5_1b_chapel:
+    $ bearings = "Summertide Chapel."
+    "The Summertide Chapel has the scent of moon petals. To be expected, of course."
+    $ glossary_dict["Harith Formation"] = "A specific formation of Myllith sigils that represents self-reflection and integrity. With myriad reflections, it's thought to be impossible to escape judgement."
+    "Myllith sigils hang all around you, chained to each other in the {a=glossary:Harith Formation}🔻 Harith formation{/a}."
+    "It's disconcerting, to say the least."
+    "There's a strange twinkling, too."
+    "Somehow it's empty. Isn't this place meant to be popular?"
+    "You wander up to the basin at the front."
+    "It's filled with petals and a red liquid."
+    "Many self-sacrifices have been made, then."
+    "You purse your lips."
+    "The twinkling sound is getting to you."
+    "Statues of Myllith are everywhere. So are pictures of Velmonta."
+    $ glossary_dict["Sword Ritual"] = "Community sacrifice. Representatives gather in a circle, joined by their swords, before offerings are made into a shared basin."
+    "It's strange. Velmonta doesn't position itself as holy. It hasn't, but the chapel has murals upon murals of Velmontans {a=glossary:Sword Ritual}🔻 in a circle{/a}, armed with silver."
+    "Your mind flits back to the statue of Myllith in your room."
+    "The likely conclusion is that Velmonta was once a deeply religious place."
+    "Strange, then, that Florence is the only person that even bothers to wear a morllith anymore."
+    "You walk back over to the basin."
+    "...Myllith still seems to obtain many sacrifices. There are definitely believers after all."
+    "You leave."
+    "Dinner should be soon. Maybe all the staff are preparing for it."
     jump ch5_2_challenge
 
 label ch5_2_challenge:
@@ -1313,12 +1359,12 @@ label ch5_3_fool:
     mc "I’m disappointed, sister. If you wanted Tess all to yourself, you coulda just asked, ‘kay?"
     "And with that, you resume eating, donning a prideful expression."
     "Cassian coughs."
-    c "Dear[noble_name], what evidence do you have to support your sister’s…"
+    c "Dear [noble_name], what evidence do you have to support your sister’s…"
     "He doesn't finish."
     "Bringing your finger to your chin, you twist your mouth into a pout."
     mc "I…{w} I feel it. But my feelings ain't never wrong.{w} Right, Estelle?"
     "In brief distaste, Estelle clears her throat."
-    e “"Yes, Miss [noble_name]. You’re the very picture of intelligent thought."
+    e "Yes, Miss [noble_name]. You’re the very picture of intelligent thought."
     "You turn to Tess next."
     mc "Tess? C’mon, help me out here, eh?"
     "His lips are drawn as he stares ahead, ignoring you. You pause.{w} What? Is he on Florence’s side?{w} Damn, your pride. You feel it flying away already."
