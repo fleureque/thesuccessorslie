@@ -1712,11 +1712,21 @@ screen deduction_log():
                             text "Your conclusion: " + entry["chosen_choice"] color "#ec4329" size 32
                         
                     else:
-                        text "> New conclusion available" color "#dec26d"
                         $ num_reqs = sum(1 for r in entry["meet_reqs"])
-                        text "Fulfilled [num_reqs]/[num_reqs] conditions. Choose a conclusion below." size 28
-                        
-                        for choice in entry["choices"]:
-                            textbutton choice:
-                                text_size 28
-                                action Function(choose_conclusion, id, choice)
+                        textbutton ("| " if entry["expanded"] else "> ") + "Fulfilled [num_reqs]/[num_reqs] conditions. Choose a conclusion below.":
+                            text_size 32
+                            text_color "#ffcb62"
+                            action [Function(change_expanded, id)]
+                        if entry["expanded"]:
+                            vbox:
+                                text "Your observations:" size 32
+                                for req in entry["meet_reqs"]:
+                                    if req in observation_log:
+                                        text "  • " + observation_log[req] size 28
+                            text "Logic:" size 32
+                            for line in entry["logic_display"]:
+                                text "  – " + line size 28
+                            for choice in entry["choices"]:
+                                textbutton choice:
+                                    text_size 28
+                                    action Function(choose_conclusion, id, choice)

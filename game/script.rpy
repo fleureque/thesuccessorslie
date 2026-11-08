@@ -131,7 +131,7 @@ define d = Character("Dorian", color="#d07ecf", what_color="#d7afdc", ctc="ctc",
 define f = Character("Florence", color="#91ebff", what_color="#b4f1f9", ctc="ctc", ctc_position="fixed")
 define c = Character("Cassian", color="#5e77a4", what_color="#d0eafe", ctc="ctc", ctc_position="fixed")
 define s = Character("Silvian", color="#f5f1f1", what_color="#d4d6d1", ctc="ctc", ctc_position="fixed")
-define t = Character("Tess", color="#c5a056", what_color="#b9b28c", ctc="ctc", ctc_position="fixed")
+define t = Character("Tess", color="#ad7f23", what_color="#dbd195", ctc="ctc", ctc_position="fixed")
 define r = Character("Rosette", color="#ce4070", what_color="#e193c0", ctc="ctc", ctc_position="fixed")
 define npc = Character("[npc]", ctc="ctc", ctc_position="fixed")
 default chapter = "1: Fading Light"
