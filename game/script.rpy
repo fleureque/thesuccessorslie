@@ -150,15 +150,10 @@ label temp_end_message:
     "Alright - bye!"
     $ MainMenu(confirm=False)()
 
-'''label main_menu:
-    show scene "gui/main_menu.png"
-    return'''
-
 
 label start:
     
     play audio transition
-
     define mc = Character("[name + ' (You)']", color="#cecd95", what_color="#f0edbc", ctc="ctc", ctc_position="fixed")
 
     python:
@@ -507,6 +502,9 @@ label ch2_1_first_blood:
     menu:
         "An honour...":
             pass
+        "Disgusting.":
+            "Estelle looks at you."
+            "...You messed up. She's definitely reporting this back."
     "You feel a strange repulsion, but know not at what."
     "The gallery ends. Estelle hurriedly wraps a shawl around you, guiding you across the lengthy courtyard."
     "You reach a mansion no less impressive than the main chateau.{w} However, its outer edifice has polished wood in the place of carved stone."
@@ -546,6 +544,21 @@ label ch2_2_wash:
             "You grab the rim of the bathtub to pull yourself up."
             "Nobody will care that you're overwhelmed. In fact, expressing it would only hurt you."
             "You have to suck it up."
+        "*Call for hotter water to drown your pain*":
+            "You wrap yourself in a towel and open the door. Estelle looks at you in surprise."
+            mc "More... hot, please."
+            e "Are you sure? It could be dangerous..."
+            mc "Y-yes. Please! No, I demand it. Do it. Do it. Do... do it."
+            "Estelle looks at the tears streaming from your face."
+            e "Alright, we'll fill it hotter."
+            "You crawl back in after the water's refilled and scream in pain."
+            $ alert("Ending unlocked: Early Death!")
+            "You feel like you're exploding."
+            "Your consciousness begins fading."
+            "Your entire body itches and itches and itches."
+            "A swelling sensation hits you."
+            "Maybe you should've listened to Estelle..."
+            $ MainMenu(confirm=False)()
     "You climb out of the bathtub."
     $ glossary_dict["Myllith Sigil"] = "A sign of the Goddess, used to entice Her Blessings. Blessings traditionally grant loyalty to the Crown, improved social harmony and success in military conquest."
     "A huge {a=glossary:Myllith Sigil}🔻 Myllith sigil{/a} hangs over the mirror, partly obscuring its surface.{w} You frown, wondering why someone would choose such an impractical placement."
@@ -634,7 +647,25 @@ label ch2_4_maid:
     npc "I- I apologise, Miss. It seems I have identified the wrong room."
     $ add_observation({"title" : "says_wrong_room", "description" : "Maid claimed to have the wrong room."})
     "You watch her eyes wandering past you, into your room.{w} As much as you wait, she doesn't seem to plan on leaving.{w} You shift uncomfortably as she continues to linger at the doorway."
-    mc "Need anythin’?"
+    "{size=50}Something feels wrong.{/size}"
+    menu:
+        "*Shut the door quickly*":
+            "As you try to shut the door, her eyes lock onto your hand."
+            "A strange look comes over her face as she slams herself against the door, stopping it from shutting."
+            "You cuss as she sweeps inside. She locks the door for you."
+            mc "Wh-what are you-?"
+            play sound scary_sound
+            stop music
+            "She reaches into her long, bulky sock as you back away.{w} Her hand comes out again, dagger in grasp."
+            "You have barely any time to react, but inch away."
+            "Running doesn't save you. Well, how could it? You're entirely unarmed."
+            $ alert("Ending unlocked: Early Death!")
+            "Next thing you know, you're in a world of pain."
+            "Your story ends here, without you even knowing why."
+            "What a sad way to go out.{w} Lin will join you soon, won't she?"
+            $ MainMenu(confirm=False)()
+        "*Stare at her cluelessly":
+            mc "Need anythin'?"
     "She continues staring, her expression blank." 
     "Where's Trusty Stick when you need it?"
     "She finally shakes her head."
@@ -767,7 +798,13 @@ label ch3_2_breakfast:
             else:
                 alert("Your new name cannot be the same as your old one. Try again.")
     c "From now on, it shall be [noble_name].{w} Observe it well: '[noble_name] Velmonta'."
-    "You fidget with your collar, then bow your head."
+    menu:
+        "I'd prefer to keep my usual name, actually.":
+            "Cassian and Marianne look at each other.{w} Sternly, Marianne lays her eyes on yours."
+            m "It would do you well to listen in this household."
+            "Your cheeks sting."
+        "*Fidget with your collar, then bow your head.*":
+            "Marianne looks satisfied at your obedience."
     "Of course, you need a new, fancier name, don't you?{w} What, to mark your new life?"  
     "What, is your old one too common?"
     "Tightening around your fork, your hand betrays a slight tremor. You've barely touched the food before you, and you don't plan to do so anytime soon." 
