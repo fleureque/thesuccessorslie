@@ -1452,12 +1452,15 @@ label ch5_4_aftermath:
     "Before, you'd been a new novelty in the household, not special enough to latch onto. Now they see you as an absolute fool."
     "At least the fool persona isn't too meek to retaliate, and they knew that.{w} You're stupid, but not stupid enough to back down.{w} The dissatisfaction follows you around regardless, but at least it's not confrontational.{w} You mentally curse Florence as you shoot a sunny smile at a valet. He blinks, then smiles back, before turning to the boy next to him. That'll keep them happy, won't it? A new piece of gossip?"
     "In some ways, nobles and slum kids are the same.{w} Always looking for something to gloat over; even better if it's a person."
-    jump ch5_5_marianne
-
-
-label ch5_5_marianne:
     $ part = "5"
     $ time = "Day 5. Early evening."
+    if choice == "Marianne":
+        jump ch5_5a_marianne
+    else:
+        jump ch5_5b_cassian
+
+
+label ch5_5a_marianne:
     play sound knocking_urgent
     "You stop before Marianne’s study. You've never been inside.{w} Well, there are always firsts, aren't there? You knock thrice, hearing no voices through the door. Estelle taught you the different knocks and when to use them." 
     m "Yes?" 
@@ -1493,14 +1496,16 @@ label ch5_5_marianne:
     m "It does not benefit anyone for you grasp at shadows. I would have informed you either way.{w} But it is good to hear your conviction spoken of."
     "She traces her hands over her necklace and smiles. Benefit no-one for you to be kept in the shadows?"
     "Are you to trust her or not? She seems so confident and assured."
-    $ glossary_dict["The Lower District"] = "The sanitised name for 'Scab City.' The name itself is counterfactual; the city's topologically higher than any other, and embedded in the middle of the Marchetti Empire. It's only 'lower' in status. But of course, that's all that matters, huh?"
+    $ glossary_dict["The Lower District"] = "The sanitised name for 'Scab City.' The name itself is counterfactual; it's topologically high-altitude and embedded in the middle of the Marchetti Empire. It's only 'lower' in status. But of course, that's all that matters, huh?"
     "You hail from the {a=glossary:The Lower District}🔻 Lower District{/a}.{w} So you would have seen the ‘gangs’ fighting. Over food, water, shelter - anything scarce."
     "You nod, mouth dry." 
     mc "Revvers protected me."
     "She pays no heed, seemingly lost in thought."
     mc "That’s why they’re tryin’ to kill us?"
     "She adjusts her hair, though beautiful either way. Her eyes curve upwards."
-    m "How direct.{w} But yes."
+    m "How direct.{w} But yes.{w} In this case, the side families are fighting for power."
+    m "There can only be four successors at a time. The quota has been fulfilled now, you see."
+    m "You might not understand how much weight your position carries, but they certainly do.{w} It's a prime opportunity."
     mc "So why’m I not being protected?{w} Why’re none of us gettin’ help?"
     show marianne hesitant
     "Marianne freezes, then looks away."
@@ -1513,4 +1518,8 @@ label ch5_5_marianne:
     mc "Mother, I need a sword at lea-"
     m "-let there be no more qualms. You are sufficiently learned now."
     "She stops waiting and walks out."
+    hide marianne
+    jump temp_end_message
 
+label ch5_5b_cassian:
+    jump temp_end_message
