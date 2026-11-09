@@ -472,7 +472,7 @@ label ch1_4_arrival:
     "You and Estelle approach the softly lit chateau.{w} It has spires that stretch into the sky, and flags painting deep blue streaks in the air.{w} The stairs stop before a pair of heavy-set double-oak doors."
     play sound knocking_urgent
     "She knocks five times in a meaningful rhythm, and the doors creak open to reveal the unsmiling footmen who drew them open."
-    play music [shimmering_wind, flaming_decadence, twelfth_yearning] loop fadein 1.0 fadeout 1.0
+    play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
     "The floor is lined with marble, so polished that the light cascading from the chandelier reflects back in dazzling shades.{w} The foyer stretches out endlessly before you, spectacular and impossible. Your heart beats faster.{w} Velmonta is beautiful." 
     "Beautiful, but devoid of life."
 
@@ -682,6 +682,7 @@ label ch2_4_maid:
             mc "Wh-what are you-?"
             play sound scary_sound
             stop music
+            play music twelfth_yearning
             "She reaches into her long, bulky sock as you back away.{w} Her hand comes out again, dagger in grasp."
             "You have barely any time to react, but inch away."
             "Running doesn't save you. Well, how could it? You're entirely unarmed."
@@ -714,6 +715,7 @@ label ch2_5_murder:
     "You hear more footsteps and quickly scramble onto the stool again, just in time to see a shadow slip past."
     play sound scary_sound
     stop music
+    play music twelfth_yearning
     "And then a scream." with vpunch
     play sound stampede loop fadein 0.2
     "More footsteps. Hurrying towards the scene. You jump off the chair. Multiple voices are now outside. So quickly?"
@@ -763,7 +765,7 @@ label ch3_1_stigma:
     scene black
     $ time = "Day 3. Early morning."
     $ bearings = "Velmonta's Main Estate. Your quarters."
-    play music [shimmering_wind, flaming_decadence, twelfth_yearning] loop fadein 1.0 fadeout 1.0
+    play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
     $ part = "1"
     $ chapter = "3: Stigma"
     "You'd eventually drifted to sleep despite your worries.{w} Estelle now awakens you.{w} Outside is not yet bright, but it seems that nobles had a different routine, waking up unnaturally early."
@@ -1068,6 +1070,7 @@ label ch4_1_mutual_benefit:
             jump ch4_1b_silence
 
 label ch4_1a_confront:
+    play music twelfth_yearning
     mc "You were there. You saw it."
     "Tess’s hand pauses."
     t "I was, Miss."
@@ -1143,6 +1146,7 @@ label ch4_1b_silence:
 
 
 label ch4_2a_gideon:
+    play music [shimmering_wind, flaming_decadence] loop fadein 1.0 fadeout 1.0
     scene black
     $ bearings = "The Barracks."
     $ time = "Day 4. Late afternoon."
