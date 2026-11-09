@@ -142,7 +142,7 @@ define gui.text_size = 35
 
 
 label temp_end_message:
-    
+    scene black
     "Hello! It's the author here."
     "The storyline after this section hasn't been written yet. I'll be sending you back to the main menu."
     "If you want to keep your progress, please navigate 'back' and save the story there."
@@ -173,10 +173,9 @@ label ch1_1_shed:
     $ time = "Day 1, Afternoon."
     $ bearings = "Scab City. Your shed."
     $ part = "1"
-    show screen stat_display() zorder 100
     show screen info_display()
     play music her_sickness loop fadein 1.0 fadeout 1.0 
-    show old shed with dissolve
+    scene bg old shed with dissolve
     show lin normal
     mc "L-Lin. It… it'll be over soon, okay?"
     "Your hand lies unmoving against your sister's."
@@ -326,7 +325,7 @@ label ch1_3_carriage_ride:
     $ time = "Day 2. Early evening."
     $ bearings = "The Carriage."
     $ part = "3"
-    show inside_carriage with dissolve
+    scene bg inside carriage 
     "Resting your head on your hand, you look through the carriage window. Emaciated children shiver as you pass them by.{w} Is it awe?{w} Or are they too lost to care at this point?"
     show gideon normal
     "Gideon's gaze is directed towards them too, expression unreadable. Does it make him sick to his stomach, seeing their gaunt, haunting faces?"
@@ -361,6 +360,7 @@ label ch1_3_carriage_ride:
     "...And besides, it's not the right time of day."
     hide gideon
     "Somewhere along the journey, the filth outside became polished stone and shrubbery. You've never left Scab City before, but you can tell: you're beyond the forest already."
+    scene bg rydell estate
     menu:
         "*Look at what Gideon's doing*":
             "You bring your face closer against the window. There isn't any physical altercation, despite the people below being armed. The opposition is clad in the same deep blue as Gideon - but their crests are slightly different."
@@ -413,6 +413,7 @@ label ch1_4_arrival:
     "You silently curse the emperor again.{w} The inhabitants' ‘own fault’ for starving, huh?{w} You weren't even around for the Original Sin."
     "Your heart quickens as Gideon looks at the rags that you insisted on bringing. However, he purses his lips and doesn't speak."
     "The carriage draws close to wrought iron gates embedded into a towering wall of grey stone. Upon the wall, flaming torches illuminate its perimeter."
+    scene bg outer chateau
     "It looks incredibly expensive to maintain. You hide a grimace."
     "Gideon nods at you. He exits the carriage, leaving the door open this time.{w} You shudder at the sudden blast of warmth.{w} It originates from the flames that lick wildly at the impervious stone."
     "Feudal brilliance is full of fiery brilliance, it seems. It suddenly occurs to you that {a=glossary:Velmonta's Reputation}🔻 Velmonta's reputation{/a} may be more than symbolic."
@@ -422,6 +423,7 @@ label ch1_4_arrival:
     "Clearing his throat, the guard hands the document back after skimming over it."
     $ alter_npc("Guard", "#4a64d7", "#98aaf0")
     $ bearings = "Velmonta's Main Estate."
+    show screen stat_display() zorder 100
     npc "Welcome to Velmonta. You may return to your carriage now."
     "Two people clad in deep blue liveries, with some effort, draw the doors open. The horses are spurred into movement again."
     hide sprite with dissolve
@@ -531,6 +533,7 @@ label ch2_1_first_blood:
     "She swings the door open, handing you a pile of fresh clothes and a towel."
     hide estelle with dissolve
     $ bearings = "Velmonta's Main Estate. Your quarters."
+    scene black
     "And finally, you're alone with the flowery fragrance of bathwater."
     jump ch2_2_wash
 
@@ -546,6 +549,7 @@ label ch2_2_wash:
             "Raising your hand up against the gleaming chandelier, you see your clean wrist for the first time - something beyond your imagination.{w} The colour of your skin - the true one - beneath all that grime.{w} You let your hand fall again."
     "Today's passed by in a daze.{w} Too much to think about, too much to take in, too much to see.{w} Even the light was - no, is - dizzying."
     "Your mind suddenly flashes to Lin.{w} What would her hand look like?"
+    $ alert(messages["Important choice"])
     "Is it wrong that you feel glad, rather than guilty, for being taken here?{w} Leaving her behind?"
     menu:
         "*Take deep breaths*":
@@ -553,12 +557,14 @@ label ch2_2_wash:
             "Nobody will care that you're overwhelmed. In fact, expressing it would only hurt you."
             "You have to suck it up."
         "*Call for hotter water to drown your pain*":
+            show estelle normal
             "You wrap yourself in a towel and open the door. Estelle looks at you in surprise."
             mc "More... hot, please."
             e "Are you sure? It could be dangerous..."
             mc "Y-yes. Please! No, I demand it. Do it. Do it. Do... do it."
             "Estelle looks at the tears streaming from your face."
             e "Alright, we'll fill it hotter."
+            hide estelle
             "You crawl back in after the water's refilled and scream in pain."
             $ reputation['fool'] += 1000000
             $ alert("Ending unlocked: Early Death!")
@@ -586,6 +592,7 @@ label ch2_2_wash:
             "Being here will certainly change you.{w} You try to memorise the image before you.{w} After all, even your body will eventually transform."
     play sound open_door
     "After lingering before the mirror for slightly too long, you swallow and push the ornament back in place.{w} Then you don a shy expression and pull open the door."
+    scene bg corridor
     show estelle normal
     "Estelle greets you with a... professional... sunny expression."
     e "Don't you look a wonder, miss?"
@@ -597,6 +604,7 @@ label ch2_2_wash:
             $ reputation['sharp'] += 9
             "Estelle's mouth hangs agape for a moment before restoring its prior position."
             e "Ahem. You're right.{w} Here's your dinner."
+    scene bg quarters
     "She sets a ‘small’ meal before you – a dazzling spectacle of strange meats, salads, and fruits."
     hide estelle 
     play sound open_door
@@ -653,7 +661,9 @@ label ch2_3_alone:
 
 label ch2_4_maid:
     $ part = "4"
+    scene bg corridor
     "You move the chair aside and open the door." 
+    show killermaid
     mc "You scared me the first time ‘round! Outside was empty!" 
     "You tilt your head.{w} Why isn't she responding?"
     "She shakes her head vigorously."
@@ -661,9 +671,11 @@ label ch2_4_maid:
     npc "I- I apologise, Miss. It seems I have identified the wrong room."
     $ add_observation({"title" : "says_wrong_room", "description" : "Maid claimed to have the wrong room."})
     "You watch her eyes wandering past you, into your room.{w} As much as you wait, she doesn't seem to plan on leaving.{w} You shift uncomfortably as she continues to linger at the doorway."
+    $ alert(messages["Important choice"])
     "{size=50}Something feels wrong.{/size}"
     menu:
         "*Shut the door quickly*":
+            scene bg quarters
             "As you try to shut the door, her eyes lock onto your hand."
             "A strange look comes over her face as she slams herself against the door, stopping it from shutting."
             "You cuss as she sweeps inside. She locks the door for you."
@@ -678,15 +690,17 @@ label ch2_4_maid:
             "Your story ends here, without you even knowing why."
             "What a sad way to go out.{w} Lin will join you soon, won't she?"
             $ MainMenu(confirm=False)()
-        "*Stare at her cluelessly":
+        "*Stare at her cluelessly*":
             mc "Need anythin'?"
     "She continues staring, her expression blank." 
     "Where's Trusty Stick when you need it?"
     "She finally shakes her head."
     npc "I’ll… I’ll go now."
     mc "Okay?" 
+    scene bg corridor
     "You watch her retreat down the hallway, her hair whipping wildly as she looks around."
     hide killermaid
+    scene bg quarters
     "You shut the door but keep listening. Her footsteps pause close to your door - the room next to yours?{w} The jingling of keys resounds."
     $ add_observation({"title": "maid_has_keys", "description": "The maid had keys to the room she was planning on entering."})
     "Why’d she knocked instead of just unlocking your door then? After all, she has the keys to the room that she wanted to access."
@@ -705,6 +719,7 @@ label ch2_5_murder:
     "More footsteps. Hurrying towards the scene. You jump off the chair. Multiple voices are now outside. So quickly?"
     stop sound
     play ambiance crowd loop fadein 1.0 fadeout 1.0
+    scene bg corridor
     "Opening the door, you're careful not to make a large noise."
     "You freeze."
     "That maid is lying flat on the floor. Blood spills from a large gash in her neck. In her hand is... a dagger."
@@ -739,17 +754,20 @@ label ch2_5_murder:
     "The sight of death is nothing new. But death in this fashion? In this mansion?" 
     hide marianne
     hide dorian
+    scene bg corridor
     "You glance one last time at Dorian, and hurry into your room. What had the valet been about to tell you?"
     jump ch3_1_stigma
 
 
 label ch3_1_stigma:
+    scene black
     $ time = "Day 3. Early morning."
     $ bearings = "Velmonta's Main Estate. Your quarters."
     play music [shimmering_wind, flaming_decadence, twelfth_yearning] loop fadein 1.0 fadeout 1.0
     $ part = "1"
     $ chapter = "3: Stigma"
     "You'd eventually drifted to sleep despite your worries.{w} Estelle now awakens you.{w} Outside is not yet bright, but it seems that nobles had a different routine, waking up unnaturally early."
+    scene bg quarters
     show estelle normal at right
     "Tentatively,you gaze up at her."
     mc "Miss Estelle?"
@@ -780,6 +798,7 @@ label ch3_1_stigma:
 
 label ch3_2_breakfast:
     $ time = "Day 3. Morning."
+    scene bg morning room
     $ bearings = "Velmonta's Main Estate. The Morning Room."
     $ part = "2"
     show marianne serious at right
@@ -906,6 +925,7 @@ label ch3_2_breakfast:
 
 label ch3_3_room:
     $ bearings = "Velmonta's Main Estate. Your quarters."
+    scene bg quarters
     $ time = "Day 3. Morning."
     hide marianne 
     hide dorian
@@ -959,6 +979,7 @@ label ch3_3_room:
     
 
 label ch3_4_mandate:
+    scene bg cassian study
     $ bearings = "Cassian's Study."
     $ time = "Day 3. Late morning."
     $ part = "4"
@@ -1029,6 +1050,7 @@ label ch3_6_lunch:
 
 
 label ch4_1_mutual_benefit:
+    scene bg quarters
     $ time = "Day 4. Afternoon."
     $ bearings = "Your quarters."
     $ part = "1"
@@ -1094,10 +1116,11 @@ label ch4_1a_confront:
     "You can trust him to give you a straight answer, too."
     play sound open_door
     $ bearings = "Outside your room."
+    scene bg corridor
     "You leave your room."
     "Despite being aware that this is a corridor, the absence of sunlight makes you uneasy.{w} You wrinkle your nose as you walk by Dorian’s room.{w} There isn't a single remnant of blood. It looks and smells of artificial cleanliness."
     "Your neck tingles. Hand on pocket, you make it through the passage, down the stairs, rushing until the courtyard.{w} You stop to breathe, nose burning in the strange mixture of fresh air and crackling fire."
-    jump ch4_2_gideon
+    jump ch4_2a_gideon
 
 
 label ch4_1b_silence:
@@ -1120,6 +1143,7 @@ label ch4_1b_silence:
 
 
 label ch4_2a_gideon:
+    scene black
     $ bearings = "The Barracks."
     $ time = "Day 4. Late afternoon."
     $ part = "2"
@@ -1182,6 +1206,7 @@ label ch4_2a_gideon:
     hide gideon with dissolve
     "Your spine crawls as you leave the barracks."
     $ time = "Day 4. Early evening."
+    scene bg corridor
     $ bearings = "Gallery."
     $ part = "3"
     "Velmonta is no longer as empty as it was when you first arrived.{w} You now see maids and servants walking around with pails of water and mops in hand. A woman with a different livery hauling firewood.{w} But still, no nobility from other houses. Everyone here is from the main line."
@@ -1198,6 +1223,7 @@ label ch4_2a_gideon:
 
 
 label ch4_3_dinner:
+    scene bg meal
     $ bearings = "Dining Hall."
     "Entering the dining hall, you glance around. A valet and a maid for each successor;{w} two lady’s maids for Marianne; two valets for Cassian at the head of the table;{w} a butler and kitchen staff scattered through the room, setting the table."
     show estelle normal
@@ -1251,6 +1277,7 @@ label ch4_3_dinner:
 
 
 label ch4_4_night:
+    scene bg quarters
     $ bearings = "Private quarters."
     $ time = "Day 4. Night."
     $ part = "4"
@@ -1260,6 +1287,7 @@ label ch4_4_night:
     if conclusions["the_truth"]["unlocked"]:
         jump ch4_4a_think
     else:
+        scene black
         "You easily drift off to sleep. Something about doesn't feel right, but you can't place what it is."
         "Maybe you should have asked Tess earlier about it."
         "No, it was better that you didn't. You don't know who he reports back to."
@@ -1293,6 +1321,7 @@ label ch4_4a_think:
 
 
 label ch5_1_fools_parade:
+    scene bg white
     $ time = "Day 5. Late morning."
     $ chapter = "5: A Fool's Parade"
     $ part = "1"
@@ -1360,6 +1389,7 @@ label ch5_1b_chapel:
     jump ch5_2_challenge
 
 label ch5_2_challenge:
+    scene bg meal
     $ part = "2"
     $ time = "Day 5. Noon."
     $ bearings = "Lunch Hall."
@@ -1510,6 +1540,7 @@ label ch5_3b_defensive:
     jump ch5_4b_aftermath
 
 label ch5_4a_aftermath:
+    scene bg quarters
     $ part = "4"
     $ time = "Day 5. Late afternoon."
     $ bearings = "Your quarters."
@@ -1527,7 +1558,9 @@ label ch5_4a_aftermath:
     "But you're grateful at the same time. She didn’t think enough.{w} She would’ve brashly done whatever she’d have thought right without a second thought.{w} You'd always agreed that you were the calmer one."
     "You reach for the bell again, then decide against it. No point in proving your isolation again.{w} If anything, this has proved that the servants don't answer to you. Any loyalty you've felt from them was loyalty to Velmonta."
     $ bearings = "Library."
-    "You're cautious around Rosette when returning the book. She seems shifty when you glance at the bookshelf. You tell her you can't read, that you struggled with your letters, and that's your reason for giving the book back so soon.{w} That sudden lie seems to calm her, but why? You assumed it's because of my newfound reputation, somehow."
+    scene white
+    "You're cautious around Rosette when returning the book. She seems shifty when you glance at the bookshelf. You tell her you can't read, that you struggled with your letters, and that's your reason for giving the book back so soon."
+    "That sudden lie seems to calm her, but why? You assumed it's because of my newfound reputation, somehow."
     "So many mysteries."
     "Well, if the answers won't come to you, it looks like you'll have to go to them yourself."
     menu:
@@ -1536,6 +1569,7 @@ label ch5_4a_aftermath:
         "*Talk to Marianne*":
             $ choice = "Marianne"
     $ bearings = "The gallery"
+    scene bg corridor
     "Just earlier this morning, you'd been feeling at home among the masses in the halls. Being able to do your own thing.{w} That's just the way you like it.{w} In the direct aftermath of the confrontation, they’d been silent. But now their gazes change. Eyes and quiet chatter follows each step you take."
     "Before, you'd been a new novelty in the household, not special enough to latch onto. Now they see you as an absolute fool."
     "At least the fool persona isn't too meek to retaliate, and they knew that.{w} You're stupid, but not stupid enough to back down.{w} The dissatisfaction follows you around regardless, but at least it's not confrontational.{w} You mentally curse Florence as you shoot a sunny smile at a valet. He blinks, then smiles back, before turning to the boy next to him. That'll keep them happy, won't it? A new piece of gossip?"
@@ -1548,6 +1582,7 @@ label ch5_4a_aftermath:
         jump ch5_5b_cassian
 
 label ch5_4b_aftermath:
+    scene bg quarters
     $ part = "4"
     $ time = "Day 5. Late afternoon."
     $ bearings = "Your quarters."
@@ -1582,9 +1617,16 @@ label ch5_4b_aftermath:
     $ part = "5"
     $ time = "Day 5. Early evening."
     if choice == "Marianne":
-        jump ch5_5c_marianne
+        if reputation["fool"] > reputation["sharp"]:
+            jump ch5_5a_marianne
+        else:
+            jump ch5_5b_marianne
     else:
-        jump ch5_5d_cassian
+        if reputation["fool"] > reputation["sharp"]:
+            jump ch5_5b_cassian
+        else:
+            jump ch5_5d_cassian
+
 
 label ch5_5a_marianne:
     play sound knocking_urgent
@@ -1596,6 +1638,7 @@ label ch5_5a_marianne:
     m "Come in."
     "You oblige."
     play sound open_door
+    scene bg marianne study
     $ bearings = "Marianne's Study."
     "Her study is warmer than Cassian’s. Strange, because Marianne herself is colder. It maintains a delicate balance. The bright blue of the windows gives the room an airy quality."
     $ glossary_dict["Chair"] = "It's not a wooden one; it's one of those sinking chairs, the type that swallows you into the earth."
@@ -1608,7 +1651,7 @@ label ch5_5a_marianne:
     m "You need not be."
     jump ch5_6a_marianne
 
-label ch5_6a_marianne
+label ch5_6a_marianne:
     mc "Really, since the death, I’ve been scared out my wits ‘round here." 
     "You let a sob slip from your lips, before quickly covering your mouth, turning your head down, and letting your hair fall over your face."
     show marianne serious
@@ -1663,6 +1706,7 @@ label ch5_5c_marianne:
     "Alright.{w} Come in."
     play sound open_door
     show marianne serious
+    scene bg marianne study
     $ bearings = "Marianne's Study."
     "Her study feels hot and oppressive. Cassian's was different from this."
     m "What do you want?"
@@ -1679,7 +1723,7 @@ label ch5_5c_marianne:
             m "Please leave my study. Maybe self-reflection would be good for you."
             "You're about to talk back, then see her steady gaze."
             "You reluctantly walk out."
-            
+            jump temp_end_message
         "I just... I wanted to talk with you. If I may.":
             $ reputation["sharp"] -= 8
             jump ch5_6a_marianne
@@ -1687,3 +1731,4 @@ label ch5_5c_marianne:
 
 label ch5_5d_cassian:
     jump temp_end_message
+
