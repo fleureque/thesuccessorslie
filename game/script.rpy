@@ -1570,9 +1570,12 @@ label ch5_4a_aftermath:
             $ choice = "Marianne"
     $ bearings = "The gallery"
     scene bg corridor
-    "Just earlier this morning, you'd been feeling at home among the masses in the halls. Being able to do your own thing.{w} That's just the way you like it.{w} In the direct aftermath of the confrontation, they’d been silent. But now their gazes change. Eyes and quiet chatter follows each step you take."
+    "Just earlier this morning, you'd been feeling at home among the masses in the halls. Being able to do your own thing.{w} That's just the way you like it."
+    "In the direct aftermath of the confrontation, they’d been silent. But now their gazes change. Eyes and quiet chatter follows each step you take."
     "Before, you'd been a new novelty in the household, not special enough to latch onto. Now they see you as an absolute fool."
-    "At least the fool persona isn't too meek to retaliate, and they knew that.{w} You're stupid, but not stupid enough to back down.{w} The dissatisfaction follows you around regardless, but at least it's not confrontational.{w} You mentally curse Florence as you shoot a sunny smile at a valet. He blinks, then smiles back, before turning to the boy next to him. That'll keep them happy, won't it? A new piece of gossip?"
+    "At least the fool persona isn't too meek to retaliate, and they knew that.{w} You're stupid, but not stupid enough to back down."
+    "The dissatisfaction follows you around regardless, but at least it's not confrontational."
+    "You mentally curse Florence as you shoot a sunny smile at a valet. He blinks, then smiles back, before turning to the boy next to him. That'll keep them happy, won't it? A new piece of gossip?"
     "In some ways, nobles and slum kids are the same.{w} Always looking for something to gloat over; even better if it's a person."
     $ part = "5"
     $ time = "Day 5. Early evening."
@@ -1601,7 +1604,8 @@ label ch5_4b_aftermath:
     "You throw it across the room."
     "Why hadn't Tess chosen to defend you??"
     $ bearings = "Library."
-    "You're cautious around Rosette when returning the book. She seems shifty when you glance at the bookshelf. You tell her you can't read, that you struggled with your letters, and that's your reason for giving the book back so soon.{w} That sudden lie seems to calm her, but why? You assumed it's because of my newfound reputation, somehow."
+    "You're cautious around Rosette when returning the book. She seems shifty when you glance at the bookshelf." 
+    "You tell her you can't read, that you struggle with your letters, and that's your reason for giving the book back so soon.{w} That sudden lie seems to calm her, but why? You assumed it's because of my newfound reputation, somehow."
     "So many mysteries."
     "Maybe it'll be best to make up with Marianne or Cassian. Defend yourself in private."
     menu:
@@ -1610,7 +1614,8 @@ label ch5_4b_aftermath:
         "*Talk to Marianne*":
             $ choice = "Marianne"
     $ bearings = "The gallery"
-    "Just earlier this morning, you'd been feeling at home among the masses in the halls. Being able to do your own thing.{w} That's just the way you like it.{w} In the direct aftermath of the confrontation, they’d been apprehensive at worst. But now their gazes change. Quiet condescending and hostility follows each step you take."
+    "Just earlier this morning, you'd been feeling at home among the masses in the halls. Being able to do your own thing.{w} That's just the way you like it."
+    "In the direct aftermath of the confrontation, they’d been apprehensive at worst. But now their gazes change. Quiet condescending and hostility follows each step you take."
     "Before, you'd been a new novelty in the household, not special enough to latch onto. Now they see you as someone that attacked noble Florence, someone involved with a servant."
     "Stupid! Stupid! Everything's stupid."
     "In some ways, nobles and slum kids are the same.{w} Always looking for something to gloat over; even better if it's a person."
@@ -1634,7 +1639,8 @@ label ch5_5a_marianne:
     m "Yes?" 
     mc "Mother, it’s [noble_name]. May I speak to you?"
     m "A moment."
-    "You look around the gallery in the meantime. Her public study is closer to the salons than Cassian’s.{w} Does that mean she takes the onus for receiving guests? Or is that a stretch?{w} You shake your head. Yes, it's probably a stretch. This room's probably been here for decades. How long has Velmonta been around?"
+    "You look around the gallery in the meantime. Her public study is closer to the salons than Cassian’s.{w} Does that mean she takes the onus for receiving guests?"
+    "Or is that a stretch?{w} You shake your head. Yes, it's probably a stretch. This room's probably been here for decades. How long has Velmonta been around?"
     m "Come in."
     "You oblige."
     play sound open_door
@@ -1645,7 +1651,8 @@ label ch5_5a_marianne:
     show marianne serious
     "She pulls out a {a=glossary:The Plague}🔻 chair{/a} for you.  You sit into its embrace only reluctantly."
     m "Why have you sought me for a meeting, [noble_name]?" 
-    "You don't know whether to meet her hazelnut eyes or avoid them.{w} Lord, she's beautiful. You aren't usually a connoisseur for faces, but there's nobody else more suitable to represent Velmonta.{w} Her skin glows from underneath, radiant from within. Her eyes are piercing and shadowed, but hesitant, caring.{w} You clear your throat."
+    "You don't know whether to meet her hazelnut eyes or avoid them.{w} Lord, she's beautiful. You aren't usually a connoisseur for faces, but there's nobody else more suitable to represent Velmonta."
+    "Her skin glows from underneath, radiant from within. Her eyes are piercing and shadowed, but hesitant, caring.{w} You clear your throat."
     mc "I’m mighty sorry for today."
     show marianne hesitant
     m "You need not be."
