@@ -10,7 +10,7 @@ Programming language: Ren'Py. My second visual novel!
 Code and story by @fleureque() (itch.io), @fleureque (GitHub)
 Art and music by @sty.bry (Instagram)
 Some background assets obtained and modified from Pixabay
-Additional effects from www.zapsplat.com"
+Additional effects from www.zapsplat.com
 Visual novel adaptation of original story. Still in early development, this is a demo.
 
-Learnt a lot of new things this time around: creating a truly customisable screen without directly copying from a tutorial, integrating better sound effects, creating new mechanics for more interesting gameplay, and experimenting with a new story structure. It's way different from my first game that used branching narratives!
+Learnt a lot of new things this time around: creating a truly customisable screen without directly copying from a tutorial, integrating better sound effects, creating new mechanics for more interesting gameplay, and experimenting with a new story structure. It's way different from my first game that used branching narratives! I also experimented with a more detailed artstyle - hence the tradeoff between sprite number and sprite quality! 
